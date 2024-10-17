@@ -1,0 +1,32 @@
+<ion-modal [isOpen]="user!=null"  (willDismiss)="cancel()">
+  <ng-template>
+    <ion-card color="{{user?.saldo < 1 ?'danger' : (user?.saldo > 1 && user?.saldo < 2 ? 'warning' : 'primary' ) }}">
+      <ion-card-header>
+        <ion-card-title>{{user?.name}}</ion-card-title>
+        <ion-card-subtitle>Saldo actual : {{user?.saldo | number}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <form  [formGroup]="formGroup" >
+        <ion-list>
+          <ion-item>
+           <h2>Incrementar saldo</h2>
+          </ion-item>
+          <ion-item>
+            <ion-input label="importe" formControlName="importe" type="number" placeholder="000"></ion-input>
+          </ion-item>
+          <ion-item>
+            <br>
+            <base-button-guardar
+            [isSaving]="isSaving"
+            [valid]="formGroup.valid"
+            (click)="onSubmit()"
+          ></base-button-guardar>
+          </ion-item>
+        </ion-list>
+      </form>
+      </ion-card-content>
+    <br><br>
+      <base-button-cancelar (click)="cancel()"></base-button-cancelar>
+    </ion-card>
+  </ng-template>
+</ion-modal>

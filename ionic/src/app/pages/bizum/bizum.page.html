@@ -1,0 +1,50 @@
+<!-- {{columns | json}} -->
+<!-- { class : 'indexPar',  condicion : 'index % 2 == 0'}, -->
+
+<ion-grid class="router-outlet">
+  <ion-row>
+    <ion-col>
+      <ion-toggle
+        [enableOnOffLabels]="true"
+        [(ngModel)]="NoCerrados"
+        (click)="NoCerradosEvent($event)"
+        >No cerrados</ion-toggle
+      >
+    </ion-col>
+    <ion-col>
+      <ion-button color="danger" (click)="cerrarEvent()">
+        <ion-icon slot="start" name="star"></ion-icon>
+        CERRAR
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-badge slot="start"> {{TotalImporte}} €</ion-badge>
+        <ion-label>Total bizum confirmados</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <my-table
+        [title]="'Bizums'"
+        [entityName]="entityName"
+        [columns]="columns"
+        [withCache]="true"
+        [refresh]="tableRefresh"
+        (actionEmiter)="actionEmiter($event)"
+        [pageSize]="5"
+        (onLoadDataEmiter)="onLoadDataEmiter($event)"
+        [objNgClass]="[       
+        { class : 'enNaranja', condicion : 'row[\'estadoid\'] == 1'},
+        { class : 'enVerde', condicion : 'row[\'estadoid\'] == 2'},      
+        { class : 'enGris', condicion : 'row[\'estadoid\'] == 3'},
+          ]" 
+          [isLoading]="isLoading"
+      ></my-table>
+    </ion-col>
+  </ion-row>
+</ion-grid>

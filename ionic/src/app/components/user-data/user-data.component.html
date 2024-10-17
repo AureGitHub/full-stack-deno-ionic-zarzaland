@@ -1,0 +1,52 @@
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ user?.name }}</ion-card-title>
+        <ion-card-subtitle>{{ user?.email }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-row>
+          <ion-col> <span style="font-size: 25px;"> Saldo</span></ion-col>
+          <ion-col> <span style="font-size: 25px;"> {{ user?.saldo | number }}€</span></ion-col>
+        </ion-row>
+
+       
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bizum</ion-card-title>
+        <ion-card-subtitle><p>Una vez que hagas el bizum desde tu banco, para  registrarlo en la aplicación pulsa en</p>
+          <p>
+            <span  (click)="userBizum = user" class="avisarBizum hand">Avisar Bizum</span>
+          </p> 
+          <p><i>(se pueden borrar en estado pendiente)</i></p>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+
+
+        <my-table
+        [title]="'Bizums'"
+        [entityName]="'userxbizum'"        
+        [columns]="columns"
+        [refresh]="tableRefresh"
+        [pageSize]="4"
+        [withCache]="true"
+        (actionEmiter)="actionEmiter($event)"
+        [objNgClass]="[
+        { class : 'enVerde',  condicion : 'row[\'estadoid\'] ==2'},
+        { class : 'enNaranja', condicion : 'row[\'estadoid\'] == 1'},
+      
+          ]"
+      ></my-table>
+
+      </ion-card-content>
+    </ion-card>
+
+    <add-bizum
+      [SetUser]="userBizum"
+      (saveEvent)="refresh()"
+      (cancelEvent)="userBizum = null"
+    ></add-bizum> 

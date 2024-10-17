@@ -1,0 +1,32 @@
+
+
+<ion-grid class="router-outlet">
+  <ion-row *ngIf="user.isAdmin">
+    <ion-col>
+      <ion-select [(ngModel)]="userIdSelected"  interface="popover" (ionChange)="selectUserEvent()">
+        <ion-select-option *ngFor="let user of lstUser" [value]="user.id">
+          {{ user.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <my-table      
+        [canAddEntity] ="false"
+        [title]="'Auditoria'"
+        [pageSize]="10" 
+        [loadOnInit]="false"
+        [entityName]="entityName"
+        [columns]="columns"
+        [refresh]="tableRefresh"       
+        (onLoadDataEmiter)="onLoadDataEmiter($event)"        
+        [objNgClass]="[          
+          { class : 'enVerde',  condicion : 'row[\'tipoid\'] ==1'},        
+          { class : 'enRojo',  condicion : 'row[\'tipoid\'] ==2'},       
+          { class : 'enNaranja', condicion : 'row[\'tipoid\'] == 3'},      
+          ]"
+      ></my-table>
+    </ion-col>
+  </ion-row>
+</ion-grid>

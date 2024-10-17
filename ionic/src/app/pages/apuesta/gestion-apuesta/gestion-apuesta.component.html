@@ -1,0 +1,64 @@
+<ion-modal [isOpen]="apuesta!=null"  (willDismiss)="cancel()">
+  <ng-template>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Apuesta : {{apuesta?.fecha  | date : "dd/MM/yyyy"}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Estado : {{apuesta?.estado}} </ion-label>            
+          </ion-item>
+          <ion-item *ngIf="estadoid==1"> <!--Abierta-->
+            <ion-label>Jugadores en Rojo: {{totalRojos}} </ion-label>
+          </ion-item>
+          <ion-item *ngIf="estadoid==1">
+            <base-button-guardar [label]="'Cerrar Apuesta'" [valid]="true" [isSaving]="isClosing" (click)="cerrarApuesta()">
+          </base-button-guardar>
+          </ion-item>
+
+          <ion-item *ngIf="estadoid==2"> <!--Abierta-->
+            <ion-label>Jugado: {{apuesta?.apostado | number}} </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="estadoid==2"> <!--Abierta-->
+            <ion-input type="number" placeholder="ganado" [(ngModel)]="ganado"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="estadoid==2"> <!--Abierta-->
+            <base-button-guardar [valid]="ganado" [label]="'Finalizar Apuesta'" [valid]="true" [isSaving]="isClosing" (click)="finalizarApuesta()">
+          </base-button-guardar>
+          </ion-item>
+        
+        </ion-list>
+
+
+
+
+
+        <!-- <form  [formGroup]="formGroup" >
+        <ion-list>
+          <ion-item>
+           <h2>Nuevo Bizum</h2>
+          </ion-item>
+          <ion-item>
+            <ion-input label="importe" formControlName="importe" type="number" placeholder="000"></ion-input>
+          </ion-item>
+          <ion-item>
+            <br>
+            <base-button-guardar
+            [isSaving]="isSaving"
+            [valid]="formGroup.valid"
+            (click)="onSubmit()"
+          ></base-button-guardar>
+          </ion-item>
+        </ion-list>
+      </form> -->
+      </ion-card-content>
+    <br><br>
+      <base-button-cancelar (click)="cancel()"></base-button-cancelar>
+    </ion-card>
+  </ng-template>
+</ion-modal>

@@ -1,0 +1,82 @@
+<!-- {{columns | json}} -->
+<!-- { class : 'indexPar',  condicion : 'index % 2 == 0'}, -->
+<ion-grid class="router-outlet">
+  <ion-row>
+    <ion-col>
+      <ion-checkbox
+        [(ngModel)]="soloActivos"
+        justify="start"
+        (click)="soloActivoEvent($event)"
+        >Solo activos</ion-checkbox
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <!-- <ion-select [(ngModel)]="userIdSelected"  interface="popover" (ionChange)="selectUserEvent()">
+        <ion-select-option *ngFor="let user of lstUser" [value]="user.id">
+          {{ user.name }}
+        </ion-select-option>
+      </ion-select> -->
+
+
+      <ionic-selectable
+    [(ngModel)]="userSelected"
+    [items]="lstUser"
+    itemValueField="id"
+    itemTextField="name"
+    [canSearch]="true"
+    (onChange)="selectUserEvent()">
+  </ionic-selectable>
+
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <my-table
+      [canAddEntity] ="user.isAdmin"
+      [canUpdateEntity] ="user.isAdmin"
+        [title]="'Ludópatas'"
+        [pageSize]="7" 
+        [entityName]="entityName"
+        [columns]="columns"
+        [withCache]="true"
+        [refresh]="tableRefresh"
+        [objNgClass]="[
+        { class : 'enRojo',  condicion : 'row[\'saldo\'] <1'},
+        { class : 'enNaranja', condicion : 'row[\'saldo\'] >= 1 && row[\'saldo\'] < 2'},
+      
+          ]"
+        (actionEmiter)="actionEmiter($event)"
+      ></my-table>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<add-saldo
+  [SetUser]="rowAddSaldo"
+  (saveEvent)="getTableRefresh()"
+  (cancelEvent)="rowAddSaldo=null"
+></add-saldo>
+<add-bizum
+  [SetUser]="rowAddBizum"
+  [fromAdmin]="true"
+  (saveEvent)="getTableRefresh()"
+  (cancelEvent)="rowAddBizum=null"
+></add-bizum>
+
+<!-- <app-editor-entity
+  [entityName]="entityName"
+  [setEntity]="entitySelected"
+  (saveEvent)="save($event)"
+  (deleteEvent)="borrar($event)"
+></app-editor-entity>
+
+<my-table
+  [title]="'Gastos de casa'"
+  [entityName]="entityName"
+  [columns]="columns"
+  [refresh]="tableRefresh"
+  (selecting)="selectItem($event)"
+></my-table> -->

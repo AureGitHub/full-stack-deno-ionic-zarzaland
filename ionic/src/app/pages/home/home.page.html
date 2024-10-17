@@ -1,0 +1,12 @@
+<ion-grid >
+  <ion-row *ngIf="!user">
+    <ion-col class="ion-text-center">
+      <ion-button color="success"  [routerLink]="'/login'" title="Conectate a la aplicación">
+        <ion-icon  style="color: gray;"   slot="start" name="person" ></ion-icon>
+        Conectate a la aplicación
+      </ion-button>
+    </ion-col>    
+  </ion-row>
+</ion-grid>
+
+<user-data *ngIf="user" [userid]="user.id"></user-data>
