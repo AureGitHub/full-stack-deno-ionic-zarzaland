@@ -8,7 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SharedComponentsModuleLocal } from 'src/app/components/shared-components.module';
-import { ButtonModule } from 'app-base-lib';
+import { MenuButtonsModule } from 'app-base-lib';
+
 
 
 
@@ -19,7 +20,8 @@ import { ButtonModule } from 'app-base-lib';
     IonicModule,
     HomePageRoutingModule,
     SharedComponentsModuleLocal,
-    ButtonModule
+    MenuButtonsModule
+
 
   ],
   declarations: [HomePage] 

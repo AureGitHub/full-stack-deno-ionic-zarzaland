@@ -1,4 +1,4 @@
-import  {entities} from './entities'
+import { reduce } from 'rxjs'
 import  {menuItems} from './menu'
 import  {message} from './message'
 
@@ -6,10 +6,10 @@ import  {message} from './message'
 
 export const settings = {
 
-  Title: 'TTEC-EUROMILLONES', //para mostar en pantalla
+  Title: 'ZARZAland', //para mostar en pantalla
+  Title_color: 'red' ,
   app: '',         // pra acceder al server (no se si lo voy a usar)
   menuItems,
-  entities,
   message,
   table : {
     pageSize: 10

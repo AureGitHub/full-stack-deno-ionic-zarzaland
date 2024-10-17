@@ -1,65 +1,31 @@
 import { Role } from 'app-base-lib';
 
 export const  menuItems =   [
-  {
-    title: 'Inicio',
-    icon: 'home',
-    path: '//',
-    key: 'inicio'
-  },
    {
-     title: 'empleadas',
-     icon: 'woman',
-     path: '/empleadas/',
-     key: 'empleadas',  // para encontar la ruta en los guard
+     title: 'Inmuebles',
+     icon: 'business-outline',
+     path: '/inmuebles/',
+     key: 'inmuebles',  // para encontar la ruta en los guard
      roles: [Role.god, Role.admin]
    },
 
    {
-    title: 'Usuarios',
-    icon: 'people',
-    path: '/users/',
-    key: 'users',  // para encontar la ruta en los guard
-    roles: [Role.god]
-  },
-  {
-    title: 'Administracion',
-    icon: 'construct-outline',
-    path: '/administracion/',
-    key: 'administracion',  // para encontar la ruta en los guard
-    roles: [Role.god]
-  },
-  {
-    title: 'Bizum',
-    icon: 'logo-bitcoin',
-    path: '/bizum/',
-    key: 'bizum',  // para encontar la ruta en los guard
-    roles: [Role.god]
+    title: 'Agenda',
+    icon: 'calendar-outline',
+    path: '/agenda/',
+    key: 'agenda',  // para encontar la ruta en los guard
+    roles: [Role.god, Role.admin],
+    // hide : true
   },
 
   {
-    title: 'Apuestas',
-    icon: 'trophy',
-    path: '/apuesta/',
-    key: 'apuesta',  // para encontar la ruta en los guard
-    roles: [Role.god, Role.normal]
+    title: 'Servicios',
+    icon: 'alarm-outline',
+    path: '/servicios/',
+    key: 'servicios',  // para encontar la ruta en los guard
+    roles: [Role.god, Role.admin],
+    // hide : true
   },
 
-  {
-    title: 'Movimientos',
-    icon: 'newspaper',
-    path: '/movimiento/',
-    key: 'movimiento',  // para encontar la ruta en los guard
-    roles: [Role.normal]
-  },
-
-  {
-    title: 'Auditoria',
-    icon: 'walk',
-    path: '/auditoria/',
-    key: 'auditoria',  // para encontar la ruta en los guard
-    roles: [Role.god]
-  },
-
-
+   
  ]

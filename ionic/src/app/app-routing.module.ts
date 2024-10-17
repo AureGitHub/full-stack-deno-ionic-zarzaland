@@ -3,16 +3,17 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RolGuard } from 'app-base-lib';
 
 const routes: Routes = [
+    {
+    path: 'login',
+    loadChildren: () => import( 'app-base-lib').then(m => m.LoginPageModule)
+  },
+
   {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
 
 
-  {
-    path: 'login',
-    loadChildren: () => import( 'app-base-lib').then(m => m.LoginPageModule)
-  },
 
   {
     path: 'forgot-password',
@@ -20,35 +21,24 @@ const routes: Routes = [
   },
 
   {
-    path: 'users',
-    loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPagePageModule), canActivate: [RolGuard]
+    path: 'inmuebles',
+    loadChildren: () => import('./pages/inmuebles/inmuebles.module').then(m => m.InmueblesPageModule), 
+    canActivate: [RolGuard]
   },
-
   {
-    path: 'bizum',
-    loadChildren: () => import('./pages/bizum/bizum.module').then( m => m.BizumPagePageModule), canActivate: [RolGuard]
+    path: 'servicios',
+    loadChildren: () => import('./pages/servicios/servicios.module').then(m => m.ServiciosPageModule), 
+    canActivate: [RolGuard]
   },
 
-  {
-    path: 'apuesta',
-    loadChildren: () => import('./pages/apuesta/apuesta.module').then( m => m.ApuestaPagePageModule), canActivate: [RolGuard]
-  },
-
-  {
-    path: 'movimiento',
-    loadChildren: () => import('./pages/movimiento/movimiento.module').then( m => m.MovimientoPagePageModule), canActivate: [RolGuard]
-  },
+  // {
+  //   path: 'opcion',
+  //   loadChildren: () => import('./pages/carta/opcion/opcion.module').then(m => m.OpcionPagePageModule), 
+  //   canActivate: [RolGuard]
+  // },
+  
 
 
-  {
-    path: 'administracion',
-    loadChildren: () => import('./pages/administracion/administracion.module').then( m => m.AdministracionPageModule), canActivate: [RolGuard]
-  },
-
-  {
-    path: 'auditoria',
-    loadChildren: () => import('./pages/auditoria/auditoria.module').then( m => m.AuditoriaPagePageModule), canActivate: [RolGuard]
-  },
 
   {
     path: '**',

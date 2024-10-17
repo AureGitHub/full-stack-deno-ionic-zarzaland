@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SeguridadService } from 'app-base-lib';
+import { MyHttpService, SeguridadService, classHttp } from 'app-base-lib';
 
 @Component({
   selector: 'home-ttec-euromillones',
@@ -7,6 +7,7 @@ import { SeguridadService } from 'app-base-lib';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
 
   user: any;
 
@@ -18,10 +19,17 @@ export class HomePage implements OnInit {
       this.user = user;      
     });
   }
+
+  async ngOnInit() {
+    this.user = this.seguridadService.UserGet();
+
+   
+
+  }
+
   
 
-  ngOnInit() {
-    this.user = this.seguridadService.UserGet();
-  }
+ 
+
 
 }

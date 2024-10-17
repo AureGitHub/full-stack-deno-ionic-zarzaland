@@ -3,17 +3,13 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserDataComponent } from './user-data/user-data.component';
-import { AddBizumComponent } from './add-bizum/add-bizum.component';
 import { SharedComponentsModule } from 'app-base-lib';
-import { AddSaldoComponent } from './add-saldo/add-saldo.component';
+import { PublicCartaComponent } from './public-carta/public-carta.component';
 
 
 @NgModule({
   declarations: [
-    UserDataComponent,
-    AddBizumComponent,
-    AddSaldoComponent,
+    PublicCartaComponent
   ],
   imports: [
     CommonModule,
@@ -25,9 +21,7 @@ import { AddSaldoComponent } from './add-saldo/add-saldo.component';
     SharedComponentsModule
   ],
   exports: [
-    UserDataComponent,
-    AddBizumComponent,
-    AddSaldoComponent,
+    PublicCartaComponent
   ],
   providers: [
   ],
