@@ -1,5 +1,5 @@
 import { run } from  "./dep/deps.ts";
-import appRouter from "./app/router.js";
+import appRouter from "./app/router.ts";
 
 const fullstack = true;
 
