@@ -1,4 +1,7 @@
 # euromillones-ttec-deno-ionic
+
+ionic serve  --ssl
+
 Full stack. server deno, client ionic-angular
 
  "baseHref": "/ionic/",
