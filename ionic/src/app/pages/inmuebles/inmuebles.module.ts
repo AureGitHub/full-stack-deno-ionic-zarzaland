@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SharedComponentsModule } from 'app-base-lib';
+import { SharedComponentsModule } from '@aure-org/app-ionic-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { InmueblesPage } from './inmuebles.page';
 

@@ -18,7 +18,7 @@ produccion = false PARA DEBGUG
 
 
 
-Funcionalidad incluidas en la librería base ('app-base-lib')
+Funcionalidad incluidas en la librería base ('@aure-org/app-ionic-base-lib')
 
 BasePage ej. export class ApuestaPage extends BasePage implements OnInit { Propiedades // objeto para realizar consultas objPagFilterOrder : any;
 

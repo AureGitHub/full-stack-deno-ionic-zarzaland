@@ -11,11 +11,11 @@ import { DecimalPipe } from '@angular/common';
 
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { SharedCommomBaseModule } from 'app-base-lib';
 
 
 import { environment } from '../environments/environment';
 import { settings } from './settings/settings';
+import { SharedCommomBaseModule } from '@aure-org/app-ionic-base-lib';
 
 registerLocaleData(es);
 

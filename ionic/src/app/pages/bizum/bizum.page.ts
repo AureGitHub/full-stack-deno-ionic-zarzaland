@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { BasePage, MyHttpService, SeguridadService, UtilService, classHttp, typeMessage } from 'app-base-lib';
+import { BasePage, MyHttpService, SeguridadService, UtilService, classHttp, typeMessage } from '@aure-org/app-ionic-base-lib';
 
 
 @Component({

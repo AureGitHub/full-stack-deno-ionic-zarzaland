@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MyHttpService, UtilService, classHttp, typeMessage } from 'app-base-lib';
+import { classHttp, MyHttpService, typeMessage, UtilService } from '@aure-org/app-ionic-base-lib';
 
 @Component({
   selector: 'add-bizum',

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedComponentsModule } from 'app-base-lib';
+import { SharedComponentsModule } from '@aure-org/app-ionic-base-lib';
 import { PublicCartaComponent } from './public-carta/public-carta.component';
 
 

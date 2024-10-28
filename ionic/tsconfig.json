@@ -27,7 +27,7 @@
       "dom"
     ],
     "paths": {
-      "app-base-lib" : ["../../../ionic/workspace-lib-ionic/dist/app-ionic-base-lib"],
+      // "app-base-lib" : ["../../../ionic/workspace-lib-ionic/dist/app-ionic-base-lib"],
       "@angular/*": ["./node_modules/@angular/*"],
     },
     "useDefineForClassFields": false

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyHttpService, classHttp } from 'app-base-lib';
+import { MyHttpService, classHttp } from '@aure-org/app-ionic-base-lib';
 
 @Component({
   selector: 'public-carta',

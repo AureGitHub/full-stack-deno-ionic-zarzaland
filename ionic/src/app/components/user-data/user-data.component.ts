@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { MyHttpService, classHttp } from 'app-base-lib';
+import { MyHttpService, classHttp } from '@aure-org/app-ionic-base-lib';
 
 @Component({
   selector: 'user-data',

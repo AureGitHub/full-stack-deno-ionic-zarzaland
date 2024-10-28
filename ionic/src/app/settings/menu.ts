@@ -1,4 +1,4 @@
-import { Role } from 'app-base-lib';
+import { Role } from '@aure-org/app-ionic-base-lib';
 
 export const  menuItems =   [
    {

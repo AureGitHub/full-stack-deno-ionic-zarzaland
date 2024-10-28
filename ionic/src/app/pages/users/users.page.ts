@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage, MyHttpService, SeguridadService } from 'app-base-lib';
+import { BasePage, MyHttpService, SeguridadService } from '@aure-org/app-ionic-base-lib';
 
 
 @Component({

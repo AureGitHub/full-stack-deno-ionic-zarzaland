@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage, MyHttpService, SeguridadService, UtilService,  WebcamImage,  classHttp, typeMessage } from 'app-base-lib';
+import { BasePage, MyHttpService, SeguridadService, UtilService,  WebcamImage,  classHttp, typeMessage } from '@aure-org/app-ionic-base-lib';
 
 
 

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UsersPage } from './users.page';
-import { SharedComponentsModule } from 'app-base-lib';
+import { SharedComponentsModule } from '@aure-org/app-ionic-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedComponentsModuleLocal } from 'src/app/components/shared-components.module';
 import { IonicSelectableComponent } from 'ionic-selectable';

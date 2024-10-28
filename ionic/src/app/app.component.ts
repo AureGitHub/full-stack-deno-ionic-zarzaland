@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilService, typeMessage } from 'app-base-lib';
+import { typeMessage, UtilService } from '@aure-org/app-ionic-base-lib';
 import { register } from 'swiper/element/bundle';
 
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    // this.utilService.message(typeMessage.danger,'hola');
+    //  this.utilService.message(typeMessage.danger,'hola');
 
   }
 }

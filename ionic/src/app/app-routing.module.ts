@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { RolGuard } from 'app-base-lib';
+import {RolGuard } from '@aure-org/app-ionic-base-lib';
 
 const routes: Routes = [
     {
     path: 'login',
-    loadChildren: () => import( 'app-base-lib').then(m => m.LoginPageModule)
+    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.LoginPageModule)
   },
 
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
 
   {
     path: 'forgot-password',
-    loadChildren: () => import( 'app-base-lib').then(m => m.ForgotPasswordModule)
+    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.ForgotPasswordModule)
   },
 
   {
@@ -42,7 +42,7 @@ const routes: Routes = [
 
   {
     path: '**',
-    loadChildren: () => import( 'app-base-lib').then(m => m.NotFoundPageModule)
+    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.NotFoundPageModule)
   },
 
 
