@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { typeMessage, UtilService } from '@aure-org/app-ionic-base-lib';
+import { UtilService, typeMessage } from 'app-base-lib';
 import { register } from 'swiper/element/bundle';
 
 

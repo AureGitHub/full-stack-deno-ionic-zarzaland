@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyHttpService, SeguridadService, classHttp } from '@aure-org/app-ionic-base-lib';
+import { MyHttpService, SeguridadService, classHttp } from 'app-base-lib';
 
 @Component({
   selector: 'home-ttec-euromillones',

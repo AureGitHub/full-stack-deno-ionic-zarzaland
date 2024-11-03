@@ -1,0 +1,17 @@
+
+
+<ion-grid class="router-outlet">
+  <ion-row>
+    <ion-col>
+      <my-table
+      [loadOnInit]="true"
+        [canAddEntity] ="user.isAdmin"
+        [canUpdateEntity] ="user.isAdmin"
+        [title]="'Acciones'"
+        [entityName]="entityName"
+        [columns]="columns"
+        [refresh]="tableRefresh"
+      ></my-table>
+    </ion-col>
+  </ion-row>
+</ion-grid>

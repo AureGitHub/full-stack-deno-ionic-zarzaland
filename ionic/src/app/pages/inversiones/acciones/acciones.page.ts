@@ -3,13 +3,13 @@ import { BasePage, MyHttpService, SeguridadService,  classHttp } from 'app-base-
 
 
 @Component({
-  selector: 'app-inmuebles',
-  templateUrl: './inmuebles.page.html',
-  styleUrls: ['./inmuebles.page.scss'],
+  selector: 'app-acciones',
+  templateUrl: './acciones.page.html',
+  styleUrls: ['./acciones.page.scss'],
 })
-export class InmueblesPage extends BasePage implements OnInit {
+export class AccionesPage extends BasePage implements OnInit {
 
-
+  columns = [ { name: 'Descripción', prop: 'descripcion', type: 'text', OrderInit: 'ASC'},];
 
   constructor(
     public override  myHttpService: MyHttpService,
@@ -17,11 +17,11 @@ export class InmueblesPage extends BasePage implements OnInit {
 
   ) {
     super(myHttpService,seguridadService);
-    this.entityName = 'UserXMovimiento';
+    this.entityName = 'accion';
   }
 
   async ngOnInit() {
-
+    this.Init();
   }
 
 }

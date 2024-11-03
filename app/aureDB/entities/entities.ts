@@ -39,6 +39,28 @@ const entities = {
         { name: 'observacion', type: 'text', title: 'observación' },
      ],
 
+     accion:
+     [       
+       { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
+       { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
+       { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
+    ],
+
+    accion_compra:
+    [       
+      { name: 'accionid', type: 'select', title: 'Acción', multiple: false, coleccion: 'accion', id: 'id', desc: 'descripcion', validators: [Validators.required] },
+      { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
+      { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
+      { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
+      { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
+      { name: 'comision', type: 'number', title: 'Comisión', validators: [Validators.required] , default: 0},
+      { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},
+      { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
+      { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
+   ],
+
+
+
 
 };
 

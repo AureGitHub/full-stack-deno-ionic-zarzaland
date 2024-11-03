@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BasePage, MyHttpService, SeguridadService,  classHttp } from 'app-base-lib';
-
+import  {menuItems} from './menu'
 
 @Component({
-  selector: 'app-inmuebles',
-  templateUrl: './inmuebles.page.html',
-  styleUrls: ['./inmuebles.page.scss'],
+  selector: 'app-inversiones',
+  templateUrl: './inversiones.page.html',
+  styleUrls: ['./inversiones.page.scss'],
 })
-export class InmueblesPage extends BasePage implements OnInit {
+export class InversionesPage extends BasePage implements OnInit {
 
 
+  menuItems = menuItems;
 
   constructor(
     public override  myHttpService: MyHttpService,
@@ -17,7 +18,7 @@ export class InmueblesPage extends BasePage implements OnInit {
 
   ) {
     super(myHttpService,seguridadService);
-    this.entityName = 'UserXMovimiento';
+    this.entityName = 'accion';
   }
 
   async ngOnInit() {

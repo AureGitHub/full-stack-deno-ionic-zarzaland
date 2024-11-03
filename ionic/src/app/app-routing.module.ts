@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {RolGuard } from '@aure-org/app-ionic-base-lib';
+import {RolGuard } from 'app-base-lib';
 
 const routes: Routes = [
     {
     path: 'login',
-    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.LoginPageModule)
+    loadChildren: () => import( 'app-base-lib').then(m => m.LoginPageModule)
   },
 
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
 
   {
     path: 'forgot-password',
-    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.ForgotPasswordModule)
+    loadChildren: () => import('app-base-lib').then(m => m.ForgotPasswordModule)
   },
 
   {
@@ -25,24 +25,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inmuebles/inmuebles.module').then(m => m.InmueblesPageModule), 
     canActivate: [RolGuard]
   },
+
   {
-    path: 'servicios',
-    loadChildren: () => import('./pages/servicios/servicios.module').then(m => m.ServiciosPageModule), 
+    path: 'inversiones',
+    loadChildren: () => import('./pages/inversiones/inversiones.module').then(m => m.InversionesPageModule), 
     canActivate: [RolGuard]
   },
-
-  // {
-  //   path: 'opcion',
-  //   loadChildren: () => import('./pages/carta/opcion/opcion.module').then(m => m.OpcionPagePageModule), 
-  //   canActivate: [RolGuard]
-  // },
-  
-
 
 
   {
     path: '**',
-    loadChildren: () => import( '../../node_modules/@aure-org/app-ionic-base-lib').then(m => m.NotFoundPageModule)
+    loadChildren: () => import( 'app-base-lib').then(m => m.NotFoundPageModule)
   },
 
 

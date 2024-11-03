@@ -15,7 +15,7 @@ import { registerLocaleData } from '@angular/common';
 
 import { environment } from '../environments/environment';
 import { settings } from './settings/settings';
-import { SharedCommomBaseModule } from '@aure-org/app-ionic-base-lib';
+import { SharedCommomBaseModule } from 'app-base-lib';
 
 registerLocaleData(es);
 

@@ -1,6 +1,9 @@
 import { gnericRouter, Router } from "../dep/deps.ts";
-import servicioRouter from "./entity/servicio/router.ts"
-import empleadaRouter from "./entity/empleada/router.ts"
+import servicioRouter from "./controller/servicio/router.ts"
+import empleadaRouter from "./controller/empleada/router.ts"
+import accionRouter from "./controller/accion/router.ts"
+import accion_compraRouter from "./controller/accion_compra/router.ts"
+
 import { client, clientNoTransaction } from "./aureDB/client.ts";
 import entities from "./aureDB/entities/entities.ts";
 
@@ -20,7 +23,9 @@ gnericRouter.init(client,clientNoTransaction,entities);
 router.use(gnericRouter.router.routes());  
 router.use(servicioRouter.routes());  
 router.use(empleadaRouter.routes());  
-// router.use(documentoRouter.router.routes());  
+router.use(accionRouter.routes());
+router.use(accion_compraRouter.routes());  
+
 
 
 

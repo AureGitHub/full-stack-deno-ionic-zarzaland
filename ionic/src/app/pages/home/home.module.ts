@@ -8,7 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SharedComponentsModuleLocal } from 'src/app/components/shared-components.module';
-import { MenuButtonsModule } from '@aure-org/app-ionic-base-lib';
+import { MenuButtonsModule } from 'app-base-lib';
 
 
 
@@ -19,7 +19,7 @@ import { MenuButtonsModule } from '@aure-org/app-ionic-base-lib';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedComponentsModuleLocal,
+    SharedComponentsModuleLocal, 
     MenuButtonsModule
 
 

@@ -82,6 +82,32 @@ CREATE UNIQUE INDEX empleada_nombre_key ON public.empleada USING btree (nombre);
 
 
 
+CREATE TABLE public.accion (
+	id serial4 NOT NULL,
+	descripcion text NOT NULL,	
+	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updatedAt" timestamp(3) NOT NULL,
+	CONSTRAINT accion_pkey PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX accion_descripcion_key ON public.accion USING btree (descripcion);
+
+
+CREATE TABLE public.accion_compra (
+	id serial4 NOT NULL,
+	accionid int4 NOT NULL,
+	CONSTRAINT "accion_compra_accion_fkey" FOREIGN KEY (accionid) REFERENCES public."accion"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
+	precio numeric(9, 2) DEFAULT 0 NOT NULL,
+	impuestos numeric(9, 2) DEFAULT 0 NOT NULL,
+	comision numeric(9, 2) DEFAULT 0 NOT NULL,
+	total numeric(9, 2) DEFAULT 0 NOT NULL,	
+	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updatedAt" timestamp(3) NOT NULL,
+	CONSTRAINT accion_compra_pkey PRIMARY KEY (id)
+);
+
+
 -- public.servicio definition
 
 -- Drop table

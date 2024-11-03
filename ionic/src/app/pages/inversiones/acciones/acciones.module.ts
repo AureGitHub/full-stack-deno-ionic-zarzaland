@@ -4,17 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UsersPage } from './users.page';
 import { SharedComponentsModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedComponentsModuleLocal } from 'src/app/components/shared-components.module';
-import { IonicSelectableComponent } from 'ionic-selectable';
+import { AccionesPage } from './acciones.page';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: UsersPage
+    component: AccionesPage
   }
 ];
 
@@ -26,9 +24,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedComponentsModule,
-    SharedComponentsModuleLocal,
-    IonicSelectableComponent
   ],
-  declarations: [UsersPage ]
+  declarations: [AccionesPage]
 })
-export class UsersPagePageModule { }
+export class AccionesPageModule { }
