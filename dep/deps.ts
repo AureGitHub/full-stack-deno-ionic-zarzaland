@@ -7,8 +7,8 @@
 
 
 
-export * from  "../../../deno/deno-oak-lib/mod.ts";    
+//export * from  "../../../deno/deno-oak-lib/mod.ts";    
     
-//export * from "https://raw.githubusercontent.com/AureGitHub/deno-oak-lib/main/mod.ts"
+export * from "https://raw.githubusercontent.com/AureGitHub/deno-oak-lib/main/mod.ts"
 
 
