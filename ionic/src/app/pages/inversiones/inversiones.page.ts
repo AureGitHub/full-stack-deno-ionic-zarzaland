@@ -12,6 +12,7 @@ export class InversionesPage extends BasePage implements OnInit {
 
   menuItems = menuItems;
 
+
   constructor(
     public override  myHttpService: MyHttpService,
     public override  seguridadService: SeguridadService,
@@ -22,7 +23,7 @@ export class InversionesPage extends BasePage implements OnInit {
   }
 
   async ngOnInit() {
-
+    
   }
 
 }

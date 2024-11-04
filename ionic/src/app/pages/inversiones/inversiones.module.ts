@@ -8,6 +8,7 @@ import { RolGuard, SharedComponentsModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { InversionesPage } from './inversiones.page';
 import { MenuButtonsModule } from 'app-base-lib';
+import { TreeModule } from 'primeng/tree';
 
 const routes: Routes = [
   {
@@ -34,7 +35,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedComponentsModule, 
-    MenuButtonsModule
+    MenuButtonsModule,
+    TreeModule
+
   ],
   declarations: [InversionesPage]
 })
