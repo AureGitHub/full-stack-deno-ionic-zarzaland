@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedComponentsModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { AccionesCompraPage } from './acciones_compra.page';
-import { TreeModule } from 'primeng/tree';
+import { TableModule } from 'primeng/table';
 
 const routes: Routes = [
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedComponentsModule,
-    TreeModule
+    TableModule
   ],
   declarations: [AccionesCompraPage]
 })
