@@ -3,9 +3,12 @@
 DROP TABLE IF EXISTS public."User";
 DROP TABLE IF EXISTS public."TC_UserRole";
 DROP TABLE IF EXISTS public."TC_UserEstado";
+DROP TABLE IF EXISTS public."accion_venta";
+DROP TABLE IF EXISTS public."accion_compra";
+DROP TABLE IF EXISTS public."accion";
 
-DROP TABLE IF EXISTS public."servicio";
-DROP TABLE IF EXISTS public."empleada";
+
+
 
 
 
@@ -63,25 +66,6 @@ CREATE UNIQUE INDEX "User_email_key" ON public."User" USING btree (email);
 
 
 
-
--- public.empleada definition
-
--- Drop table
-
--- DROP TABLE public.empleada;
-
-CREATE TABLE public.empleada (
-	id serial4 NOT NULL,
-	nombre text NOT NULL,
-	baja bool NOT NULL,
-	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT empleada_pkey PRIMARY KEY (id)
-);
-CREATE UNIQUE INDEX empleada_nombre_key ON public.empleada USING btree (nombre);
-
-
-
 CREATE TABLE public.accion (
 	id serial4 NOT NULL,
 	descripcion text NOT NULL,	
@@ -108,30 +92,17 @@ CREATE TABLE public.accion_compra (
 );
 
 
--- public.servicio definition
-
--- Drop table
-
--- DROP TABLE public.servicio;
-
-CREATE TABLE public.servicio (
+CREATE TABLE public.accion_venta (
 	id serial4 NOT NULL,
-	fecha date NOT NULL,
-	"horaInicio" time NOT NULL,
-	"horaFin" time NOT NULL,
-	"suplLevantar" bool DEFAULT false NOT NULL,
-	"empleadaId" int4 NOT NULL,
-	pagado bool DEFAULT false NOT NULL,
-	horas int4 NOT NULL,
-	minutos int4 NOT NULL,
-	importe numeric(9, 2) NOT NULL,
-	observacion text NULL,
+	accion_compraid int4 NOT NULL,
+	CONSTRAINT "accion_compra_accion_venta_fkey" FOREIGN KEY (accion_compraid) REFERENCES public."accion_compra"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
+	precio numeric(9, 2) DEFAULT 0 NOT NULL,
+	impuestos numeric(9, 2) DEFAULT 0 NOT NULL,
+	comision numeric(9, 2) DEFAULT 0 NOT NULL,
+	total numeric(9, 2) DEFAULT 0 NOT NULL,	
 	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT servicio_pkey PRIMARY KEY (id)
+	CONSTRAINT accion_venta_pkey PRIMARY KEY (id)
 );
-
-
--- public.servicio foreign keys
-
-ALTER TABLE public.servicio ADD CONSTRAINT "servicio_empleadaId_fkey" FOREIGN KEY ("empleadaId") REFERENCES public.empleada(id) ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -20,30 +20,24 @@
       ></my-table> -->
       <!-- {{selectedNode | json}} -->
 
-      <div *ngFor="let mov of movimientos" class="grid itemTreeCompra">
-        <div class="col-12">
+      <div *ngFor="let mov of movimientos" class="grid ">
+        <div class="col-12 itemTreeCompra">
           <div class="grid head">
-            <div class="col-3 hand"  (click)="SelectedId=mov?.id">
-              <div class="text-top font-bold">{{ mov.descripcion }}</div>
+            <div class="col-4 hand"  (click)="SelectedId=mov?.id">
+              <div class="text-top font-bold">{{ mov.descripcion }} - {{ mov.fecha | date: 'dd/MM/yy' }}</div>
             </div>
-            <div class="col-3">
-              <div class="text-center">{{ mov.fecha | date: 'dd/MM/yy' }}</div>
-            </div>
+            
             <div class="col-3">
               <div class="text-center">{{ mov.precio }}</div>
             </div>
             <div class="col-3 hand">
               <div class="text-center" (click)="selectedNode = selectedNode == mov ?  null : mov">{{ mov.total }}</div>
             </div>
+            <div class="col-2">
+              <ion-icon  class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
+            </div>
           </div>
           <div class="detail" *ngIf="selectedNode == mov">
-            <div class="grid acciones">
-              <div class="col-12">
-                <ion-icon  class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
-              </div>
-              
-            </div> 
-
             <div class="grid ventas">              
               <div class="col-3">
                 <div class="text-center">{{ mov.fecha | date: 'dd/MM/yy' }}</div>

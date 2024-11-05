@@ -4,15 +4,14 @@ import {client, clientNoTransaction } from "../../aureDB/client.ts";
 
 import entities from "../../aureDB/entities/entities.ts";
 
-const entity =new aureDB(client, clientNoTransaction,entities,'accion_compra' );
+const entity =new aureDB(client, clientNoTransaction,entities,'accion_venta' );
 const genericDB = new GenericDB(entity);
 
 const get= async (ctx: any) => {
 
-    const sqlSelect = `  select ac.id,fecha,acciones, precio,total, a.descripcion `; 
+    const sqlSelect = `  select * `; 
 
-  let sqlFrom =` from  public.accion_compra ac 
-  inner join accion a on a.id = ac.accionid 
+  let sqlFrom =` from  public.accion_venta   
    `;
 
 
