@@ -1,10 +1,21 @@
 <app-editor-entity
-  [entityName]="entityName"
-  [setEntity]="SelectedId"
+  [entityName]="entityNameCompra"
+  [setEntity]="SelectedCompraId"
   (saveEvent)="getMovimientos()"
   (deleteEvent)="getMovimientos()"
-  (CancelEvent)="SelectedId = null"
+  (CancelEvent)="SelectedCompraId = null"
 ></app-editor-entity>
+
+
+<app-editor-entity #venta
+  [entityName]="entityNameVenta"
+  [setEntity]="SelectedVentaId"
+  [entityInitialValues]="entityVentaInitialValues"
+  (saveEvent)="getMovimientos()"
+  (deleteEvent)="getMovimientos()"
+  (CancelEvent)="SelectedVentaId = null"
+></app-editor-entity>
+
 
 <ion-grid class="router-outlet">
   <ion-row>
@@ -20,10 +31,14 @@
       ></my-table> -->
       <!-- {{selectedNode | json}} -->
 
+      <div *ngIf="isLoading">
+        <app-base-cargando [message]="'Cargando operaciones...'"></app-base-cargando>
+      </div>
+
       <div *ngFor="let mov of movimientos" class="grid ">
         <div class="col-12 itemTreeCompra">
           <div class="grid head">
-            <div class="col-4 hand"  (click)="SelectedId=mov?.id">
+            <div class="col-4 hand"  (click)="SelectedCompraId = mov?.id">
               <div class="text-top font-bold">{{ mov.descripcion }} - {{ mov.fecha | date: 'dd/MM/yy' }}</div>
             </div>
             
@@ -34,7 +49,7 @@
               <div class="text-center" (click)="selectedNode = selectedNode == mov ?  null : mov">{{ mov.total }}</div>
             </div>
             <div class="col-2">
-              <ion-icon  class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
+              <ion-icon (click)="addVenta(mov.id, mov.acciones)" class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
             </div>
           </div>
           <div class="detail" *ngIf="selectedNode == mov">

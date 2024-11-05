@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   BasePage,
+  EditorEntityComponent,
   MyHttpService,
   SeguridadService,
   classHttp,
@@ -22,8 +23,16 @@ export class AccionesCompraPage extends BasePage implements OnInit {
     { name: 'P', prop: 'precio', type: 'number' },
     { name: 'T', prop: 'total', type: 'number' },
   ];
-SelectedId: any;
+SelectedCompraId: any;
+SelectedVentaId: any;
 selectedNode: any;
+
+entityNameCompra = 'accion_compra';
+entityNameVenta = 'accion_venta';
+
+
+@ViewChild('venta') editorEntityComponent :EditorEntityComponent ;
+entityVentaInitialValues: any;
 
   constructor(
     public override myHttpService: MyHttpService,
@@ -89,5 +98,11 @@ selectedNode: any;
     //     ]
     //   }
     // ];
+  }
+
+  addVenta(accion_compraid, acciones){
+
+    this.entityVentaInitialValues = {accion_compraid,acciones};
+    this.editorEntityComponent.management(0);
   }
 }
