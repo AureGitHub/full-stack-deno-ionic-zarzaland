@@ -2,7 +2,7 @@ import { Router, requireAdmin,getData } from  "../../../dep/deps.ts";
 import controller from "./controller.ts";
 
 const router = new Router({
-    prefix: "/accion_venta",
+    prefix: "/accion_compra",
   });
 
 router
