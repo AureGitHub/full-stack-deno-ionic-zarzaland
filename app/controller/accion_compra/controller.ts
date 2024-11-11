@@ -41,17 +41,18 @@ const getById= async (ctx: any) => {
 
 const comprasByEmpresaId= async (ctx: any) => {
   const empresaid = Number(ctx?.params?.empresaid);
-  const sqlSelect = `  select ac.id, e.descripcion || '-' || TO_CHAR(ac.fecha, 'dd/MM/yyyy') descripcion `; 
+  const sqlSelect = ` select ac.id,TO_CHAR(ac.fecha, 'dd/MM/yyyy')fecha, ac.acciones,ac.precio `; 
 
   let sqlFrom =` from accion_compra ac
   inner join empresa e on e.id = ac.empresaid 
+  where ac.empresaid= ${empresaid.toString()}
    `;
 
 
   //where empresaid = ${empresaid}
   
 
- const orderBydefect = ``;
+ const orderBydefect = ` order by ac,fecha desc `;
 
  const result=await entity.execute_query_data(ctx, client, sqlSelect, sqlFrom, orderBydefect);
  ctx.response.status = 201;

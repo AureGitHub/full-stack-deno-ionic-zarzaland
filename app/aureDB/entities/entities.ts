@@ -42,7 +42,6 @@ const entities = {
 
    accion_venta:
    [       
-     { name: 'accion_compraid', type: 'number', title: 'Compra de',  validators: [Validators.required], hide : true  },
      { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
      { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
      { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
@@ -52,6 +51,14 @@ const entities = {
      { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
      { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
   ],
+
+  accion_compra_venta:
+  [ 
+    { name: 'compraid', type: 'number', title: 'Acciones', validators: [Validators.required]},
+    { name: 'ventaid', type: 'number', title: 'Precio', validators: [Validators.required]},    
+    { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
+     { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },       
+ ],
 
 
 

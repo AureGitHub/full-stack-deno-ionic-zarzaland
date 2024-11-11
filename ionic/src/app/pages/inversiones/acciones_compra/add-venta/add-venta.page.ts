@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BasePage, MyHttpService, SeguridadService,  UtilService,  classHttp, typeMessage } from 'app-base-lib';
 
 
@@ -11,8 +11,9 @@ import { BasePage, MyHttpService, SeguridadService,  UtilService,  classHttp, ty
 export class AddVentaPage  implements OnInit {
 
   isOpenModal = false;
+  isAlta=true;
 
-  @Input() set  isOpen (value){
+  @Input() set  isOpen (value){ 
     this.isOpenModal = value;
     if(value){
       this.getEmpresas();
@@ -21,6 +22,7 @@ export class AddVentaPage  implements OnInit {
   }
   
   @Output() CancelEvent = new EventEmitter<true>();
+  @Output() saveEvent = new EventEmitter<any>();
 
   formGroup: FormGroup;
   isSaving = false;
@@ -43,9 +45,17 @@ export class AddVentaPage  implements OnInit {
   async ngOnInit() { 
 
     this.formGroup = new FormGroup({
-      empresaid: new FormControl(''),
-      comprasid: new FormControl(''),
+      fecha: new FormControl('',Validators.required),
+      empresaid: new FormControl('',Validators.required),
+      comprasid: new FormControl('',Validators.required),
+      acciones: new FormControl('',Validators.required),
+      precio: new FormControl('',Validators.required),
+      impuestos: new FormControl(''),
+      comision: new FormControl(''),
+      total: new FormControl('',Validators.required),
     });
+
+    this.formGroup.controls['fecha'].setValue(this.utilService.toISOString(new Date()));
   }
 
   async getEmpresas(){
@@ -90,9 +100,6 @@ export class AddVentaPage  implements OnInit {
     this.CancelEvent.emit(true);
   }
 
-  async onSubmit() {
-
-  }
 
   
   select_empresa(){
@@ -127,6 +134,66 @@ export class AddVentaPage  implements OnInit {
       this.isLoadingCompras= false;
     }
   }
+
+  selectCompra(event,compra){
+
+
+    if(!this.formGroup.controls['comprasid'].value){
+      this.formGroup.controls['comprasid'].setValue([]);
+    }
+
+    let lstComprasis = this.formGroup.controls['comprasid'].value;
+
+
+    const accionesTmp = parseFloat(compra.acciones);
+    const accionesActual = !this.formGroup.controls['acciones'].value ? 0 : this.formGroup.controls['acciones'].value;
+
+    if(event?.detail?.checked){
+      this.formGroup.controls['acciones'].setValue(accionesActual + accionesTmp);
+
+      lstComprasis.push(compra.id);
+
+
+    }
+    else{
+      this.formGroup.controls['acciones'].setValue(accionesActual - accionesTmp);
+      lstComprasis = lstComprasis.filter(a=> a !=compra.id );
+    }
+
+    this.formGroup.controls['comprasid'].setValue(lstComprasis);
+    
+
+  }
+
+
+  async onSubmit() {
+    let date = this.utilService.toISOString(new Date(this.formGroup.controls['fecha'].value));
+    this.formGroup.controls['fecha'].setValue(date);
+
+
+    const formData = new FormData();
+    Object.keys(this.formGroup.controls).forEach((controlName: string) => {      
+        formData.append(controlName, this.formGroup.controls[controlName].value);
+    });
+
+
+    const protocol = this.isAlta ? 'post' : 'put';
+    const param = this.isAlta ? null : this.formGroup.controls['id'].value.toString();
+    const objHttp: classHttp = new classHttp(protocol, 'accion_compra_venta', null, null, formData, param);
+    const resp = await this.myHttpService.ejecuteURL(objHttp);
+    this.isSaving = false;
+    if (resp) { // verificar... no se si solo responde undefined cuando falla        
+      
+      this.isAlta = false;
+      this.isOpenModal = false;
+      this.saveEvent.emit(this.formGroup.value);
+    }
+
+
+
+  }
+
+
 
 }
 

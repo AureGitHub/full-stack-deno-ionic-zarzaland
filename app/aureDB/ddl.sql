@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS public."TC_UserRole";
 DROP TABLE IF EXISTS public."TC_UserEstado";
 DROP TABLE IF EXISTS public."accion_venta";
 DROP TABLE IF EXISTS public."accion_compra";
+DROP TABLE IF EXISTS public."accion_compra_venta";
 DROP TABLE IF EXISTS public."empresa";
 
 
@@ -94,8 +95,6 @@ CREATE TABLE public.accion_compra (
 
 CREATE TABLE public.accion_venta (
 	id serial4 NOT NULL,
-	accion_compraid int4 NOT NULL,
-	CONSTRAINT "accion_compra_accion_venta_fkey" FOREIGN KEY (accion_compraid) REFERENCES public."accion_compra"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
 	precio numeric(9, 2) DEFAULT 0 NOT NULL,
@@ -105,4 +104,16 @@ CREATE TABLE public.accion_venta (
 	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updatedAt" timestamp(3) NOT NULL,
 	CONSTRAINT accion_venta_pkey PRIMARY KEY (id)
+);
+
+
+CREATE TABLE public.accion_compra_venta (
+	id serial4 NOT NULL,	
+	compraid int4 NOT NULL,
+	CONSTRAINT "accion_compra_accion_fkey1" FOREIGN KEY (compraid) REFERENCES public."accion_compra"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ventaid int4 NOT NULL,
+	CONSTRAINT "accion_venta_fkey" FOREIGN KEY (ventaid) REFERENCES public."accion_venta"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updatedAt" timestamp(3) NOT NULL,
+	CONSTRAINT accion_compra_venta_pkey PRIMARY KEY (id)
 );
