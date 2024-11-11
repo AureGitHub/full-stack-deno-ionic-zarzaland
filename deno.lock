@@ -205,5 +205,14 @@
     "https://raw.githubusercontent.com/AureGitHub/deno-oak-lib/main/sendEmail.ts": "50d0908d945cd2df598e092788139a80545c0d1d379adb640e44b2730d1f378b",
     "https://raw.githubusercontent.com/AureGitHub/deno-oak-lib/main/server.ts": "689dce44b4c13fd430d74525a4fc4683bd76c676817300c7a559531d4f6b792e",
     "https://raw.githubusercontent.com/AureGitHub/deno-oak-lib/main/status.ts": "065b5fac9feeb3a25e3d4246aa07f9f25af7cad7cffad5b276959dc39ecae9e0"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@angular/animations@^18.2.10",
+        "npm:primeicons@^7.0.0",
+        "npm:primeng@^17.18.11"
+      ]
+    }
   }
 }

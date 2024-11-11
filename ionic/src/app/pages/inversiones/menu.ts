@@ -2,10 +2,10 @@ import { Role } from 'app-base-lib';
 
 export const  menuItems =   [
    {
-     title: 'Gestión Acciones',
-     icon: 'ticket-outline',
-     path: '/inversiones/acciones/',
-     key: 'acciones',  // para encontar la ruta en los guard
+     title: 'Gestión Empresas',
+     icon: 'business-outline',
+     path: '/inversiones/empresas/',
+     key: 'empresas',  // para encontar la ruta en los guard
      roles: [Role.god]
    } ,
    {
@@ -23,3 +23,4 @@ export const  menuItems =   [
    roles: [Role.god]
  }      
  ]
+ 

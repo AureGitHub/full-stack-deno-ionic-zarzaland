@@ -1,0 +1,93 @@
+<!-- isOpenModal : ({{isOpenModal}})
+<ion-modal [isOpen]="isOpenModal"  (willDismiss)="cancelar()">
+    <ng-template>
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" *ngIf="formGroupOK">
+            <ion-list >
+
+                <ion-item>
+                    <base-button-guardar
+                      [isSaving]="isSaving"
+                      [valid]="formGroup.valid"
+                      (click)="onSubmit()"
+                    ></base-button-guardar>
+                    <base-button-cancelar (click)="cancelar()"></base-button-cancelar>
+                  </ion-item>
+
+            </ion-list>
+        </form>
+    </ng-template>
+</ion-modal> -->
+
+<ion-modal [isOpen]="isOpenModal" (willDismiss)="cancelar()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Añadir venta</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isOpenModal=false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+
+        
+        <ion-list >
+            <ion-item>
+                <ion-label>Empresa</ion-label>
+                <app-base-cargando *ngIf="isLoadingEmpresas" [message]="'Cargando empresas...'"></app-base-cargando>                  
+                <ion-select
+                  *ngIf="!isLoadingEmpresas"                  
+                  formControlName="empresaid"
+                  interface="popover"
+                  placeholder="Seleccione"      
+                  (ionChange)="select_empresa()"            
+                >
+                  <ion-select-option
+                    *ngFor="let item of lstEmpresas"
+                    [value]="item['id']"
+                    >{{ item["descripcion"] }}</ion-select-option
+                  >
+                </ion-select>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-item>
+                    <!-- <ion-label>Compras {{this.formGroup.controls['comprasid']?.value | json}}</ion-label> -->
+                    <app-base-cargando *ngIf="isLoadingCompras" [message]="'Cargando compras...'"></app-base-cargando>                  
+                    <ion-select
+                      *ngIf="!isLoadingCompras"                  
+                      formControlName="comprasid"
+                      interface="popover"
+                      placeholder="Seleccione"   
+                      [multiple]="true"   
+                      
+                    >
+                      <ion-select-option
+                        *ngFor="let item of lstCompras"
+                        [value]="item['id']"
+                        >{{ item["descripcion"] }}</ion-select-option
+                      >
+                    </ion-select>
+                </ion-item>
+            </ion-item>
+
+
+
+
+            <ion-item>
+                <base-button-guardar
+                  [isSaving]="isSaving"
+                  [valid]="formGroup.valid"
+                  (click)="onSubmit()"
+                ></base-button-guardar>
+                <base-button-cancelar (click)="cancelar()"></base-button-cancelar>
+              </ion-item>
+
+        </ion-list>
+    </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+

@@ -8,6 +8,7 @@ const router = new Router({
 router
 .get("/",  controller.get)
 .get("/:id",requireAdmin,  controller.getById)
+.get("/comprasByEmpresaId/:empresaid",requireAdmin,  controller.comprasByEmpresaId)
 .post("/", requireAdmin,getData, controller.add)
 .put("/:id", requireAdmin,getData,  controller.update)
 .delete("/:id",  requireAdmin,  controller.del)

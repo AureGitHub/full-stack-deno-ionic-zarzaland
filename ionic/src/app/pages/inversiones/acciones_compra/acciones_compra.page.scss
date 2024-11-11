@@ -1,5 +1,5 @@
 .itemTreeCompra{
-    font-size: 10px;
+    font-size: 12px;
     padding-bottom: 10px;;
  
 }
@@ -17,4 +17,27 @@
     border: solid 1px;
     padding: 5px;
     background-color: lightgreen;
+}
+
+.name-date{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.precio-total{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1px;
+}
+
+.precio{
+    background-color: navy;
+    color: white;
+    padding: 3px;
+}
+.total{
+    background-color: navy;
+    color: white;
+    padding: 3px;
 }

@@ -3,11 +3,11 @@ import { BasePage, MyHttpService, SeguridadService,  classHttp } from 'app-base-
 
 
 @Component({
-  selector: 'app-acciones',
-  templateUrl: './acciones.page.html',
-  styleUrls: ['./acciones.page.scss'],
+  selector: 'app-empresas',
+  templateUrl: './empresas.page.html',
+  styleUrls: ['./empresas.page.scss'],
 })
-export class AccionesPage extends BasePage implements OnInit {
+export class EmpresasPage extends BasePage implements OnInit {
 
   columns = [ { name: 'Descripción', prop: 'descripcion', type: 'text', OrderInit: 'ASC'},];
 
@@ -17,7 +17,7 @@ export class AccionesPage extends BasePage implements OnInit {
 
   ) {
     super(myHttpService,seguridadService);
-    this.entityName = 'accion';
+    this.entityName = 'empresa';
   }
 
   async ngOnInit() {

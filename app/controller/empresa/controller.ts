@@ -4,14 +4,14 @@ import {client, clientNoTransaction } from "../../aureDB/client.ts";
 
 import entities from "../../aureDB/entities/entities.ts";
 
-const entity =new aureDB(client, clientNoTransaction,entities,'accion' );
+const entity =new aureDB(client, clientNoTransaction,entities,'empresa' );
 const genericDB = new GenericDB(entity);
 
 const get= async (ctx: any) => {
 
     const sqlSelect = `  select *  `; 
 
-  let sqlFrom =` from "accion" `;
+  let sqlFrom =` from "empresa" `;
 
 
   const orderBydefect = ``;

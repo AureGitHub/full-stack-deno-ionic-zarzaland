@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS public."TC_UserRole";
 DROP TABLE IF EXISTS public."TC_UserEstado";
 DROP TABLE IF EXISTS public."accion_venta";
 DROP TABLE IF EXISTS public."accion_compra";
-DROP TABLE IF EXISTS public."accion";
+DROP TABLE IF EXISTS public."empresa";
 
 
 
@@ -78,8 +78,8 @@ CREATE UNIQUE INDEX accion_descripcion_key ON public.accion USING btree (descrip
 
 CREATE TABLE public.accion_compra (
 	id serial4 NOT NULL,
-	accionid int4 NOT NULL,
-	CONSTRAINT "accion_compra_accion_fkey" FOREIGN KEY (accionid) REFERENCES public."accion"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	empresaid int4 NOT NULL,
+	CONSTRAINT "accion_compra_accion_fkey" FOREIGN KEY (empresaid) REFERENCES public."empresa"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
 	precio numeric(9, 2) DEFAULT 0 NOT NULL,

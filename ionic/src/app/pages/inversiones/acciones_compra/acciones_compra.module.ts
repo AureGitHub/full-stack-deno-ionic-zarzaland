@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SharedComponentsModule } from 'app-base-lib';
+import { SharedComponentsModule, TableModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { AccionesCompraPage } from './acciones_compra.page';
-import { TableModule } from 'primeng/table';
+import { AddVentaPage } from './add-venta/add-venta.page';
 
 const routes: Routes = [
   {
@@ -22,8 +22,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedComponentsModule,
-    TableModule
+    TableModule,
   ],
-  declarations: [AccionesCompraPage]
+  declarations: [AccionesCompraPage,  AddVentaPage]
 })
 export class AccionesCompraPageModule { }

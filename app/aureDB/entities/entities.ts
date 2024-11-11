@@ -20,7 +20,7 @@ const entities = {
          { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
       ],
 
-     accion:
+     empresa:
      [       
        { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
        { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
@@ -29,7 +29,7 @@ const entities = {
 
     accion_compra:
     [       
-      { name: 'accionid', type: 'select', title: 'Acción', multiple: false, coleccion: 'accion', id: 'id', desc: 'descripcion', validators: [Validators.required] },
+      { name: 'empresaid', type: 'select', title: 'Acción', multiple: false, coleccion: 'empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
       { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
       { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
       { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},

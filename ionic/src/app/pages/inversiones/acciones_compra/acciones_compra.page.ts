@@ -30,6 +30,7 @@ selectedNode: any;
 entityNameCompra = 'accion_compra';
 entityNameVenta = 'accion_venta';
 
+isOpenModal=false;
 
 @ViewChild('venta') editorEntityComponent :EditorEntityComponent ;
 entityVentaInitialValues: any;

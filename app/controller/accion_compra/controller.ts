@@ -12,10 +12,10 @@ const get= async (ctx: any) => {
 
 
 
-   const sqlSelect = `  select ac.id,fecha,acciones, precio,total, a.descripcion `; 
+   const sqlSelect = `  select ac.id,fecha,acciones, precio,total, e.descripcion `; 
 
    let sqlFrom =` from  public.accion_compra ac 
-   inner join accion a on a.id = ac.accionid 
+   inner join empresa e on e.id = ac.empresaid 
     `;
 
 
@@ -30,8 +30,36 @@ const get= async (ctx: any) => {
  
 };
 
+
+
+
+
 const getById= async (ctx: any) => {
   await genericDB.getById(ctx);
+};
+
+
+const comprasByEmpresaId= async (ctx: any) => {
+  const empresaid = Number(ctx?.params?.empresaid);
+  const sqlSelect = `  select ac.id, e.descripcion || '-' || TO_CHAR(ac.fecha, 'dd/MM/yyyy') descripcion `; 
+
+  let sqlFrom =` from accion_compra ac
+  inner join empresa e on e.id = ac.empresaid 
+   `;
+
+
+  //where empresaid = ${empresaid}
+  
+
+ const orderBydefect = ``;
+
+ const result=await entity.execute_query_data(ctx, client, sqlSelect, sqlFrom, orderBydefect);
+ ctx.response.status = 201;
+  ctx.response.body = {
+    status: StatusCodes.OK,
+    data: { data: result.data.rows, count: result.count },
+  };
+
 };
 
 
@@ -56,4 +84,5 @@ export default {
     add, 
     update, 
     del,
+    comprasByEmpresaId
 };

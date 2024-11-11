@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RolGuard, SharedComponentsModule } from 'app-base-lib';
+import { RolGuard, SharedComponentsModule, TreeModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { InversionesPage } from './inversiones.page';
 import { MenuButtonsModule } from 'app-base-lib';
-import { TreeModule } from 'primeng/tree';
+
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
     component: InversionesPage,    
   },
   {
-    path: 'acciones',
-    loadChildren: () => import('./acciones/acciones.module').then(m => m.AccionesPageModule), 
+    path: 'empresas',
+    loadChildren: () => import('./empresas/empresas.module').then(m => m.EmpresasPageModule), 
     canActivate: [RolGuard]
   },
   {
