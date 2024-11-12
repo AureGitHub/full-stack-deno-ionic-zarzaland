@@ -1,17 +1,17 @@
 // deno-lint-ignore-file no-explicit-any
-import { aureDB, GenericDB, StatusCodes,statusError, statusOK } from  "../../../dep/deps.ts";
-import {client, clientNoTransaction } from "../../aureDB/client.ts";
+import { aureDB, GenericDB, StatusCodes,statusError, statusOK } from  "../../../../dep/deps.ts";
+import {client, clientNoTransaction } from "../../../aureDB/client.ts";
 
-import entities from "../../aureDB/entities/entities.ts";
+import entities from "../../../aureDB/entities/entities.ts";
 
-const entity =new aureDB(client, clientNoTransaction,entities,'empresa' );
+const entity =new aureDB(client, clientNoTransaction,entities,'bolsa.empresa' );
 const genericDB = new GenericDB(entity);
 
 const get= async (ctx: any) => {
 
     const sqlSelect = `  select *  `; 
 
-  let sqlFrom =` from "empresa" `;
+  let sqlFrom =` from  bolsa.empresa `;
 
 
   const orderBydefect = ``;

@@ -4,13 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SharedComponentsModule, TableModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
-import { AccionesCompraPage } from './acciones_compra.page';
-import { AddVentaPage } from './add-venta/add-venta.page';
+import { CarteraPage } from './cartera.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AccionesCompraPage
+    component: CarteraPage
   }
 ];
 
@@ -24,6 +23,6 @@ const routes: Routes = [
     SharedComponentsModule,
     TableModule,
   ],
-  declarations: [AccionesCompraPage,  AddVentaPage]
+  declarations: [CarteraPage]
 })
-export class AccionesCompraPageModule { }
+export class CarteraPageModule { }

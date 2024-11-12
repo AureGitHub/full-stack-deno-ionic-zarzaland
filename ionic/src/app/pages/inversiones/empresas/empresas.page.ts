@@ -17,7 +17,7 @@ export class EmpresasPage extends BasePage implements OnInit {
 
   ) {
     super(myHttpService,seguridadService);
-    this.entityName = 'empresa';
+    this.entityName = 'bolsa/empresa';
   }
 
   async ngOnInit() {

@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'acciones_compra',
-    loadChildren: () => import('./acciones_compra/acciones_compra.module').then(m => m.AccionesCompraPageModule), 
+    loadChildren: () => import('./cartera/cartera.module').then(m => m.CarteraPageModule), 
     canActivate: [RolGuard]
   },
 ];

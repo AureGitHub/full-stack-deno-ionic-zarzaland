@@ -8,7 +8,7 @@ import { Validators } from "../../enums.ts";
 const entities = {
 
 
-   User:
+   'public."User"':
       [
          { name: 'name', type: 'text', title: 'Nombre', validators: [Validators.required] },
          { name: 'email', type: 'text', title: 'Email', validators: [Validators.required, Validators.email] },
@@ -20,36 +20,46 @@ const entities = {
          { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
       ],
 
-     empresa:
-     [       
-       { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
-       { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
-       { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
-    ],
 
-    accion_compra:
+
+    'bolsa.empresa':
     [       
-      { name: 'empresaid', type: 'select', title: 'Acción', multiple: false, coleccion: 'empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
-      { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
-      { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
-      { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
-      { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
-      { name: 'comision', type: 'number', title: 'Comisión', validators: [Validators.required] , default: 0},
-      { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},
-      { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
-      { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
+      { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },      
+      { name: 'color', type: 'text', title: 'Color', validators: [Validators.required] },      
    ],
 
-   accion_venta:
+
+   'bolsa.cartera':
    [       
+      { name: 'empresaid', type: 'select', title: 'Acción', multiple: false, noTC:true ,  coleccion: 'bolsa/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },   
+      { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
+      { name: 'acciones', type: 'number', title: 'Acciones',disabled : true, validators: [Validators.required] , default: 0},
+      { name: 'beneficios', type: 'number', title: 'Beneficios',disabled : true, validators: [Validators.required] , default: 0},
+  ],
+
+
+
+  'bolsa.compra':
+  [       
+    { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide : true, useAlways : true },
+    { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
+    { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
+    { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
+    { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
+    { name: 'comision', type: 'number', title: 'Comisión', validators: [Validators.required] , default: 0},
+    { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},
+ ],
+
+
+   'bolsa.venta':
+   [   
+    { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide : true, useAlways : true },
      { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
      { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
      { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
      { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
      { name: 'comision', type: 'number', title: 'Comisión', validators: [Validators.required] , default: 0},
-     { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},
-     { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
-     { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },         
+     { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},     
   ],
 
   accion_compra_venta:

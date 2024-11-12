@@ -10,6 +10,12 @@ DROP TABLE IF EXISTS public."empresa";
 
 
 
+DROP TABLE IF EXISTS bolsa.empresa;
+
+
+
+ 
+
 
 
 
@@ -67,53 +73,51 @@ CREATE UNIQUE INDEX "User_email_key" ON public."User" USING btree (email);
 
 
 
-CREATE TABLE public.accion (
+CREATE TABLE bolsa.empresa (
 	id serial4 NOT NULL,
 	descripcion text NOT NULL,	
-	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT accion_pkey PRIMARY KEY (id)
+	color text NOT NULL,
+	CONSTRAINT empresa_pkey PRIMARY KEY (id)
 );
-CREATE UNIQUE INDEX accion_descripcion_key ON public.accion USING btree (descripcion);
+CREATE UNIQUE INDEX accion_descripcion_key ON bolsa.empresa USING btree (descripcion);
 
 
-CREATE TABLE public.accion_compra (
+
+CREATE TABLE bolsa.cartera (
 	id serial4 NOT NULL,
 	empresaid int4 NOT NULL,
-	CONSTRAINT "accion_compra_accion_fkey" FOREIGN KEY (empresaid) REFERENCES public."empresa"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "cartera_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES bolsa.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
-	precio numeric(9, 2) DEFAULT 0 NOT NULL,
-	impuestos numeric(9, 2) DEFAULT 0 NOT NULL,
-	comision numeric(9, 2) DEFAULT 0 NOT NULL,
-	total numeric(9, 2) DEFAULT 0 NOT NULL,	
-	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT accion_compra_pkey PRIMARY KEY (id)
+	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
+	beneficios numeric(15, 6) DEFAULT 0 NOT NULL,
+	CONSTRAINT cartera_pkey PRIMARY KEY (id)
 );
 
 
-CREATE TABLE public.accion_venta (
+CREATE TABLE bolsa.compra (
 	id serial4 NOT NULL,
+	carteraid int4 NOT NULL,
+	CONSTRAINT "compra_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES bolsa.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	acciones numeric(9, 6) DEFAULT 0 NOT NULL,
-	precio numeric(9, 2) DEFAULT 0 NOT NULL,
-	impuestos numeric(9, 2) DEFAULT 0 NOT NULL,
-	comision numeric(9, 2) DEFAULT 0 NOT NULL,
-	total numeric(9, 2) DEFAULT 0 NOT NULL,	
-	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT accion_venta_pkey PRIMARY KEY (id)
+	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
+	precio numeric(15, 6) DEFAULT 0 NOT NULL,
+	impuestos numeric(15, 6) DEFAULT 0 NOT NULL,
+	comision numeric(15, 6) DEFAULT 0 NOT NULL,
+	total numeric(15, 6) DEFAULT 0 NOT NULL,	
+	CONSTRAINT compra_pkey PRIMARY KEY (id)
 );
 
 
-CREATE TABLE public.accion_compra_venta (
-	id serial4 NOT NULL,	
-	compraid int4 NOT NULL,
-	CONSTRAINT "accion_compra_accion_fkey1" FOREIGN KEY (compraid) REFERENCES public."accion_compra"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-	ventaid int4 NOT NULL,
-	CONSTRAINT "accion_venta_fkey" FOREIGN KEY (ventaid) REFERENCES public."accion_venta"(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-	"createdAt" timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"updatedAt" timestamp(3) NOT NULL,
-	CONSTRAINT accion_compra_venta_pkey PRIMARY KEY (id)
+
+CREATE TABLE bolsa.venta (
+	id serial4 NOT NULL,
+	carteraid int4 NOT NULL,
+	CONSTRAINT "venta_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES bolsa.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
+	precio numeric(15, 6) DEFAULT 0 NOT NULL,
+	impuestos numeric(15, 6) DEFAULT 0 NOT NULL,
+	comision numeric(15, 6) DEFAULT 0 NOT NULL,
+	total numeric(15, 6) DEFAULT 0 NOT NULL,	
+	CONSTRAINT venta_pkey PRIMARY KEY (id)
 );
