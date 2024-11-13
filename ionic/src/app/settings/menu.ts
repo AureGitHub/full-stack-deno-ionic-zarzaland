@@ -10,10 +10,10 @@ export const  menuItems =   [
    },
 
    {
-    title: 'Agenda',
-    icon: 'calendar-outline',
-    path: '/agenda/',
-    key: 'agenda',  // para encontar la ruta en los guard
+    title: 'Casa',
+    icon: 'storefront-outline',
+    path: '/casa/',
+    key: 'casa',  // para encontar la ruta en los guard
     roles: [Role.god, Role.admin],
     // hide : true
   },
@@ -26,6 +26,4 @@ export const  menuItems =   [
     roles: [Role.god],
     // hide : true
   },
-
-   
  ]

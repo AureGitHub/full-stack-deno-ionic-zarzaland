@@ -34,6 +34,14 @@ const routes: Routes = [
 
 
   {
+    path: 'casa',
+    loadChildren: () => import('./pages/casa/casa.module').then(m => m.CasaPagePageModule), 
+    canActivate: [RolGuard]
+  },
+
+  
+
+  {
     path: '**',
     loadChildren: () => import( 'app-base-lib').then(m => m.NotFoundPageModule)
   },

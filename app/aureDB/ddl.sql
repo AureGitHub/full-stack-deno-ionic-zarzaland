@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS public."TC_UserEstado";
 
 
 
+DROP TABLE IF EXISTS bolsa.dividendo;
 DROP TABLE IF EXISTS bolsa.compra;
 DROP TABLE IF EXISTS bolsa.venta;
 DROP TABLE IF EXISTS bolsa.cartera;
@@ -59,6 +60,7 @@ CREATE UNIQUE INDEX "User_email_key" ON public."User" USING btree (email);
 CREATE TABLE bolsa.empresa (
 	id serial4 NOT NULL,
 	descripcion text NOT NULL,	
+	abreviatura text NOT NULL,
 	color text NOT NULL,
 	CONSTRAINT empresa_pkey PRIMARY KEY (id)
 );
@@ -116,3 +118,13 @@ CREATE TABLE bolsa.dividendo (
 	total numeric(15, 6) DEFAULT 0 NOT NULL,	
 	CONSTRAINT dividendo_pkey PRIMARY KEY (id)
 );
+
+
+
+CREATE TABLE casa.compra_producto (
+	id serial4 NOT NULL,
+	descripcion text NOT NULL,
+	CONSTRAINT producto_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX producto_descripcion_key ON casa.compra_producto USING btree (descripcion);

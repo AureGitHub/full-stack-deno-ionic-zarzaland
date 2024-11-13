@@ -25,6 +25,7 @@ const entities = {
     'bolsa.empresa':
     [       
       { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },      
+      { name: 'abreviatura', type: 'text', title: 'Abreviatura', validators: [Validators.required] },      
       { name: 'color', type: 'text', title: 'Color', validators: [Validators.required] },      
    ],
 
@@ -73,6 +74,14 @@ const entities = {
     { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
     { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},     
  ],
+
+ 'casa.compra_producto':
+ [   
+   { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },      
+ 
+],
+
+ 
 
 
 };

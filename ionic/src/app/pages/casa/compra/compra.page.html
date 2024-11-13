@@ -1,0 +1,34 @@
+
+<ion-grid class="router-outlet">
+
+  <ion-row>
+    <ion-col class="col-2">
+      <ion-button [color]="addProducto ? 'warning' : 'success' "    shape="round" size="small" (click)="addProducto=!addProducto" >
+        <ion-icon  slot="start" name="business-outline" ></ion-icon>  
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-3">
+    </ion-col>
+    <ion-col class="col-7">
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="addProducto">
+    <ion-col>
+      <add-producto></add-producto>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <app-base-cargando *ngIf="isLoading" [message]="'Cargando Productos...'"></app-base-cargando>
+    <div class="container-producto">
+      <div class="item hand" *ngFor="let producto of lstProductos" (click)="lstProductosSelected.push(producto)"> 
+        {{producto.descripcion}}</div>
+    </div>
+
+    <div class="container-selected">
+      <div class="item" *ngFor="let producto of lstProductosSelected"> 
+        {{producto.descripcion}}</div>
+    </div>
+
+  </ion-row>
+</ion-grid>

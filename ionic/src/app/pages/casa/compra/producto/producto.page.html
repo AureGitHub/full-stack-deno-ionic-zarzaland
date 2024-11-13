@@ -7,10 +7,11 @@
       [loadOnInit]="true"
         [canAddEntity] ="user.isAdmin"
         [canUpdateEntity] ="user.isAdmin"
-        [title]="'Empresas'"
+        [title]="'Productos'"
         [entityName]="entityName"
         [columns]="columns"
         [refresh]="tableRefresh"
+        [withCache]="true"
       ></my-table>
     </ion-col>
   </ion-row>

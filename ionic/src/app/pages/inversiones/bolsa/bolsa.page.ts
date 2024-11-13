@@ -51,6 +51,13 @@ export class BolsaPage extends BasePage implements OnInit {
     await this.getCartera();
   }
 
+
+  async handleRefresh(event) {
+    await this.getCartera();
+    event.target.complete();
+  }
+
+
   formatFecha(fecha) {
     const value = new Date(fecha);
     return `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`;
@@ -58,6 +65,8 @@ export class BolsaPage extends BasePage implements OnInit {
 
   async getCartera() {
     try {
+      this.beneficios=0;
+      this.inversionActual=0;
       this.lstCartera = [];
       this.isLoading = true;
       const objHttp: classHttp = new classHttp('get', this.entityName, null);
@@ -106,9 +115,9 @@ export class BolsaPage extends BasePage implements OnInit {
   }
 
 
-  async expanded(value,cartera){
-    cartera['expanded']=value;
-    if(value){
+  async expanded(cartera){
+    cartera['expanded']=!cartera['expanded'];
+    if(cartera['expanded']){
       this.getTransacciones(cartera);
     }
     else{

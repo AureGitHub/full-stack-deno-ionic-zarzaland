@@ -1,0 +1,36 @@
+.contenedor-productos{
+    display: flex;
+    flex-direction: row;
+    border: solid 1px;
+    padding: 5px;
+}
+
+.container-producto {
+    background: lightblue;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+
+  .container-selected {
+    background: rgb(201, 230, 173);
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .item {
+    width: 100px;
+    background: white;
+    border: 1px solid black;
+    font-size: 10px;
+    text-align: center;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    height: 20px;
+  }

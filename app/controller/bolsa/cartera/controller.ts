@@ -11,7 +11,7 @@ const genericDB = new GenericDB(entity);
 const get= async (ctx: any) => {
 
   const sqlSelect = `
-  select c.id,c.fecha,c.acciones, beneficios, e.descripcion,
+  select c.id,c.fecha,c.acciones, beneficios, e.descripcion,e.abreviatura,
 (select cast(count(*) as integer) from bolsa.compra c2 where c2.carteraid= c.id) AS compras,
 (select cast(count(*) as integer) from bolsa.venta v where v.carteraid= c.id) AS ventas,
 (select cast(count(*) as integer) from bolsa.dividendo d  where d.carteraid= c.id) AS dividendos

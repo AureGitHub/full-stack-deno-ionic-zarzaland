@@ -24,11 +24,9 @@
       </ion-button>
     </ion-col>
     <ion-col class="col-7">
-      <div class="flex_column">
+      <div class="flex_column infoBeneInver">
         <span>beneficios : {{beneficios  | number : '1.2-2' }}€</span>
         <span>Inversión : {{inversionActual  | number : '1.2-2' }}€</span>
-
-
       </div>
       
     </ion-col>
@@ -54,11 +52,11 @@
         <div class="col-12 itemTreeCompra" >
           <div class="grid head" [ngClass]="cartera.ventas == 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
             <div class="col-3 hand name-date"  (click)="managementCartera('bolsa/cartera',cartera.id)">
-              <div class="text-top font-bold">{{ cartera.descripcion }}</div>
+              <div class="text-top font-bold" title="{{cartera.descripcion}}">{{ cartera.abreviatura }}</div>
               <div>{{ cartera.fecha | date: 'dd/MM/yy' }}</div>
             </div>
             
-            <div class="col-3 hand"  (click)="getOperaciones(cartera)">
+            <div class="col-3 hand"  (click)="expanded(cartera)">
               <div class="text-center precio-beneficio">
                 <span>Acciones</span>
                 <span class="acciones">{{ cartera.acciones | number : '1.4-4' }}</span>
@@ -66,7 +64,7 @@
               </div>
             </div>
 
-            <div class="col-3"  (click)="selectedNode = selectedNode == cartera ?  null : cartera">
+            <div class="col-3"  (click)="selectedNode = selectedNode == cartera ?  null : cartera" (click)="expanded(cartera)">
               <div class="text-center precio-beneficio">
                 <span>{{cartera.ventas == 0 ? 'Invertido' : (cartera.beneficios >= 0 ? 'Beneficios' : 'Perdida')}}</span>
                 <span [ngClass]="cartera.beneficios >= 0 ? 'beneficio' : 'perdida'" >{{ cartera.beneficios| number : '1.2-2' }} €</span>
@@ -89,9 +87,6 @@
                 <span>{{cartera.dividendos}}</span>
                 <ion-icon  (click)="management(cartera,'bolsa/dividendo',0)" class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>              
               </div>
-              
-              <ion-icon *ngIf="!cartera['expanded']"  (click)="expanded(true,cartera)" class="hand" style="font-size: 24px;color:yellow;" name="chevron-down"></ion-icon>
-              <ion-icon *ngIf="cartera['expanded']" (click)="expanded(false,cartera)" class="hand" style="font-size: 24px;color: lightyellow;" name="chevron-up"></ion-icon>          
             </div>
           </div>
          
