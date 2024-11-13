@@ -16,13 +16,8 @@ const routes: Routes = [
     component: InversionesPage,    
   },
   {
-    path: 'empresas',
-    loadChildren: () => import('./empresas/empresas.module').then(m => m.EmpresasPageModule), 
-    canActivate: [RolGuard]
-  },
-  {
-    path: 'acciones_compra',
-    loadChildren: () => import('./cartera/cartera.module').then(m => m.CarteraPageModule), 
+    path: 'bolsa',
+    loadChildren: () => import('./bolsa/bolsa.module').then(m => m.BolsaPageModule), 
     canActivate: [RolGuard]
   },
 ];

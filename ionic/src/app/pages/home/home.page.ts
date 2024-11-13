@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHttpService, SeguridadService, classHttp } from 'app-base-lib';
+import { menuItems } from 'src/app/settings/menu';
 
 @Component({
   selector: 'home-ttec-euromillones',
@@ -8,7 +9,7 @@ import { MyHttpService, SeguridadService, classHttp } from 'app-base-lib';
 })
 export class HomePage implements OnInit {
 
-
+  menuItems = menuItems;
   user: any;
 
   constructor(

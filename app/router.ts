@@ -1,6 +1,6 @@
 import { gnericRouter, Router } from "../dep/deps.ts";
 
-import bolsaRouter from "./controller/bolsa/router.ts"
+import bolsaRouter from "./controller/bolsa/routerBolsa.ts"
 
 
 import { client, clientNoTransaction } from "./aureDB/client.ts";

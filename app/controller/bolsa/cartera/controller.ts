@@ -7,29 +7,65 @@ import entities from "../../../aureDB/entities/entities.ts";
 const entity =new aureDB(client, clientNoTransaction,entities,'bolsa.cartera' );
 const genericDB = new GenericDB(entity);
 
+
 const get= async (ctx: any) => {
 
-    const sqlSelect = `  select c.id,c.fecha,c.acciones, beneficios, e.descripcion, to_char(count(v.id), '9999') ventas, to_char(count(c2.id), '9999') compras   `; 
-
-  let sqlFrom =` 
-  from  bolsa.cartera c 
+  const sqlSelect = `
+  select c.id,c.fecha,c.acciones, beneficios, e.descripcion,
+(select cast(count(*) as integer) from bolsa.compra c2 where c2.carteraid= c.id) AS compras,
+(select cast(count(*) as integer) from bolsa.venta v where v.carteraid= c.id) AS ventas,
+(select cast(count(*) as integer) from bolsa.dividendo d  where d.carteraid= c.id) AS dividendos
+from  bolsa.cartera c 
 inner join  bolsa.empresa e on e.id = c.empresaid 
-left join bolsa.venta v on v.carteraid =c.id
-left join bolsa.compra c2  on c2.carteraid =c.id
-group by c.id,c.fecha,c.acciones, beneficios, e.descripcion
+order by c.fecha  desc
+
   `;
 
-
-  const orderBydefect = ` order by fecha desc`;
-
-  const result=await entity.execute_query_data(ctx, client, sqlSelect, sqlFrom, orderBydefect);
+  const result=await entity.queryObject(client, sqlSelect);
   ctx.response.status = 201;
    ctx.response.body = {
      status: StatusCodes.OK,
-     data: { data: result.data.rows, count: result.count },
+     data: { data: result.rows, count: result.count },
    };
  
 };
+
+
+
+const getTransacciones = async (ctx: any) => {
+
+  const carteraid = Number(ctx?.params?.carteraid);
+
+
+const sqlSelect = `
+select * from(
+select 'venta' tipo,id, carteraid, fecha, acciones, precio, impuestos, comision, total
+  from  bolsa.venta v     
+  where v.carteraid =${carteraid}
+  union
+select 'compra' tipo,id, carteraid, fecha, acciones, precio, impuestos, comision, total
+  from  bolsa.compra c     
+  where c.carteraid =${carteraid}
+  union  
+  select 'dividendo' tipo,id, carteraid, fecha, acciones, precio, impuestos, 0 comision, total
+  from  bolsa.dividendo d     
+  where d.carteraid =${carteraid}
+)T
+order by fecha desc
+
+
+`;
+
+const result=await entity.queryObject(client, sqlSelect);
+ctx.response.status = 201;
+ ctx.response.body = {
+   status: StatusCodes.OK,
+   data: { data: result.rows, count: result.count },
+ };
+
+};
+
+
 
 const getById= async (ctx: any) => {
   await genericDB.getById(ctx);
@@ -57,4 +93,5 @@ export default {
     add, 
     update, 
     del,
+    getTransacciones
 };

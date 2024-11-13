@@ -9,7 +9,7 @@
     </ion-row>
     <ion-row  *ngIf="user">
       <ion-col >       
-        <app-menu-buttons></app-menu-buttons>
+        <app-menu-buttons [menuItems]="menuItems"></app-menu-buttons>
       </ion-col>
     </ion-row>   
   </ion-grid>

@@ -62,14 +62,17 @@ const entities = {
      { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},     
   ],
 
-  accion_compra_venta:
-  [ 
-    { name: 'compraid', type: 'number', title: 'Acciones', validators: [Validators.required]},
-    { name: 'ventaid', type: 'number', title: 'Precio', validators: [Validators.required]},    
-    { name: 'createdAt', type: 'date', title: 'createdAt', validators: [Validators.required], hide : true },         
-     { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide : true },       
- ],
 
+
+  'bolsa.dividendo':
+  [   
+   { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide : true, useAlways : true },
+    { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },         
+    { name: 'acciones', type: 'number', title: 'Acciones', validators: [Validators.required] , default: 0},
+    { name: 'precio', type: 'number', title: 'Precio', validators: [Validators.required] , default: 0},
+    { name: 'impuestos', type: 'number', title: 'Impuestos', validators: [Validators.required] , default: 0},
+    { name: 'total', type: 'number', title: 'Total', validators: [Validators.required] , default: 0},     
+ ],
 
 
 };

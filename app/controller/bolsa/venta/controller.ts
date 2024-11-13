@@ -99,7 +99,6 @@ const update = async (ctx: any) => {
       throw new Error(`Hay ${cartera.acciones} acciones. No puedes vender ${itemUpdateInput.acciones} acciones`)
     }
 
-
     let carteraUpdate ={};
 
     if(itemUpdateInput.acciones){
@@ -111,21 +110,13 @@ const update = async (ctx: any) => {
     const  beneficios =   Number(cartera.beneficios) - Number(oldVenta.total) + Number(itemUpdateInput.total);      
       carteraUpdate['beneficios']=beneficios;
     }
-
-
-
     await transaction.begin();
-
-
     if(carteraUpdate['acciones'] || carteraUpdate['beneficios']  ){
 
       await carteraEntity.update({ data: carteraUpdate, where: { id :  Number(cartera.id) }, tr: transaction });
 
     }
-
     const data = await entity.update({ data: itemUpdateInput, where: { id }, tr: transaction });
-
-
     await transaction.commit();
 
     statusOK(ctx, { rowCount: data?.rowCount });
@@ -138,7 +129,30 @@ const update = async (ctx: any) => {
 
 
 const del = async (ctx: any) => {
-  await genericDB.del(ctx);
+  const transaction = client.createTransaction("transaction_del_venta");
+
+  try {
+    const id = Number(ctx?.params?.id);
+
+    const carteraEntity = new aureDB(client, clientNoTransaction, entities, 'bolsa.cartera');
+    const OldVentaEntity = new aureDB(client, clientNoTransaction, entities, 'bolsa.venta');
+
+    const oldVenta = await OldVentaEntity.findFirst({ where: {id} });
+    const cartera = await carteraEntity.findFirst({ where: { id: Number(oldVenta.carteraid)} });
+
+    const acciones =  Number(cartera.acciones) + Number(oldVenta.acciones);
+    const  beneficios = Number(cartera.beneficios) - Number(oldVenta.total);      
+
+    await transaction.begin();
+    await carteraEntity.update({ data: {acciones,beneficios}, where: { id :  Number(cartera.id) }, tr: transaction });
+
+    const data = await entity.del({ where: { id }, tr: transaction });
+    await transaction.commit();
+    statusOK(ctx, { rowCount: data?.rowCount });
+} catch (error) {
+    statusError(ctx, error);
+    return;
+}
 };
 
 

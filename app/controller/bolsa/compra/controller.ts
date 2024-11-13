@@ -101,15 +101,7 @@ const update = async (ctx: any) => {
     const  beneficios =   Number(cartera.beneficios) + Number(oldCompra.total) - Number(itemUpdateInput.total);      
       carteraUpdate['beneficios']=beneficios;
     }
-
-    
-
-
-
     await transaction.begin();
-
-
-
 
     if(carteraUpdate['acciones'] || carteraUpdate['beneficios']  ){
 
@@ -132,7 +124,30 @@ const update = async (ctx: any) => {
 
 
 const del = async (ctx: any) => {
-  await genericDB.del(ctx);
+  const transaction = client.createTransaction("transaction_del_compra");
+
+  try {
+    const id = Number(ctx?.params?.id);
+    const carteraEntity = new aureDB(client, clientNoTransaction, entities, 'bolsa.cartera');
+    const OldCompraEntity = new aureDB(client, clientNoTransaction, entities, 'bolsa.compra');
+
+    const oldCompra = await OldCompraEntity.findFirst({ where: {id} });
+    const cartera = await carteraEntity.findFirst({ where: { id: Number(oldCompra.carteraid)} });
+
+    const acciones =  Number(cartera.acciones) - Number(oldCompra.acciones);
+    const beneficios = Number(cartera.beneficios) + Number(oldCompra.total);      
+
+   
+    await transaction.begin();
+    await carteraEntity.update({ data: {acciones,beneficios}, where: { id :  Number(cartera.id) }, tr: transaction });
+    const data =await entity.del({where: { id }, tr: transaction });
+    await transaction.commit();
+
+    statusOK(ctx, { rowCount: data?.rowCount });
+} catch (error) {
+    statusError(ctx, error);
+    return;
+}
 };
 
 
