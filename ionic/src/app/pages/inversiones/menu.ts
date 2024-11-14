@@ -9,5 +9,15 @@ export const  menuItems =   [
     key: 'bolsa',  // para encontar la ruta en los guard
     roles: [Role.god]
   } ,
+
+  {
+    title: 'Depósitos, letras..',
+    icon: 'bar-chart-outline',
+    remixicon: 'ri-bank-fill',
+    path: '/inversiones/fondo/',
+    key: 'fondo',  // para encontar la ruta en los guard
+    roles: [Role.god]
+  } ,
+
   
  ]

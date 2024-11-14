@@ -1,10 +1,14 @@
 
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
 <ion-grid class="router-outlet">
 
   <ion-row>
     <ion-col class="col-2">
       <ion-button [color]="addProducto ? 'warning' : 'success' "    shape="round" size="small" (click)="addProducto=!addProducto" >
-        <ion-icon  slot="start" name="business-outline" ></ion-icon>  
+        <ion-icon  slot="start" name="fast-food-outline" ></ion-icon>  
       </ion-button>
     </ion-col>
     <ion-col class="col-3">
@@ -15,18 +19,18 @@
 
   <ion-row *ngIf="addProducto">
     <ion-col>
-      <add-producto></add-producto>
+      <add-producto (deleteEvent)="deleteEventProducto($event)" (saveEvent)="saveEventProducto($event)"></add-producto>
     </ion-col>
   </ion-row>
   <ion-row>
     <app-base-cargando *ngIf="isLoading" [message]="'Cargando Productos...'"></app-base-cargando>
     <div class="container-producto">
-      <div class="item hand" *ngFor="let producto of lstProductos" (click)="lstProductosSelected.push(producto)"> 
+      <div class="item hand" *ngFor="let producto of lstProductos" (click)="selectProducto(producto)"> 
         {{producto.descripcion}}</div>
     </div>
 
     <div class="container-selected">
-      <div class="item" *ngFor="let producto of lstProductosSelected"> 
+      <div class="item hand" *ngFor="let producto of lstProductosSelected" (click)="unselectProducto(producto)"> 
         {{producto.descripcion}}</div>
     </div>
 

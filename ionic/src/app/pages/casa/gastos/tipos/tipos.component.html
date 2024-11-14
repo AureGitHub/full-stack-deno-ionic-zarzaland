@@ -7,13 +7,11 @@
       [loadOnInit]="true"
         [canAddEntity] ="user.isAdmin"
         [canUpdateEntity] ="user.isAdmin"
-        [title]="'Productos'"
+        [title]="'Tipos Gastos'"
         [entityName]="entityName"
         [columns]="columns"
         [refresh]="tableRefresh"
         [withCache]="true"
-        (saveEvent)="saveEvent.emit($event)"
-        (deleteEvent)="deleteEvent.emit($event)"
       ></my-table>
     </ion-col>
   </ion-row>

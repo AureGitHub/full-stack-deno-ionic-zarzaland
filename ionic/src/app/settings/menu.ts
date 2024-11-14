@@ -1,15 +1,7 @@
 import { Role } from 'app-base-lib';
 
 export const  menuItems =   [
-   {
-     title: 'Inmuebles',
-     icon: 'business-outline',
-     path: '/inmuebles/',
-     key: 'inmuebles',  // para encontar la ruta en los guard
-     roles: [Role.god, Role.admin]
-   },
-
-   {
+  {
     title: 'Casa',
     icon: 'storefront-outline',
     path: '/casa/',
@@ -17,7 +9,13 @@ export const  menuItems =   [
     roles: [Role.god, Role.admin],
     // hide : true
   },
-
+   {
+     title: 'Inmuebles',
+     icon: 'business-outline',
+     path: '/inmuebles/',
+     key: 'inmuebles',  // para encontar la ruta en los guard
+     roles: [Role.god, Role.admin]
+   },
   {
     title: 'Inversiones',
     icon: 'cash-outline',

@@ -1,8 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
-import { aureDB, GenericDB, StatusCodes,statusError, statusOK } from  "../../../../dep/deps.ts";
-import {client, clientNoTransaction } from "../../../aureDB/client.ts";
+import { aureDB, GenericDB, StatusCodes,statusError, statusOK } from  "../../../../../dep/deps.ts";
+import {client, clientNoTransaction } from "../../../../aureDB/client.ts";
 
-import entities from "../../../aureDB/entities/entities.ts";
+import entities from "../../../../aureDB/entities/entities.ts";
 
 const entity =new aureDB(client, clientNoTransaction,entities,'casa.compra_producto' );
 const genericDB = new GenericDB(entity);
@@ -14,7 +14,7 @@ const get= async (ctx: any) => {
   let sqlFrom =` from  casa.compra_producto `;
 
 
-  const orderBydefect = ``;
+  const orderBydefect = ` order by descripcion`;
 
   const result=await entity.execute_query_data(ctx, client, sqlSelect, sqlFrom, orderBydefect);
   ctx.response.status = 201;

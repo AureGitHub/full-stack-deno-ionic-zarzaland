@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: () => import('./bolsa/bolsa.module').then(m => m.BolsaPageModule), 
     canActivate: [RolGuard]
   },
+  {
+    path: 'fondo',
+    loadChildren: () => import('./fondo/fondo.module').then(m => m.FondoPageModule), 
+    canActivate: [RolGuard]
+  },
 ];
 
 @NgModule({

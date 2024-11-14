@@ -1,8 +1,8 @@
-import { Router, requireAdmin,getData } from  "../../../../dep/deps.ts";
+import { Router, requireAdmin,getData } from  "../../../../../dep/deps.ts";
 import controller from "./controller.ts";
 
 const router = new Router({
-    prefix: "/compra_producto",
+    prefix: "/gasto_tipo",
   });
 
 router

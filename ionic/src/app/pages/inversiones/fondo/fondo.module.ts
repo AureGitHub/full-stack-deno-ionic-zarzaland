@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SharedComponentsModule, TableModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
-import { BolsaPage } from './bolsa.page';
 import { EmpresasComponentModule } from '../components/empresas/empresas.component.module';
+import { FondoPage } from './fondo.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: BolsaPage
+    component: FondoPage
   }
 ];
 
@@ -25,6 +25,6 @@ const routes: Routes = [
     TableModule,
     EmpresasComponentModule
   ],
-  declarations: [BolsaPage]
+  declarations: [FondoPage]
 })
-export class BolsaPageModule { }
+export class FondoPageModule { }

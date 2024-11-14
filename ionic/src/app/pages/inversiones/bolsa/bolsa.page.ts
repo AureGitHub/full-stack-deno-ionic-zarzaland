@@ -3,6 +3,7 @@ import {
   BasePage,
   EditorEntityComponent,
   MyHttpService,
+  MyHttpService_EXEC,
   SeguridadService,
   UtilService,
   classHttp,
@@ -39,9 +40,11 @@ export class BolsaPage extends BasePage implements OnInit {
     public override myHttpService: MyHttpService,
     public override seguridadService: SeguridadService,
     private utilService: UtilService,
+    public override myHttpService_EXEC: MyHttpService_EXEC,
+
 
   ) {
-    super(myHttpService, seguridadService);
+    super(myHttpService, seguridadService,myHttpService_EXEC);
     this.entityName = 'bolsa/cartera';
   }
 

@@ -1,6 +1,7 @@
 import { Router } from "../../../dep/deps.ts";
 import empresaRouter from "./empresa/router.ts"
 import carteraRouter from "./cartera/router.ts"
+import fondoRouter from "./fondo/router.ts"
 import compraRouter from "./compra/router.ts"
 import ventaRouter from "./venta/router.ts"
 import dividendoRouter from "./dividendo/router.ts"
@@ -18,6 +19,8 @@ router.use(carteraRouter.routes());
 router.use(compraRouter.routes());
 router.use(ventaRouter.routes());
 router.use(dividendoRouter.routes());
+router.use(fondoRouter.routes());
+
 
 
 

@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: () => import('./compra/compra.module').then(m => m.CompraPageModule), 
     canActivate: [RolGuard]
   },
+  {
+    path: 'gastos',
+    loadChildren: () => import('./gastos/gastos.module').then(m => m.GastosPageModule), 
+    canActivate: [RolGuard]
+  },
 ];
 
 @NgModule({

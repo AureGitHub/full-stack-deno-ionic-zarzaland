@@ -3,19 +3,13 @@ import { BasePage, MyHttpService, MyHttpService_EXEC, SeguridadService,  classHt
 
 
 @Component({
-  selector: 'add-producto',
-  templateUrl: './producto.page.html',
-  styleUrls: ['./producto.page.scss'],
+  selector: 'add-tipos',
+  templateUrl: './tipos.component.html',
+  styleUrls: ['./tipos.component.scss'],
 })
-export class ProductoPage extends BasePage implements OnInit {
+export class TiposComponent extends BasePage implements OnInit {
 
   columns = [ { name: 'Descripción', prop: 'descripcion', type: 'text', OrderInit: 'ASC'},];
-
-  
-  @Output()  saveEvent = new EventEmitter<boolean>();
-  @Output()  deleteEvent = new EventEmitter<boolean>();
-
-
 
   constructor(
     public override  myHttpService: MyHttpService,
@@ -25,7 +19,7 @@ export class ProductoPage extends BasePage implements OnInit {
 
   ) {
     super(myHttpService,seguridadService,myHttpService_EXEC);
-    this.entityName = 'casa/compra_producto';
+    this.entityName = 'casa/gasto_tipo';
   }
 
   async ngOnInit() {

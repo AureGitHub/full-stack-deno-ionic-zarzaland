@@ -1,0 +1,39 @@
+
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-grid class="router-outlet">
+
+  <ion-row>
+    <ion-col class="col-2">
+      <ion-button [color]="addEmpresa ? 'warning' : 'success' "    shape="round" size="small" (click)="addEmpresa=!addEmpresa" >
+        <ion-icon  slot="start" name="business-outline" ></ion-icon>  
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-3">
+    </ion-col>
+    <ion-col class="col-7">
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="addEmpresa">
+    <ion-col>
+      <gestor-empresas></gestor-empresas>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+
+    <my-table
+    [loadOnInit]="true"
+      [canAddEntity] ="user.isAdmin"
+      [canUpdateEntity] ="user.isAdmin"
+      [title]="'Fondos'"
+      [entityName]="entityName"
+      [columns]="columns"
+      [refresh]="tableRefresh"
+      [withCache]="true"
+    ></my-table>
+
+  </ion-row>
+</ion-grid>

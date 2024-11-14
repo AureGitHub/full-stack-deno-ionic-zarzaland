@@ -119,6 +119,18 @@ CREATE TABLE bolsa.dividendo (
 	CONSTRAINT dividendo_pkey PRIMARY KEY (id)
 );
 
+CREATE TABLE bolsa.fondo (
+	id serial4 NOT NULL,
+	empresaid int4 NOT NULL,
+	CONSTRAINT "fondo_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES bolsa.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fechainicio timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	fechafin timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	importe numeric(9, 2) DEFAULT 0 NOT NULL,
+	interes numeric(9, 2) DEFAULT 0 NOT NULL,
+	beneficios numeric(15, 6) DEFAULT 0 NOT NULL,
+	CONSTRAINT fondo_pkey PRIMARY KEY (id)
+);
+
 
 
 CREATE TABLE casa.compra_producto (
@@ -126,5 +138,32 @@ CREATE TABLE casa.compra_producto (
 	descripcion text NOT NULL,
 	CONSTRAINT producto_pkey PRIMARY KEY (id)
 );
-
 CREATE UNIQUE INDEX producto_descripcion_key ON casa.compra_producto USING btree (descripcion);
+
+
+CREATE TABLE casa.compra_producto_selected (
+	id int4 NOT NULL,	
+	CONSTRAINT "compra_producto_selected_compra_producto_fkey" FOREIGN KEY (id) REFERENCES casa.compra_producto(id) ON DELETE RESTRICT ON UPDATE cascade,
+	CONSTRAINT compra_producto_selected_pkey PRIMARY KEY (id)
+)
+
+
+CREATE TABLE casa.gasto_tipo (
+	id serial4 NOT NULL,
+	descripcion text NOT NULL,	
+	CONSTRAINT empresa_pkey PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX gasto_tipo_descripcion_key ON bolsa.empresa USING btree (descripcion);
+
+
+CREATE TABLE casa.gasto (
+	id serial4 NOT NULL,
+	gastotipoid int4 NOT NULL,
+	CONSTRAINT "cartera_empresa_fkey" FOREIGN KEY (gastotipoid) REFERENCES casa.gasto_tipo(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	importe numeric (9, 2) DEFAULT 0 NOT NULL,
+	observaciones text  null,	
+	CONSTRAINT gasto_pkey PRIMARY KEY (id)
+);
+
+

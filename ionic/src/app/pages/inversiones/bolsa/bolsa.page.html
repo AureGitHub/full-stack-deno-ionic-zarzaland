@@ -1,10 +1,13 @@
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
 <app-editor-entity #editorEntity
 [MostrarIconAdd]="false"
   [entityName]="entityName"
   (saveEvent)="getCartera()"
   (deleteEvent)="getCartera()"
 ></app-editor-entity>
-
 
 <ion-grid class="router-outlet">
 
@@ -36,7 +39,7 @@
 
   <ion-row *ngIf="addEmpresa">
     <ion-col>
-      <add-empresas></add-empresas>
+      <gestor-empresas></gestor-empresas>
     </ion-col>
   </ion-row>
 
@@ -53,7 +56,8 @@
           <div class="grid head" [ngClass]="cartera.ventas == 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
             <div class="col-3 hand name-date"  (click)="managementCartera('bolsa/cartera',cartera.id)">
               <div class="text-top font-bold" title="{{cartera.descripcion}}">{{ cartera.abreviatura }}</div>
-              <div>{{ cartera.fecha | date: 'dd/MM/yy' }}</div>
+              <div><span class="venta">{{ cartera.maxventa | date: 'dd/MM/yy' }}</span></div>
+              <div><span class="compra">{{ cartera.fecha | date: 'dd/MM/yy' }}</span></div>
             </div>
             
             <div class="col-3 hand"  (click)="expanded(cartera)">
@@ -96,7 +100,7 @@
 
             <app-base-cargando *ngIf="cartera['loading']" [message]="'Cargando transacciones...'"></app-base-cargando>
 
-            <div class="grid {{oper.tipo}}"  *ngFor="let oper of cartera['lstTransacciones']" (click)="management(cartera,'bolsa/'+transaccion ,oper.id)" >
+            <div class="grid {{oper.tipo}}"  *ngFor="let oper of cartera['lstTransacciones']" (click)="management(cartera,'bolsa/'+ oper.tipo ,oper.id)" >
               <div class="col-3">
                 <div class="text-center">{{ oper?.fecha | date: 'dd/MM/yy' }}</div>
               </div>
