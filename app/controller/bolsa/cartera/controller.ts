@@ -11,7 +11,7 @@ const genericDB = new GenericDB(entity);
 const get= async (ctx: any) => {
 
   const sqlSelect = `
-  select c.id,c.fecha,c.acciones, beneficios, e.descripcion,e.abreviatura,
+select c.id,c.fecha,c.acciones, beneficios, e.descripcion,e.abreviatura,
 (select cast(count(*) as integer) from bolsa.compra c2 where c2.carteraid= c.id) AS compras,
 (select cast(count(*) as integer) from bolsa.venta v where v.carteraid= c.id) AS ventas,
 (select cast(count(*) as integer) from bolsa.dividendo d  where d.carteraid= c.id) AS dividendos,
@@ -19,14 +19,16 @@ const get= async (ctx: any) => {
 from  bolsa.cartera c 
 inner join  bolsa.empresa e on e.id = c.empresaid 
 order by c.fecha  desc
-
   `;
 
-  const result=await entity.queryObject(client, sqlSelect);
+  const bolsa=await GenericDB.queryObject(client, sqlSelect);
+
+
+
   ctx.response.status = 201;
    ctx.response.body = {
      status: StatusCodes.OK,
-     data: { data: result.rows, count: result.count },
+     data: { data: bolsa.rows, count: bolsa.count },
    };
  
 };

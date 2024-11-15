@@ -5,6 +5,8 @@ import fondoRouter from "./fondo/router.ts"
 import compraRouter from "./compra/router.ts"
 import ventaRouter from "./venta/router.ts"
 import dividendoRouter from "./dividendo/router.ts"
+import estadisticasRouter from "./estadisticas/router.ts"
+
 
 
 
@@ -20,6 +22,8 @@ router.use(compraRouter.routes());
 router.use(ventaRouter.routes());
 router.use(dividendoRouter.routes());
 router.use(fondoRouter.routes());
+router.use(estadisticasRouter.routes());
+
 
 
 

@@ -1,0 +1,59 @@
+
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<div class="grid">
+  <div class="row">
+    <div class="col">
+      <my-table
+      [loadOnInit]="true"
+        [canAddEntity] ="user.isAdmin"
+        [canUpdateEntity] ="user.isAdmin"
+        [tableResult]="'resultFondosActivos'"
+        [tableResultCount]="'resultFondosActivoscount'"
+        [dataFromOut]="resultFondosActivos"
+        [title]="'Activos'"
+        [entityName]="entityName"
+        [columns]="columnsFondosActivos"
+        [refresh]="tableRefresh"
+        [withCache]="true" 
+      ></my-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <my-table
+    [loadOnInit]="true"
+      [canAddEntity] ="user.isAdmin"
+      [canUpdateEntity] ="user.isAdmin"
+      [tableResult]="'resultWithoutEmpresa'"
+      [tableResultCount]="'resultWithoutEmpresacount'"
+      [dataFromOut]="resultWithoutEmpresa"
+      [title]="'Resumen X mes'"
+      [entityName]="entityName"
+      [columns]="columnsWithout"
+      [refresh]="tableRefresh"
+      [withCache]="true" 
+      (selecting)="selectingWithoutEmpresa($event)"
+    ></my-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <my-table
+      [loadOnInit]="true"
+        [canAddEntity] ="user.isAdmin"
+        [canUpdateEntity] ="user.isAdmin"
+        [tableResult]="'resultWithEmpresa'"
+        [tableResultCount]="'resultWithEmpresacount'"
+        [title]="'Resumen X Empresas'"
+        [entityName]="entityName"
+        [columns]="columns"
+        [refresh]="tableRefresh"
+        [dataFromOut]="resultWithEmpresa"
+        [withCache]="true"
+      ></my-table>
+    </div>
+  </div>
+</div>

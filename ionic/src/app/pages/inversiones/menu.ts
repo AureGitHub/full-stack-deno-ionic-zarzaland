@@ -12,10 +12,17 @@ export const  menuItems =   [
 
   {
     title: 'Depósitos, letras..',
-    icon: 'bar-chart-outline',
     remixicon: 'ri-bank-fill',
     path: '/inversiones/fondo/',
     key: 'fondo',  // para encontar la ruta en los guard
+    roles: [Role.god]
+  } ,
+
+  {
+    title: 'Estadísticas',
+    remixicon: 'ri-bar-chart-grouped-line',
+    path: '/inversiones/estadisticas/',
+    key: 'estadisticas',  // para encontar la ruta en los guard
     roles: [Role.god]
   } ,
 

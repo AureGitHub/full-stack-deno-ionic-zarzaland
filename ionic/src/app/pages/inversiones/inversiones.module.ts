@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () => import('./fondo/fondo.module').then(m => m.FondoPageModule), 
     canActivate: [RolGuard]
   },
+  {
+    path: 'estadisticas',
+    loadChildren: () => import('./estadisticas/estadisticas.module').then(m => m.EstadisticasPageModule), 
+    canActivate: [RolGuard]
+  },
 ];
 
 @NgModule({

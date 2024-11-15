@@ -40,6 +40,7 @@ const entities = {
          { name: 'empresaid', type: 'select', title: 'Empresa', multiple: false, noTC: true, coleccion: 'bolsa/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
          { name: 'fechainicio', type: 'date', title: 'Fecha I', validators: [Validators.required] },
          { name: 'fechafin', type: 'date', title: 'Fecha F', validators: [Validators.required] },
+         { name: 'meses', type: 'number', title: 'Meses', disabled: true, validators: [Validators.required], default: 0 },
          { name: 'importe', type: 'number', title: 'Importe', disabled: true, validators: [Validators.required], default: 0 },
          { name: 'interes', type: 'number', title: 'Interes', disabled: true, validators: [Validators.required], default: 0 },
          { name: 'beneficios', type: 'number', title: 'Beneficios', disabled: true, validators: [Validators.required], default: 0 },
