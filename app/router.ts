@@ -1,6 +1,6 @@
 import { gnericRouter, Router } from "../dep/deps.ts";
 
-import bolsaRouter from "./controller/bolsa/routerBolsa.ts"
+import finanzasRouter from "./controller/finanazas/routerFinanzas.ts"
 import casaRouter from "./controller/casa/routerCasa.ts"
 
 
@@ -19,7 +19,7 @@ gnericRouter.init(client,clientNoTransaction,entities);
 // documentoRouter.InitRouter(client,clientNoTransaction,entities);
 
 router.use(gnericRouter.router.routes());  
-router.use(bolsaRouter.routes());  
+router.use(finanzasRouter.routes());  
 router.use(casaRouter.routes());  
 
 

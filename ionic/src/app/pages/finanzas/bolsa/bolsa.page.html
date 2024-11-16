@@ -1,0 +1,119 @@
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<app-editor-entity #editorEntity
+[MostrarIconAdd]="false"
+  [entityName]="entityName"
+  (saveEvent)="getCartera()"
+  (deleteEvent)="getCartera()"
+></app-editor-entity>
+
+<ion-grid class="router-outlet">
+
+  <ion-row>
+    <ion-col class="col-2">
+    </ion-col>
+    <ion-col class="col-3">
+      <ion-button color="success"    shape="round" size="small" (click)="managementCartera('bolsa/cartera',0)" >
+        <ion-icon  slot="start" name="add-circle" ></ion-icon>  
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-7">
+      <div class="flex_column infoBeneInver">
+        <span>beneficios : {{beneficios  | number : '1.2-2' }}€</span>
+        <span>Inversión : {{inversionActual  | number : '1.2-2' }}€</span>
+      </div>
+      
+    </ion-col>
+    
+
+  </ion-row>
+
+
+
+
+  <ion-row>
+    <ion-col>
+
+      <div *ngIf="isLoading">
+        <app-base-cargando [message]="'Cargando cartera...'"></app-base-cargando>
+      </div>
+
+      <div *ngFor="let cartera of lstCartera" class="grid ">
+        <div class="col-12 itemTreeCompra" >
+          <div class="grid head" [ngClass]="cartera.ventas == 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
+            <div class="col-3 hand name-date"  (click)="managementCartera('bolsa/cartera',cartera.id)">
+              <div class="text-top font-bold" title="{{cartera.descripcion}}">{{ cartera.abreviatura }}</div>
+              <div><span class="venta">{{ cartera.maxventa | date: 'dd/MM/yy' }}</span></div>
+              <div><span class="compra">{{ cartera.fecha | date: 'dd/MM/yy' }}</span></div>
+            </div>
+            
+            <div class="col-3 hand"  (click)="expanded(cartera)">
+              <div class="text-center precio-beneficio">
+                <span>Acciones</span>
+                <span class="acciones">{{ cartera.acciones | number : '1.4-4' }}</span>
+                
+              </div>
+            </div>
+
+            <div class="col-3"  (click)="selectedNode = selectedNode == cartera ?  null : cartera" (click)="expanded(cartera)">
+              <div class="text-center precio-beneficio">
+                <span>{{cartera.ventas == 0 ? 'Invertido' : (cartera.beneficios >= 0 ? 'Beneficios' : 'Perdida')}}</span>
+                <span [ngClass]="cartera.beneficios >= 0 ? 'beneficio' : 'perdida'" >{{ cartera.beneficios| number : '1.2-2' }} €</span>
+              </div>
+            </div>
+
+
+            <div class="col-3 flex_row">
+              <div class="flex_column flex-center-align-items">
+                <span>{{cartera.compras}}</span>
+                <ion-icon  (click)="management(cartera,'bolsa/compra',0)" class="hand" style="font-size: 24px;color: blue;" name="add-circle"></ion-icon>
+              </div>
+
+              <div class="flex_column  flex-center-align-items">
+                <span>{{cartera.ventas}}</span>
+                <ion-icon  (click)="management(cartera,'bolsa/venta',0)" class="hand" style="font-size: 24px;color: orange;" name="add-circle"></ion-icon>              
+              </div>
+
+              <div class="flex_column  flex-center-align-items">
+                <span>{{cartera.dividendos}}</span>
+                <ion-icon  (click)="management(cartera,'bolsa/dividendo',0)" class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>              
+              </div>
+            </div>
+          </div>
+         
+         <div class="operaciones" *ngIf="cartera['expanded']">
+
+      
+
+            <app-base-cargando *ngIf="cartera['loading']" [message]="'Cargando transacciones...'"></app-base-cargando>
+
+            <div class="grid {{oper.tipo}}"  *ngFor="let oper of cartera['lstTransacciones']" (click)="management(cartera,'bolsa/'+ oper.tipo ,oper.id)" >
+              <div class="col-3">
+                <div class="text-center">{{ oper?.fecha | date: 'dd/MM/yy' }}</div>
+              </div>
+              <div class="col-3 flex_column">
+                <div class="text-center">{{ oper?.precio  | number : '1.4-4'  }}€</div>
+                <div class="text-center">{{ oper?.acciones | number : '1.4-4' }}</div>
+              </div>
+              <div class="col-3 flex_column">
+                <div class="text-center">{{ oper?.comision  | number : '1.2-2'  }}€</div>
+                <div class="text-center">{{ oper?.impuestos | number : '1.2-2' }}€</div>
+              </div>
+              <div class="col-3">
+                <div class="text-center">{{ oper?.total | number : '1.2-2' }}€</div>
+              </div>
+            </div> 
+
+         </div>
+         
+
+
+          </div>
+
+          </div>
+     
+    </ion-col>
+  </ion-row>
+</ion-grid>

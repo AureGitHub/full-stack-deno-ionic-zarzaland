@@ -27,8 +27,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'inversiones',
-    loadChildren: () => import('./pages/inversiones/inversiones.module').then(m => m.InversionesPageModule), 
+    path: 'finanzas',
+    loadChildren: () => import('./pages/finanzas/finanzas.module').then(m => m.FinanzasPageModule), 
     canActivate: [RolGuard]
   },
 

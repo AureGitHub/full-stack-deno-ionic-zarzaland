@@ -20,10 +20,10 @@ export const  menuItems =   [
    },
   {
     ppal : true,
-    title: 'Inversiones',
+    title: 'Finanzas',
     icon: 'cash-outline',
-    path: '/inversiones/',
-    key: 'inversiones',  // para encontar la ruta en los guard
+    path: '/finanzas/',
+    key: 'finanzas',  // para encontar la ruta en los guard
     roles: [Role.god],
     // hide : true
   },

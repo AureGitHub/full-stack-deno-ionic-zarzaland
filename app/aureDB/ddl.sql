@@ -6,11 +6,11 @@ DROP TABLE IF EXISTS public."TC_UserEstado";
 
 
 
-DROP TABLE IF EXISTS bolsa.dividendo;
-DROP TABLE IF EXISTS bolsa.compra;
-DROP TABLE IF EXISTS bolsa.venta;
-DROP TABLE IF EXISTS bolsa.cartera;
-DROP TABLE IF EXISTS bolsa.empresa;
+DROP TABLE IF EXISTS finanzas.dividendo;
+DROP TABLE IF EXISTS finanzas.compra;
+DROP TABLE IF EXISTS finanzas.venta;
+DROP TABLE IF EXISTS finanzas.cartera;
+DROP TABLE IF EXISTS finanzas.empresa;
 
 
 
@@ -57,21 +57,21 @@ CREATE UNIQUE INDEX "User_email_key" ON public."User" USING btree (email);
 
 
 
-CREATE TABLE bolsa.empresa (
+CREATE TABLE finanzas.empresa (
 	id serial4 NOT NULL,
 	descripcion text NOT NULL,	
 	abreviatura text NOT NULL,
 	color text NOT NULL,
 	CONSTRAINT empresa_pkey PRIMARY KEY (id)
 );
-CREATE UNIQUE INDEX accion_descripcion_key ON bolsa.empresa USING btree (descripcion);
+CREATE UNIQUE INDEX accion_descripcion_key ON finanzas.empresa USING btree (descripcion);
 
 
 
-CREATE TABLE bolsa.cartera (
+CREATE TABLE finanzas.cartera (
 	id serial4 NOT NULL,
 	empresaid int4 NOT NULL,
-	CONSTRAINT "cartera_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES bolsa.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "cartera_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES finanzas.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
 	beneficios numeric(15, 6) DEFAULT 0 NOT NULL,
@@ -79,10 +79,10 @@ CREATE TABLE bolsa.cartera (
 );
 
 
-CREATE TABLE bolsa.compra (
+CREATE TABLE finanzas.compra (
 	id serial4 NOT NULL,
 	carteraid int4 NOT NULL,
-	CONSTRAINT "compra_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES bolsa.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "compra_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES finanzas.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
 	precio numeric(15, 6) DEFAULT 0 NOT NULL,
@@ -94,10 +94,10 @@ CREATE TABLE bolsa.compra (
 
 
 
-CREATE TABLE bolsa.venta (
+CREATE TABLE finanzas.venta (
 	id serial4 NOT NULL,
 	carteraid int4 NOT NULL,
-	CONSTRAINT "venta_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES bolsa.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "venta_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES finanzas.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(15, 6) DEFAULT 0 NOT NULL,
 	precio numeric(15, 6) DEFAULT 0 NOT NULL,
@@ -107,10 +107,10 @@ CREATE TABLE bolsa.venta (
 	CONSTRAINT venta_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE bolsa.dividendo (
+CREATE TABLE finanzas.dividendo (
 	id serial4 NOT NULL,
 	carteraid int4 NOT NULL,
-	CONSTRAINT "dividendo_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES bolsa.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "dividendo_cartera_fkey" FOREIGN KEY (carteraid) REFERENCES finanzas.cartera(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	acciones numeric(15, 6) DEFAULT 0 NOT NULL,	
 	precio numeric(15, 6) DEFAULT 0 NOT NULL,
@@ -119,10 +119,10 @@ CREATE TABLE bolsa.dividendo (
 	CONSTRAINT dividendo_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE bolsa.fondo (
+CREATE TABLE finanzas.fondo (
 	id serial4 NOT NULL,
 	empresaid int4 NOT NULL,
-	CONSTRAINT "fondo_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES bolsa.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT "fondo_empresa_fkey" FOREIGN KEY (empresaid) REFERENCES finanzas.empresa(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	fechainicio timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	fechafin timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	importe numeric(9, 2) DEFAULT 0 NOT NULL,
@@ -130,6 +130,18 @@ CREATE TABLE bolsa.fondo (
 	beneficios numeric(15, 6) DEFAULT 0 NOT NULL,
 	CONSTRAINT fondo_pkey PRIMARY KEY (id)
 );
+
+CREATE TABLE finanzas.fondoxmes (
+	id serial4 NOT NULL,
+	fondoid int4 NOT NULL,
+	CONSTRAINT "fondo_empresa_fkey" FOREIGN KEY (fondo) REFERENCES finanzas.fondo(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	anno numeric(9, 2) DEFAULT 0 NOT NULL,
+	mes numeric(9, 2) DEFAULT 0 NOT NULL,
+	importe numeric(15, 6) DEFAULT 0 NOT NULL,
+	CONSTRAINT fondoxmes_pkey PRIMARY KEY (id)
+);
+
+
 
 
 
@@ -153,7 +165,7 @@ CREATE TABLE casa.gasto_tipo (
 	descripcion text NOT NULL,	
 	CONSTRAINT empresa_pkey PRIMARY KEY (id)
 );
-CREATE UNIQUE INDEX gasto_tipo_descripcion_key ON bolsa.empresa USING btree (descripcion);
+CREATE UNIQUE INDEX gasto_tipo_descripcion_key ON finanzas.empresa USING btree (descripcion);
 
 
 CREATE TABLE casa.gasto (

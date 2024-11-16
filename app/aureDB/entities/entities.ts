@@ -20,36 +20,46 @@ const entities = {
          { name: 'updatedAt', type: 'date', title: 'updatedAt', validators: [Validators.required], hide: true },
       ],
 
-   'bolsa.empresa':
+   'finanzas.empresa':
       [
          { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
          { name: 'abreviatura', type: 'text', title: 'Abreviatura', validators: [Validators.required] },
          { name: 'color', type: 'text', title: 'Color', validators: [Validators.required] },
       ],
 
-   'bolsa.cartera':
+   'finanzas.cartera':
       [
-         { name: 'empresaid', type: 'select', title: 'Empresa', multiple: false, noTC: true, coleccion: 'bolsa/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
+         { name: 'empresaid', type: 'select', title: 'Empresa', multiple: false, noTC: true, coleccion: 'finanzas/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
          { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },
          { name: 'acciones', type: 'number', title: 'Acciones', disabled: true, validators: [Validators.required], default: 0 },
          { name: 'beneficios', type: 'number', title: 'Beneficios', disabled: true, validators: [Validators.required], default: 0 },
       ],
 
-'bolsa.fondo':
+'finanzas.fondo':
       [
-         { name: 'empresaid', type: 'select', title: 'Empresa', multiple: false, noTC: true, coleccion: 'bolsa/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
-         { name: 'fechainicio', type: 'date', title: 'Fecha I', validators: [Validators.required] },
+         { name: 'empresaid', type: 'select', title: 'Empresa', multiple: false, noTC: true, coleccion: 'finanzas/empresa', id: 'id', desc: 'descripcion', validators: [Validators.required] },
+         { name: 'fechainicio', type: 'date', title: 'Fecha I', validators: [Validators.required], useAlways: true },
          { name: 'fechafin', type: 'date', title: 'Fecha F', validators: [Validators.required] },
-         { name: 'meses', type: 'number', title: 'Meses', disabled: true, validators: [Validators.required], default: 0 },
-         { name: 'importe', type: 'number', title: 'Importe', disabled: true, validators: [Validators.required], default: 0 },
+         { name: 'meses', type: 'number', title: 'Meses', disabled: true, validators: [Validators.required], useAlways: true },
+         { name: 'importe', type: 'number', title: 'Importe', disabled: true, validators: [Validators.required] },
          { name: 'interes', type: 'number', title: 'Interes', disabled: true, validators: [Validators.required], default: 0 },
-         { name: 'beneficios', type: 'number', title: 'Beneficios', disabled: true, validators: [Validators.required], default: 0 },
+         { name: 'beneficios', type: 'number', title: 'Beneficios', disabled: true, validators: [Validators.required], useAlways: true },
+      ],
+
+
+      'finanzas.fondoxmes':
+      [
+         { name: 'fondoid', type: 'number', validators: [Validators.required] },         
+         { name: 'anno', type: 'number',  validators: [Validators.required] },
+         { name: 'mes', type: 'number',  validators: [Validators.required] },
+         { name: 'importe', type: 'number',  validators: [Validators.required]},         
       ],
 
 
 
 
-   'bolsa.compra':
+
+   'finanzas.compra':
       [
          { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide: true, useAlways: true },
          { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },
@@ -61,7 +71,7 @@ const entities = {
       ],
 
 
-   'bolsa.venta':
+   'finanzas.venta':
       [
          { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide: true, useAlways: true },
          { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },
@@ -74,7 +84,7 @@ const entities = {
 
 
 
-   'bolsa.dividendo':
+   'finanzas.dividendo':
       [
          { name: 'carteraid', type: 'number', title: 'Cartera', validators: [Validators.required], hide: true, useAlways: true },
          { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },

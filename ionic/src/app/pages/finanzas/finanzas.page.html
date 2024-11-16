@@ -1,0 +1,19 @@
+<ion-grid >
+  <ion-row>
+    <ion-col >       
+      <app-menu-buttons [menuItems]="menuItems"></app-menu-buttons>
+    </ion-col>
+  </ion-row>   
+  <ion-row>
+    <ion-col >  
+      <ion-button [color]="addEmpresa ? 'warning' : 'success' "    shape="round" size="small" (click)="addEmpresa=!addEmpresa" >
+        <ion-icon  slot="start" name="business-outline" ></ion-icon>  
+      </ion-button>
+    </ion-col>
+  </ion-row>   
+  <ion-row *ngIf="addEmpresa">
+    <ion-col>
+      <gestor-empresas></gestor-empresas>
+    </ion-col>
+  </ion-row>
+</ion-grid>
