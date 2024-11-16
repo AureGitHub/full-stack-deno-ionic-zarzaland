@@ -2,6 +2,7 @@ import { Role } from 'app-base-lib';
 
 export const  menuItems =   [
   {
+    ppal : true,
     title: 'Casa',
     icon: 'storefront-outline',
     path: '/casa/',
@@ -10,6 +11,7 @@ export const  menuItems =   [
     // hide : true
   },
    {
+    ppal : true,
      title: 'Inmuebles',
      icon: 'business-outline',
      path: '/inmuebles/',
@@ -17,6 +19,7 @@ export const  menuItems =   [
      roles: [Role.god, Role.admin]
    },
   {
+    ppal : true,
     title: 'Inversiones',
     icon: 'cash-outline',
     path: '/inversiones/',

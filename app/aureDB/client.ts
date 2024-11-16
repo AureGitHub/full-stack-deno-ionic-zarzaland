@@ -4,8 +4,6 @@ import "https://deno.land/x/dotenv@v3.2.2/load.ts";
 
 const { DATABASE_URL } = Deno.env.toObject();
 
-console.log('DATABASE_URL ' + DATABASE_URL);
-
 export const client = new Client(DATABASE_URL);
 export const clientNoTransaction = new Client(DATABASE_URL);
 

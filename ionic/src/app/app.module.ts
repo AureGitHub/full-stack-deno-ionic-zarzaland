@@ -15,7 +15,7 @@ import { registerLocaleData } from '@angular/common';
 
 import { environment } from '../environments/environment';
 import { settings } from './settings/settings';
-import { SharedCommomBaseModule } from 'app-base-lib';
+import { CalendarComponentModule, SharedCommomBaseModule } from 'app-base-lib';
 
 registerLocaleData(es);
 
@@ -29,6 +29,7 @@ registerLocaleData(es);
     IonicModule.forRoot(),
     AppRoutingModule,
     SharedCommomBaseModule.forRoot(environment, settings),
+    CalendarComponentModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

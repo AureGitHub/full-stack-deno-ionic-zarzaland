@@ -24,9 +24,10 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
   columnsFondosActivos = [
 
-    { name: 'e', prop: 'em', type: 'text' },
+    { name: 'e', prop: 'ab', type: 'text' },
     { name: 'Fi', prop: 'fechainicio', type: 'date' },
     { name: 'Ff', prop: 'fechafin', type: 'date' },
+    { name: 'i', prop: 'interes', type: 'number' },
     { name: 'i', prop: 'importe', type: 'number' },
   ];
 
@@ -34,6 +35,7 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
     { name: 'F', prop: 'fecha', type: 'text' },
     { name: 'f', prop: 'fondo', type: 'number', decimalNamber: '1.2-2' },
+    { name: 'l', prop: 'letra', type: 'number', decimalNamber: '1.2-2' },
     { name: 'b', prop: 'bolsa', type: 'number', decimalNamber: '1.2-2' },
     { name: 't', prop: 'beneficios', type: 'number', decimalNamber: '1.2-2' },
   ];
