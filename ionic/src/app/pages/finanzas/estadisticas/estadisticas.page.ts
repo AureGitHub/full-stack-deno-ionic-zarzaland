@@ -37,14 +37,14 @@ export class EstadisticasPage extends BasePage implements OnInit {
     { name: 'f', prop: 'fondo', type: 'number', decimalNamber: '1.2-2' },
     { name: 'l', prop: 'letra', type: 'number', decimalNamber: '1.2-2' },
     { name: 'b', prop: 'bolsa', type: 'number', decimalNamber: '1.2-2' },
-    { name: 't', prop: 'beneficios', type: 'number', decimalNamber: '1.2-2' },
+    { name: 't', prop: 'total', type: 'number', decimalNamber: '1.2-2' },
   ];
 
   columns = [
 
     { name: 'E', prop: 'em', type: 'text' },
     { name: 'F', prop: 'fecha', type: 'text' },
-    { name: 'B', prop: 'beneficios', type: 'number', decimalNamber: '1.2-2' },
+    { name: 'B', prop: 'importe', type: 'number', decimalNamber: '1.2-2' },
   ];
 
 
