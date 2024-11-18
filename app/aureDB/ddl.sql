@@ -163,7 +163,7 @@ CREATE TABLE casa.compra_producto_selected (
 CREATE TABLE casa.gasto_tipo (
 	id serial4 NOT NULL,
 	descripcion text NOT NULL,	
-	CONSTRAINT empresa_pkey PRIMARY KEY (id)
+	CONSTRAINT gasto_tipo_pkey PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX gasto_tipo_descripcion_key ON finanzas.empresa USING btree (descripcion);
 
@@ -177,5 +177,27 @@ CREATE TABLE casa.gasto (
 	observaciones text  null,	
 	CONSTRAINT gasto_pkey PRIMARY KEY (id)
 );
+
+
+
+CREATE TABLE casa.evento_tipo (
+	id serial4 NOT NULL,
+	descripcion text NOT NULL,	
+	color text NOT NULL,	
+	bkcolor text NOT NULL,	
+	CONSTRAINT evento_tipo_pkey PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX gasto_tipo_descripcion_key ON casa.evento_tipo USING btree (descripcion);
+
+
+CREATE TABLE casa.evento (
+	id serial4 NOT NULL,
+	eventotipoid int4 NOT NULL,
+	CONSTRAINT "evento_evento_tipo_fkey" FOREIGN KEY (eventotipoid) REFERENCES casa.evento_tipo(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fecha timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,	
+	observaciones text  null,	
+	CONSTRAINT gasto_pkey PRIMARY KEY (id)
+);
+
 
 

@@ -19,7 +19,7 @@
 
   <ion-row *ngIf="addTipoGasto">
     <ion-col>
-      <add-tipos></add-tipos>
+      <tc-tipos [entityName]="'casa/gasto_tipo'" [user]="user" [tableRefresh]="tableRefresh"></tc-tipos>
     </ion-col>
   </ion-row>
   <ion-row>

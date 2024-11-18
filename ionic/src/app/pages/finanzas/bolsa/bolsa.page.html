@@ -15,7 +15,7 @@
     <ion-col class="col-2">
     </ion-col>
     <ion-col class="col-3">
-      <ion-button color="success"    shape="round" size="small" (click)="managementCartera('bolsa/cartera',0)" >
+      <ion-button color="success"    shape="round" size="small" (click)="managementCartera('finanzas/cartera',0)" >
         <ion-icon  slot="start" name="add-circle" ></ion-icon>  
       </ion-button>
     </ion-col>
@@ -43,7 +43,7 @@
       <div *ngFor="let cartera of lstCartera" class="grid ">
         <div class="col-12 itemTreeCompra" >
           <div class="grid head" [ngClass]="cartera.ventas == 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
-            <div class="col-3 hand name-date"  (click)="managementCartera('bolsa/cartera',cartera.id)">
+            <div class="col-3 hand name-date"  (click)="managementCartera('finanzas/cartera',cartera.id)">
               <div class="text-top font-bold" title="{{cartera.descripcion}}">{{ cartera.abreviatura }}</div>
               <div><span class="venta">{{ cartera.maxventa | date: 'dd/MM/yy' }}</span></div>
               <div><span class="compra">{{ cartera.fecha | date: 'dd/MM/yy' }}</span></div>
@@ -68,17 +68,17 @@
             <div class="col-3 flex_row">
               <div class="flex_column flex-center-align-items">
                 <span>{{cartera.compras}}</span>
-                <ion-icon  (click)="management(cartera,'bolsa/compra',0)" class="hand" style="font-size: 24px;color: blue;" name="add-circle"></ion-icon>
+                <ion-icon  (click)="management(cartera,'finanzas/compra',0)" class="hand" style="font-size: 24px;color: blue;" name="add-circle"></ion-icon>
               </div>
 
               <div class="flex_column  flex-center-align-items">
                 <span>{{cartera.ventas}}</span>
-                <ion-icon  (click)="management(cartera,'bolsa/venta',0)" class="hand" style="font-size: 24px;color: orange;" name="add-circle"></ion-icon>              
+                <ion-icon  (click)="management(cartera,'finanzas/venta',0)" class="hand" style="font-size: 24px;color: orange;" name="add-circle"></ion-icon>              
               </div>
 
               <div class="flex_column  flex-center-align-items">
                 <span>{{cartera.dividendos}}</span>
-                <ion-icon  (click)="management(cartera,'bolsa/dividendo',0)" class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>              
+                <ion-icon  (click)="management(cartera,'finanzas/dividendo',0)" class="hand" style="font-size: 24px;color: green;" name="add-circle"></ion-icon>              
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
 
             <app-base-cargando *ngIf="cartera['loading']" [message]="'Cargando transacciones...'"></app-base-cargando>
 
-            <div class="grid {{oper.tipo}}"  *ngFor="let oper of cartera['lstTransacciones']" (click)="management(cartera,'bolsa/'+ oper.tipo ,oper.id)" >
+            <div class="grid {{oper.tipo}}"  *ngFor="let oper of cartera['lstTransacciones']" (click)="management(cartera,'finanzas/'+ oper.tipo ,oper.id)" >
               <div class="col-3">
                 <div class="text-center">{{ oper?.fecha | date: 'dd/MM/yy' }}</div>
               </div>

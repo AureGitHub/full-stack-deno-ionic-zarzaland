@@ -19,7 +19,7 @@
 
   <ion-row *ngIf="addProducto">
     <ion-col>
-      <add-producto (deleteEvent)="deleteEventProducto($event)" (saveEvent)="saveEventProducto($event)"></add-producto>
+      <tc-tipos [entityName]="'casa/compra_producto'"  (deleteEvent)="deleteEventProducto($event)" (saveEvent)="saveEventProducto($event)" [user]="user" [tableRefresh]="tableRefresh"></tc-tipos>
     </ion-col>
   </ion-row>
   <ion-row>

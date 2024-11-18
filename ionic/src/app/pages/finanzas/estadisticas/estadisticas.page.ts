@@ -50,9 +50,8 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
 
   resultWithEmpresa: any[] = [];
-  resultWithoutEmpresa: any[] = []; 
+  resultWithoutEmpresa: any[] = [];
   resultFondosActivos: any[] = [];
-  resultWithEmpresaTMP: any[] = [];
 
 
   constructor(
@@ -85,11 +84,6 @@ export class EstadisticasPage extends BasePage implements OnInit {
       if (result) {
         this.resultWithoutEmpresa = result?.resultWithoutEmpresa;
         this.resultFondosActivos = result?.resultFondosActivos;
-
-
-        this.resultWithEmpresaTMP = result?.resultWithEmpresa;
-
-
       }
 
     } catch (error) {
@@ -100,12 +94,10 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
   }
 
-  selectingWithoutEmpresa(rowSelected: any) {
-    this.resultWithEmpresa = this.resultWithEmpresaTMP
-    .filter(a=> a.anno == rowSelected.anno && a.mes == rowSelected.mes);
-    }
-
-
-
-
+  async selectingWithoutEmpresa(rowSelected: any) {
+    const param = { anno: rowSelected.anno, mes: rowSelected.mes };
+    const objHttp: classHttp = new classHttp('get', this.entityName, null, 'getDetalle', null, param);
+    const result = await this.myHttpService.ejecuteURL(objHttp);
+    this.resultWithEmpresa = result?.resultWithEmpresa;
+  }
 }

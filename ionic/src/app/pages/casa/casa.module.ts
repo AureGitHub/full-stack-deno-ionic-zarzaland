@@ -25,8 +25,13 @@ const routes: Routes = [
     loadChildren: () => import('./gastos/gastos.module').then(m => m.GastosPageModule), 
     canActivate: [RolGuard]
   },
+  {
+    path: 'agenda',
+    loadChildren: () => import('./agenda/agenda.module').then(m => m.AgendaPageModule), 
+    canActivate: [RolGuard]
+  },
 ];
-
+ 
 @NgModule({
   imports: [
     CommonModule,

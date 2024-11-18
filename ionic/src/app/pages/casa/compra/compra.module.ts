@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SharedComponentsModule, TableModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductoPage } from './producto/producto.page';
 import { CompraPage } from './compra.page';
 
 const routes: Routes = [
@@ -24,6 +23,6 @@ const routes: Routes = [
     SharedComponentsModule,
     TableModule,
   ],
-  declarations: [CompraPage, ProductoPage]
+  declarations: [CompraPage]
 })
 export class CompraPageModule { }

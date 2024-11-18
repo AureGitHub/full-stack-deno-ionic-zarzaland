@@ -11,13 +11,7 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-refreshSelectedDate($event: any) {
-throw new Error('Method not implemented.');
-}
-refreshEnvents($event: any) {
-throw new Error('Method not implemented.');
-}
-eventSourceNew: any;
+
 
   constructor(
     private utilService: UtilService,

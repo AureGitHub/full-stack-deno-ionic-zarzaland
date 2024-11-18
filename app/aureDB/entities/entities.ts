@@ -116,9 +116,20 @@ const entities = {
          { name: 'importe', type: 'number', title: 'Impuestos', validators: [Validators.required], default: 0 },         
          { name: 'observaciones', type: 'text', title: 'Observaciones' },
       ],
+      'casa.evento_tipo':
+      [
+         { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
+         { name: 'color', type: 'text', title: 'Color', validators: [Validators.required] },
+         { name: 'bkcolor', type: 'text', title: 'BK Color', validators: [Validators.required] },
 
+      ],
 
-      
+   'casa.evento':
+      [         
+         { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },
+         { name: 'eventotipoid', type: 'select', title: 'Tipo', validators: [Validators.required], noTC: true, multiple: false, coleccion: 'casa/evento_tipo', id: 'id', desc: 'descripcion' },
+         { name: 'observaciones', type: 'text', title: 'Observaciones' },
+      ],
 
 };
 

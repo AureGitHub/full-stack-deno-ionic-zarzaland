@@ -18,4 +18,12 @@ export const  menuItems =   [
     roles: [Role.admin]
   } ,
 
+  {
+    title: 'Agenda',
+    remixicon: 'ri-calendar-schedule-line',
+    path: '/casa/agenda/',
+    key: 'agenda',  // para encontar la ruta en los guard
+    roles: [Role.admin]
+  } ,
+
  ]

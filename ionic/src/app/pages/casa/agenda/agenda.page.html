@@ -1,0 +1,31 @@
+
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-grid class="router-outlet">
+  <ion-row>
+    <ion-col class="col-2">
+      <ion-button [color]="addTipoTipoEvento ? 'warning' : 'success' "    shape="round" size="small" (click)="addTipoTipoEvento=!addTipoTipoEvento" >
+        <ion-icon  slot="start" name="cash-outline" ></ion-icon>  
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-3">
+    </ion-col>
+    <ion-col class="col-7">
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="addTipoTipoEvento">
+    <ion-col>
+      <tc-tipos [columns]="columns" [entityName]="'casa/evento_tipo'" [user]="user" [tableRefresh]="tableRefresh"></tc-tipos>
+    </ion-col>
+  </ion-row>  
+  <ion-row>
+    <ion-col class="col-12">
+          <my-calendar [lan]="'ES'" [eventSource]="eventSourceNew"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+

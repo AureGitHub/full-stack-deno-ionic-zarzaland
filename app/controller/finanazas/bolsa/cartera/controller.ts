@@ -18,7 +18,7 @@ select c.id,c.fecha,c.acciones, beneficios, e.descripcion,e.abreviatura,
 (select  max(fecha) from finanzas.venta v  where v.carteraid= c.id) maxventa
 from  finanzas.cartera c 
 inner join  finanzas.empresa e on e.id = c.empresaid 
-order by c.fecha  desc
+order by ventas asc,c.fecha  desc
   `;
 
   const finanzas=await GenericDB.queryObject(client, sqlSelect);

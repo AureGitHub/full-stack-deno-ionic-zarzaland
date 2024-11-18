@@ -5,54 +5,67 @@ import { client } from "../../../aureDB/client.ts";
 
 
 
-const getResumenEmpresa = async () =>{
+const getDetalle = async (ctx: any) => {
+
+  const anno = Number(ctx?.params?.anno);
+  const mes = Number(ctx?.params?.mes);
 
   const sqlSelect = `
   select 
-em,
-anno,
-mes,
-(case when mes <10 then   concat('0', mes,'/',anno)  else concat(mes,'/',anno) end) fecha,
- round(importe,2) importe
-from
-(
-select 
-e.abreviatura em ,
-fm.anno ,
-fm.mes ,
-fm.importe importe
-from finanzas.fondoxmes fm 
-inner join finanzas.fondo f on f.id = fm.fondoid
-inner join finanzas.empresa e on f.empresaid =e.id 
-where empresaid!=9
-UNION
-select 
-concat(e.abreviatura,'(',f.interes,')' )em,
-fm.anno ,
-fm.mes ,
-fm.importe importe
-from finanzas.fondoxmes fm 
-inner join finanzas.fondo f on f.id = fm.fondoid
-inner join finanzas.empresa e on f.empresaid =e.id 
-where empresaid=9
-UNION
-select em,anno,mes, importe
-from(
-  select 
-  e.abreviatura em ,
-  date_part('year', fecha)-2000 anno ,
-  date_part('month',  c.fecha) mes,
-  c.beneficios as importe,
-  (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas
-  from finanzas.cartera c
-  inner join finanzas.empresa e on c.empresaid =e.id 
-  )b 
-  where b.ventas > 0)T
-  order by em
+em, 
+anno, 
+mes, 
+(case when mes <10 then   concat('0', mes,'/',anno)  else concat(mes,'/',anno) end) fecha, 
+ round(importe,2) importe 
+from 
+( 
+select  
+e.abreviatura em , 
+fm.anno , 
+fm.mes , 
+fm.importe importe 
+from finanzas.fondoxmes fm  
+inner join finanzas.fondo f on f.id = fm.fondoid 
+inner join finanzas.empresa e on f.empresaid =e.id  
+where empresaid!=9 
+UNION 
+select  
+concat(e.abreviatura,'(',f.interes,')' )em, 
+fm.anno , 
+fm.mes , 
+fm.importe importe 
+from finanzas.fondoxmes fm  
+inner join finanzas.fondo f on f.id = fm.fondoid 
+inner join finanzas.empresa e on f.empresaid =e.id  
+where empresaid=9 
+UNION 
+select em,anno,mes, importe 
+from( 
+  select  
+  e.abreviatura em , 
+  date_part('year', fecha)-2000 anno , 
+  date_part('month',  c.fecha) mes, 
+  c.beneficios as importe, 
+  (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas 
+  from finanzas.cartera c 
+  inner join finanzas.empresa e on c.empresaid =e.id  
+  )b  
+  where b.ventas > 0)T 
+  where anno=${anno} and mes=${mes} 
+  order by em 
 
   `;
-  const resumenDB = await GenericDB.queryObject(client, sqlSelect);
-  return resumenDB.rows;
+  const resumenDB = await GenericDB.queryObject(client, sqlSelect);  
+  ctx.response.status = 201;
+  ctx.response.body = {
+    status: StatusCodes.OK,
+    data: {
+      resultWithEmpresa : resumenDB.rows,
+      resultWithEmpresacount : resumenDB?.rows?.length,      
+
+    },
+  };
+
 }
 
 const getResumenByMoth = async () =>{
@@ -139,35 +152,23 @@ where f.fechainicio  <= now() and f.fechafin >= now()
 
 const get = async (ctx: any) => {
 
-
   const lstFondosActivos = await getFondoLetrasActivos();
-  const resultWithEmpresa = await getResumenEmpresa();
   const resultWithoutEmpresa = await getResumenByMoth();
-
   ctx.response.status = 201;
   ctx.response.body = {
     status: StatusCodes.OK,
     data: {
-      resultWithEmpresa,
-      resultWithEmpresacount: resultWithEmpresa.length,
       resultWithoutEmpresa,
       resultWithoutEmpresacount: resultWithoutEmpresa.length,
       resultFondosActivos: lstFondosActivos,
       resultFondosActivoscount: lstFondosActivos.length,
-
-
-
     },
   };
 
 };
 
 
-const ordenaAnnoMes = (a, b) => {
-  return b.anno - a.anno || b.mes - a.mes
-}
-
-
 export default {
-  get
+  get,
+  getDetalle
 };

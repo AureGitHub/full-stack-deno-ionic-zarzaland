@@ -7,4 +7,5 @@ const router = new Router({
 
 router
 .get("/",  controller.get)
+.get("/getDetalle/:anno/:mes",  controller.getDetalle)
 export default router;
