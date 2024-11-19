@@ -23,7 +23,7 @@ export class AgendaPage extends BasePage implements OnInit {
 columns = [ 
   { name: 'Descripción', prop: 'descripcion', type: 'text', OrderInit: 'ASC'},
   { name: 'Color', prop: 'color', type: 'text'},
-  { name: 'BK Color', prop: 'descripcion', type: 'text'},
+  { name: 'BK Color', prop: 'bkcolor', type: 'text'},
 ]
 
   constructor(
