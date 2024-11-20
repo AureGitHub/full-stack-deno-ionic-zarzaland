@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage, MyHttpService, MyHttpService_EXEC, SeguridadService,  classHttp } from 'app-base-lib';
+import { BasePage, BasePageService } from 'app-base-lib';
 import  {menuItems} from './menu'
 
 @Component({
@@ -16,18 +16,12 @@ export class FinanzasPage extends BasePage implements OnInit {
 
 
   constructor(
-    public override  myHttpService: MyHttpService,
-    public override  seguridadService: SeguridadService,
-    public override myHttpService_EXEC: MyHttpService_EXEC,
-
-
+    public override basePageService: BasePageService
   ) {
-    super(myHttpService,seguridadService,myHttpService_EXEC);
+    super(basePageService);
     this.entityName = 'accion';
   }
-
   async ngOnInit() {
-    
   }
 
 }

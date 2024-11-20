@@ -1,13 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   BasePage,
-  EditorEntityComponent,
-  MyHttpService,
-  MyHttpService_EXEC,
-  SeguridadService,
-  UtilService,
-  classHttp,
-  typeMessage,
+  BasePageService
 } from 'app-base-lib';
 
 
@@ -31,14 +25,9 @@ export class FondoPage extends BasePage implements OnInit {
 
 
   constructor(
-    public override myHttpService: MyHttpService,
-    public override seguridadService: SeguridadService,
-    private utilService: UtilService,
-    public override myHttpService_EXEC: MyHttpService_EXEC,
-
-
+    public override basePageService: BasePageService
   ) {
-    super(myHttpService, seguridadService,myHttpService_EXEC);
+    super(basePageService);
     this.entityName = 'finanzas/fondo';
   }
 

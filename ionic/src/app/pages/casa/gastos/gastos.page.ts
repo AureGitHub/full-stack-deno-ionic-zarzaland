@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   BasePage,
-  MyHttpService,
-  MyHttpService_EXEC,
-  SeguridadService,
-  UtilService,
-  classHttp,
-  typeMessage,
+  BasePageService,
 } from 'app-base-lib';
 
 
@@ -27,14 +22,9 @@ export class GastosPage extends BasePage implements OnInit {
   
 
   constructor(
-    public override myHttpService: MyHttpService,
-    public override seguridadService: SeguridadService,
-    public override myHttpService_EXEC: MyHttpService_EXEC,
-    private utilService: UtilService,
-
-
+    public override basePageService: BasePageService
   ) {
-    super(myHttpService, seguridadService,myHttpService_EXEC);
+    super(basePageService);
     this.entityName = 'casa/gasto';
   }
 

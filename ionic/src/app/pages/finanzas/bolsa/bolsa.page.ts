@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   BasePage,
+  BasePageService,
   EditorEntityComponent,
-  MyHttpService,
-  MyHttpService_EXEC,
-  SeguridadService,
-  UtilService,
   classHttp,
   typeMessage,
 } from 'app-base-lib';
@@ -37,14 +34,10 @@ export class BolsaPage extends BasePage implements OnInit {
 
 
   constructor(
-    public override myHttpService: MyHttpService,
-    public override seguridadService: SeguridadService,
-    private utilService: UtilService,
-    public override myHttpService_EXEC: MyHttpService_EXEC,
-
+    public override basePageService: BasePageService
 
   ) {
-    super(myHttpService, seguridadService,myHttpService_EXEC);
+    super(basePageService);
     this.entityName = 'finanzas/cartera';
   }
 
