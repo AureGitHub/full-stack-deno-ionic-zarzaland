@@ -43,8 +43,8 @@ select em,anno,mes, importe
 from( 
   select  
   e.abreviatura em , 
-  date_part('year', fecha)-2000 anno , 
-  date_part('month',  c.fecha) mes, 
+  date_part('year', (select max(fecha)  from finanzas.venta v where v.carteraid= c.id))-2000 anno , 
+  date_part('month', (select max(fecha)  from finanzas.venta v where v.carteraid= c.id)) mes, 
   c.beneficios as importe, 
   (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas 
   from finanzas.cartera c 
@@ -117,8 +117,8 @@ group by anno, mes) Fondos on Fondos.anno = Letras.anno and Fondos.mes = Letras.
 (select anno,mes, tipo, sum(importe) importe
 from(
   select 
-  date_part('year', fecha)-2000 anno ,
-  date_part('month',  c.fecha) mes,
+  date_part('year', (select max(fecha)  from finanzas.venta v where v.carteraid= c.id))-2000 anno ,
+  date_part('month',  (select max(fecha)  from finanzas.venta v where v.carteraid= c.id)) mes,
   'bolsa' tipo,
   c.beneficios as importe,
   (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas

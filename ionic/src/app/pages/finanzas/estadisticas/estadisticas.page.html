@@ -2,19 +2,28 @@
 <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
-<my-table
-[loadOnInit]="true"
-  [canAddEntity] ="user.isAdmin"
-  [canUpdateEntity] ="user.isAdmin"
-  [tableResult]="'resultFondosActivos'"
-  [tableResultCount]="'resultFondosActivoscount'"
-  [dataFromOut]="resultFondosActivos"
-  [title]="'Activos'"
-  [entityName]="entityName"
-  [columns]="columnsFondosActivos"
-  [refresh]="tableRefresh"
-  [withCache]="true" 
-></my-table>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="play-circle"></ion-icon>
+      Listen Now
+    </ion-tab-button>
+    <ion-tab-button tab="radio">
+      <ion-icon name="radio"></ion-icon>
+      Radio
+    </ion-tab-button>
+    <ion-tab-button tab="library">
+      <ion-icon name="library"></ion-icon>
+      Library
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+      Search
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
 <my-table
 [loadOnInit]="true"
   [canAddEntity] ="user.isAdmin"
@@ -41,4 +50,17 @@
   [refresh]="tableRefresh"
   [dataFromOut]="resultWithEmpresa"
   [withCache]="true"
+></my-table>
+<my-table
+[loadOnInit]="true"
+  [canAddEntity] ="user.isAdmin"
+  [canUpdateEntity] ="user.isAdmin"
+  [tableResult]="'resultFondosActivos'"
+  [tableResultCount]="'resultFondosActivoscount'"
+  [dataFromOut]="resultFondosActivos"
+  [title]="'Activos'"
+  [entityName]="entityName"
+  [columns]="columnsFondosActivos"
+  [refresh]="tableRefresh"
+  [withCache]="true" 
 ></my-table>
