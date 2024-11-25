@@ -14,6 +14,7 @@ import {
 export class EstadisticasPage extends BasePage implements OnInit {
 
 
+
   addEmpresa = false;
 
 
@@ -48,6 +49,8 @@ export class EstadisticasPage extends BasePage implements OnInit {
   resultWithoutEmpresa: any[] = [];
   resultFondosActivos: any[] = [];
 
+  buttonsTab = {};
+
 
   constructor(
     public override basePageService: BasePageService
@@ -58,7 +61,8 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
   async ngOnInit() {
     this.Init();
-    this.getEstadisticas();
+    this.buttonTab('resumenxmes');
+
 
   }
   async handleRefresh(event) {
@@ -90,4 +94,28 @@ export class EstadisticasPage extends BasePage implements OnInit {
     const result = await this.myHttpService.ejecuteURL(objHttp);
     this.resultWithEmpresa = result?.resultWithEmpresa;
   }
+
+
+  buttonTab(cual) {
+
+    for(const pp in this.buttonsTab){
+      this.buttonsTab[pp] =false;
+    }
+
+    if(!this.buttonsTab[cual]){
+      this.buttonsTab[cual] =true;
+    }
+    this.buttonsTab[cual] =true;
+
+    //mejorarlo... si no he accedido al servidor, acceder
+    // solo hay que traerse los datos del tab activo
+    switch(cual){
+      case '':
+        default:    
+        this.getEstadisticas();
+        break;
+    }
+
+  }
+
 }

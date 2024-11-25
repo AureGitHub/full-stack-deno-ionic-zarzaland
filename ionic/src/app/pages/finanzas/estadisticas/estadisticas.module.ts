@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SharedComponentsModule, TableModule } from 'app-base-lib';
+import { IconremixiconComponentModule, SharedComponentsModule, TableModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { EstadisticasPage } from './estadisticas.page';
 
@@ -22,6 +22,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedComponentsModule,
     TableModule,
+    IconremixiconComponentModule
   ],
   declarations: [EstadisticasPage]
 })

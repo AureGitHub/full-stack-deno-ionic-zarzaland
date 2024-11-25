@@ -1,15 +1,16 @@
 // deno-lint-ignore-file no-explicit-any
 import { aureDB, GenericDB, StatusCodes, statusError, statusOK } from "../../../../../dep/deps.ts";
 import { client, clientNoTransaction } from "../../../../aureDB/client.ts";
+import eventoBusiness from "../../../../business/evento.ts";
 
 import entities from "../../../../aureDB/entities/entities.ts";
 
-const entity = new aureDB(client, clientNoTransaction, entities, 'casa.evento');
+const entity = new aureDB(client, clientNoTransaction, entities, 'casa.evento');  
 const genericDB = new GenericDB(entity);
 
 const get = async (ctx: any) => {
 
-  const sqlSelect = ` select e.id,e.fecha,e.observaciones, te.descripcion `;
+  const sqlSelect = ` select e.id,date_trunc('day', e.fecha) fecha ,e.observaciones, te.descripcion , te.color, te.bkcolor`;
   let sqlFrom = ` from  casa.evento e
                   inner join casa.evento_tipo te on te.id=e.eventotipoid
   `;
@@ -33,14 +34,64 @@ const getById = async (ctx: any) => {
 };
 
 
+
+const getWeekDates=(startDate) => {
+  const inputDate = new Date(startDate);
+  // if (isNaN(inputDate)) {
+  //   throw new Error("Fecha inválida. Asegúrate de usar un formato válido.");
+  // }
+
+  const dayOfWeek = inputDate.getDay(); // 0 (domingo) a 6 (sábado)
+  const weekStart = new Date(inputDate);
+  const weekEnd = new Date(inputDate);
+
+  // Ajustar al inicio (lunes) y fin (domingo) de la semana
+  weekStart.setDate(inputDate.getDate() - ((dayOfWeek === 0 ? 7 : dayOfWeek) - 1)); // Lunes
+  weekEnd.setDate(weekStart.getDate() + 6); // Domingo
+
+  const weekDates: any[] = [];
+  for (let d = new Date(weekStart); d <= weekEnd; d.setDate(d.getDate() + 1)) {
+    weekDates.push(new Date(d)); // Clonar la fecha
+  }
+
+  return weekDates;
+}
+
 const add = async (ctx: any) => {
-  await genericDB.add(ctx);
-};
 
 
-const update = async (ctx: any) => {
+  try {
+    const evento = ctx.state.data;
+    const periodoturno = evento?.periodoturno;  
   
-  await genericDB.update(ctx);
+    let data = null;
+
+   
+
+
+    switch(periodoturno){
+      case 'd':   //día
+      data = await eventoBusiness.addUpdateEvento(evento);
+  
+      break;
+
+      case 's':   //día
+      const daysOfWeek = getWeekDates(evento.fecha);
+
+      for(let i=0; i<daysOfWeek.length;i++){
+        evento.fecha = daysOfWeek[i].toISOString();
+        await eventoBusiness.addUpdateEvento(evento);
+      }
+      break;
+
+    }
+  
+    statusOK(ctx, {  entity : data });
+} catch (error) {
+    statusError(ctx, error);
+    return;
+}
+  
 };
 
 
@@ -53,6 +104,5 @@ export default {
   get,
   getById,
   add,
-  update,
   del,
 };

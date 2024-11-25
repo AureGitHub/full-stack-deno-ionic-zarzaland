@@ -39,7 +39,7 @@
       <div *ngFor="let cartera of lstCartera" class="grid ">
         <div class="col-12 itemTreeCompra">
           <div class="grid head"
-            [ngClass]="cartera.ventas == 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
+            [ngClass]="cartera.acciones > 0  ? 'fondo-activo' : (cartera.beneficios >= 0 ? 'fondo-beneficio' : 'fondo-perdida')">
             <div class="col-3 hand name-date" (click)="managementCartera('finanzas/cartera',cartera.id)">
               <div class="text-top font-bold" title="{{cartera.descripcion}}">{{ cartera.abreviatura }}</div>
               <div><span class="precioventas">{{ cartera.maxventa | date: 'dd/MM/yy' }}</span></div>
@@ -59,7 +59,7 @@
             <div class="col-3" (click)="selectedNode = selectedNode == cartera ?  null : cartera"
               (click)="expanded(cartera)">
               <div class="text-center precio-beneficio">
-                <span>{{cartera.ventas == 0 && cartera.acciones > 0 ? 'Invertido' : (cartera.beneficios >= 0 ? 'Beneficios' :
+                <span>{{cartera.acciones > 0 ? 'Invertido' : (cartera.beneficios >= 0 ? 'Beneficios' :
                   'Perdida')}}</span>
                 <span [ngClass]="cartera.beneficios >= 0  ? 'beneficio' : 'perdida'">{{ cartera.beneficios| number :
                   '1.2-2' }} €</span>

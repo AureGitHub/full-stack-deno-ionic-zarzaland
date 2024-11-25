@@ -3,27 +3,18 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-      <ion-icon name="play-circle"></ion-icon>
-      Listen Now
-    </ion-tab-button>
-    <ion-tab-button tab="radio">
-      <ion-icon name="radio"></ion-icon>
-      Radio
-    </ion-tab-button>
-    <ion-tab-button tab="library">
-      <ion-icon name="library"></ion-icon>
-      Library
-    </ion-tab-button>
-    <ion-tab-button tab="search">
-      <ion-icon name="search"></ion-icon>
-      Search
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-tab-bar slot="bottom">
+  <ion-tab-button [selected]="buttonsTab['resumenxmes']"   (click)="buttonTab('resumenxmes')">
+    <icon-remixicon [class]="'ri-line-chart-line'" ></icon-remixicon>
+    Resumen X mes
+  </ion-tab-button>
+  <ion-tab-button [selected]="buttonsTab['fondosactivos']"    (click)="buttonTab('fondosactivos')">
+    <icon-remixicon [class]="'ri-bar-chart-box-ai-fill'" ></icon-remixicon>
+    Fondos Activos
+  </ion-tab-button>
+</ion-tab-bar>
 
+<div *ngIf="buttonsTab['resumenxmes']">
 <my-table
 [loadOnInit]="true"
   [canAddEntity] ="user.isAdmin"
@@ -51,7 +42,10 @@
   [dataFromOut]="resultWithEmpresa"
   [withCache]="true"
 ></my-table>
-<my-table
+</div>
+
+<div *ngIf="buttonsTab['fondosactivos']">
+  <my-table
 [loadOnInit]="true"
   [canAddEntity] ="user.isAdmin"
   [canUpdateEntity] ="user.isAdmin"
@@ -64,3 +58,10 @@
   [refresh]="tableRefresh"
   [withCache]="true" 
 ></my-table>
+  </div>
+
+
+
+
+
+

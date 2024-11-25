@@ -3,27 +3,67 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<ion-grid class="router-outlet">
-  <ion-row>
-    <ion-col class="col-2">
-      <ion-button [color]="addTipoTipoEvento ? 'warning' : 'success' "    shape="round" size="small" (click)="addTipoTipoEvento=!addTipoTipoEvento" >
-        <ion-icon  slot="start" name="cash-outline" ></ion-icon>  
-      </ion-button>
-    </ion-col>
-    <ion-col class="col-3">
-    </ion-col>
-    <ion-col class="col-7">
-    </ion-col>
-  </ion-row>
+<ion-tab-bar slot="bottom">
+  <ion-tab-button [selected]="buttonsTab['tipoeventos']"   (click)="buttonTab('tipoeventos')">
+    <icon-remixicon [class]="'ri-image-add-fill'" ></icon-remixicon>
+   Tipo
+  </ion-tab-button>
+  <ion-tab-button [selected]="buttonsTab['turnos']"    (click)="buttonTab('turnos')">
+    <icon-remixicon [class]="'ri-user-shared-line'" ></icon-remixicon>
+    Turnos
+  </ion-tab-button>
+</ion-tab-bar>
 
-  <ion-row *ngIf="addTipoTipoEvento">
+<ion-grid class="router-outlet">
+
+  <ion-row *ngIf="buttonsTab['tipoeventos']">
     <ion-col>
       <tc-tipos [columns]="columns" [entityName]="'casa/evento_tipo'" [user]="user" [tableRefresh]="tableRefresh"></tc-tipos>
     </ion-col>
   </ion-row>  
+
+  <ion-row *ngIf="buttonsTab['turnos']" class="turno">
+    <ion-col class="col-12">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="col-6" style="background-color: lightgreen;"> 
+            <ion-checkbox  [(ngModel)]="turnos['carmen']" (ionChange)="turnos['carmen'] ? turnos['aure']=false : turnos['aure']=true">Carmen</ion-checkbox>
+          </ion-col>
+          <ion-col class="col-6" style="background-color: lightblue;">
+            <ion-checkbox [(ngModel)]="turnos['aure']" (ionChange)="turnos['aure'] ? turnos['carmen']=false : turnos['carmen']=true" >Aure</ion-checkbox>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="col-12">
+            <ion-radio-group [(ngModel)]="tipoturno">
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="col-4">
+                    <ion-label>Día</ion-label>
+                    <ion-radio value="d"></ion-radio>
+                  </ion-col>
+                  <ion-col class="col-4">
+                    <ion-label>Semana</ion-label>
+                  <ion-radio value="s" ></ion-radio>
+                  </ion-col>
+                  <ion-col class="col-4">
+                    <ion-label>Completo</ion-label>
+                    <ion-radio value="c" ></ion-radio>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-radio-group>
+          
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+
   <ion-row>
     <ion-col class="col-12">
-          <my-calendar [lan]="'ES'" [eventSource]="eventSourceNew"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
+          <my-calendar [disabled]="isLoading" [lan]="'ES'" [eventSource]="lstEventos"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
     </ion-col>
   </ion-row>
 </ion-grid>
