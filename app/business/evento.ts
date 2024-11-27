@@ -29,7 +29,7 @@ const addUpdateEvento = async (evento: any) => {
 
     let data = null;
 
-    if(eventDB && (eventDB.eventotipoid==eventotipoid || [2,3].some(a=> a==eventDB.eventotipoid))){
+    if(eventDB && (eventDB.eventotipoid==eventotipoid || ([2,3].some(a=> a==eventDB.eventotipoid)  && [2,3].some(a=> a==eventotipoid)  ))){
         data = await entity.update({ data: evento, where: { id:eventDB.id  } });
         return evento;
 

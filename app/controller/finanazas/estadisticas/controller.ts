@@ -46,11 +46,12 @@ from(
   date_part('year', (select max(fecha)  from finanzas.venta v where v.carteraid= c.id))-2000 anno , 
   date_part('month', (select max(fecha)  from finanzas.venta v where v.carteraid= c.id)) mes, 
   c.beneficios as importe, 
+  c.acciones,
   (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas 
   from finanzas.cartera c 
   inner join finanzas.empresa e on c.empresaid =e.id  
   )b  
-  where b.ventas > 0)T 
+  where b.ventas > 0 and b.acciones=0)T 
   where anno=${anno} and mes=${mes} 
   order by em 
 
@@ -121,9 +122,10 @@ from(
   date_part('month',  (select max(fecha)  from finanzas.venta v where v.carteraid= c.id)) mes,
   'bolsa' tipo,
   c.beneficios as importe,
+  c.acciones,
   (select cast(count(*) as integer) from finanzas.venta v where v.carteraid= c.id) AS ventas
   from finanzas.cartera c)b 
-  where b.ventas > 0
+  where b.ventas > 0  and b.acciones=0
   group by anno, mes, tipo ) bolsa  on fondoyletras.anno = bolsa.anno and fondoyletras.mes = bolsa.mes  
   order by anno desc, mes desc)T
   `;

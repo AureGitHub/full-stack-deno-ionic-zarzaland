@@ -10,7 +10,9 @@ const genericDB = new GenericDB(entity);
 
 const get = async (ctx: any) => {
 
-  const sqlSelect = ` select e.id,date_trunc('day', e.fecha) fecha ,e.observaciones, te.descripcion , te.color, te.bkcolor`;
+  const sqlSelect = ` select e.id,TO_CHAR(e.fecha, 'yyyy-mm-dd') fecha ,e.observaciones, te.descripcion , te.color, te.bkcolor,
+  (case when e.eventotipoid = 2 or e.eventotipoid = 3 then true else false end) esturno
+  `;
   let sqlFrom = ` from  casa.evento e
                   inner join casa.evento_tipo te on te.id=e.eventotipoid
   `;
@@ -41,13 +43,19 @@ const getWeekDates=(startDate) => {
   //   throw new Error("Fecha inválida. Asegúrate de usar un formato válido.");
   // }
 
+
+  
+
   const dayOfWeek = inputDate.getDay(); // 0 (domingo) a 6 (sábado)
+
+
   const weekStart = new Date(inputDate);
-  const weekEnd = new Date(inputDate);
+
 
   // Ajustar al inicio (lunes) y fin (domingo) de la semana
   weekStart.setDate(inputDate.getDate() - ((dayOfWeek === 0 ? 7 : dayOfWeek) - 1)); // Lunes
-  weekEnd.setDate(weekStart.getDate() + 6); // Domingo
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6); // Domingo
 
   const weekDates: any[] = [];
   for (let d = new Date(weekStart); d <= weekEnd; d.setDate(d.getDate() + 1)) {
@@ -78,10 +86,18 @@ const add = async (ctx: any) => {
       case 's':   //día
       const daysOfWeek = getWeekDates(evento.fecha);
 
+      if(daysOfWeek.length!=7){
+        throw new Error('Error calculando semanas!!');
+      }
+
       for(let i=0; i<daysOfWeek.length;i++){
         evento.fecha = daysOfWeek[i].toISOString();
         await eventoBusiness.addUpdateEvento(evento);
       }
+      break;
+
+      default : //evento normal (no turno)
+      await eventoBusiness.addUpdateEvento(evento);
       break;
 
     }

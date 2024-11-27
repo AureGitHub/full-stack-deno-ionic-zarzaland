@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   BasePage,
   BasePageService,
   classHttp,
+  EditorEntityComponent,
   typeMessage,
 } from 'app-base-lib';
 
@@ -27,13 +28,15 @@ export class AgendaPage extends BasePage implements OnInit {
   ]
   lstEventos: any;
 
+  @ViewChild('editorEntity') editorEntityComponent: EditorEntityComponent;
+
   constructor(
     public override basePageService: BasePageService
 
 
   ) {
     super(basePageService);
-    this.entityName = 'casa/gasto';
+    this.entityName = 'casa/evento';
   }
 
   async ngOnInit() {
@@ -50,7 +53,7 @@ export class AgendaPage extends BasePage implements OnInit {
 
   async getEventos() {
 
-    this.isLoading = true;    
+    this.isLoading = true;
 
     let objHttp: classHttp = new classHttp('get', `casa/evento`, null, '', null, null);
     try {
@@ -61,58 +64,45 @@ export class AgendaPage extends BasePage implements OnInit {
       this.utilService.message(typeMessage.danger, ex.message);
     }
     finally {
-      this.isLoading =false;
+      this.isLoading = false;
     }
 
   }
 
 
+  async gestionTurnos(fecha) {
+    if (this.turnos['carmen'] || this.turnos['aure']) {
+      if (this.tipoturno) {
 
+        //send to server : 
 
-  async refreshSelectedDate(fecha: any) {
-    if(this.buttonsTab['turnos']){
+        const formData = {};
+        formData['eventotipoid'] = this.turnos['aure'] ? '2' : '3';
+        formData['periodoturno'] = this.tipoturno;
+        formData['fecha'] = this.utilService.toISOString(new Date(fecha));
 
-      if(this.turnos['carmen'] || this.turnos['aure']  ){
-        if(this.tipoturno){
+        //hago un post
 
-          //send to server : 
-          
-          const formData = {};
-          formData['eventotipoid']=this.turnos['aure'] ? '2' : '3';
-          formData['periodoturno']=this.tipoturno;
-          formData['fecha']=this.utilService.toISOString(new Date(fecha));
-
-          //hago un post
-
-          this.isLoading=true;
-          const resp=await this.myHttpService_EXEC.Save('post','casa/evento',formData, this.pk);
-
-          this.getEventos();
-
-          // if(resp?.entity){
-
-          //   this.lstEventos = this.lstEventos.filter(a=> a.id !=resp?.entity.id);
-          //   this.lstEventos.push(resp?.entity);
-
-          // }
-
-          
-
-
-          //refresh events
-
-
-        }
-        
+        this.isLoading = true;
+        const resp = await this.myHttpService_EXEC.Save('post', 'casa/evento', formData, this.pk);
+        this.getEventos();
       }
 
-      
+    }
+  }
+  async refreshSelectedDate(fecha: any) {
+    if (this.buttonsTab['turnos']) {
+      await this.gestionTurnos(fecha);
+    }
+    else{
+      //añado evento normal
+      this.editorEntityComponent.management(0,null);
     }
 
 
   }
   refreshEnvents($event: any) {
-  
+
   }
 
 

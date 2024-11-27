@@ -1,4 +1,4 @@
-import { Router, requireAdmin,getData } from  "../../../../dep/deps.ts";
+import { Router, requireAdmin,getData, requireGod } from  "../../../../dep/deps.ts";
 import controller from "./controller.ts";
 
 const router = new Router({
@@ -6,7 +6,7 @@ const router = new Router({
   });
 
 router
-.get("/",  controller.get)
+.get("/", requireGod, controller.get)
 .get("/:id",requireAdmin,  controller.getById)
 .post("/", requireAdmin,getData, controller.add)
 .put("/:id", requireAdmin,getData,  controller.update)

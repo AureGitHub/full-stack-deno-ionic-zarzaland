@@ -113,7 +113,7 @@ const entities = {
       [         
          { name: 'fecha', type: 'date', title: 'Fecha', validators: [Validators.required] },
          { name: 'gastotipoid', type: 'select', title: 'Tipo', validators: [Validators.required], noTC: true, multiple: false, coleccion: 'casa/gasto_tipo', id: 'id', desc: 'descripcion' },
-         { name: 'importe', type: 'number', title: 'Impuestos', validators: [Validators.required], default: 0 },         
+         { name: 'importe', type: 'number', title: 'Importe', validators: [Validators.required], default: 0 },         
          { name: 'observaciones', type: 'text', title: 'Observaciones' },
       ],
       'casa.evento_tipo':

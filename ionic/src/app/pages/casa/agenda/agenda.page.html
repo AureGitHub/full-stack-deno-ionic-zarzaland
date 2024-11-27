@@ -47,8 +47,8 @@
                   <ion-radio value="s" ></ion-radio>
                   </ion-col>
                   <ion-col class="col-4">
-                    <ion-label>Completo</ion-label>
-                    <ion-radio value="c" ></ion-radio>
+                    <!-- <ion-label>Completo</ion-label>
+                    <ion-radio value="c" ></ion-radio> -->
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -63,6 +63,8 @@
 
   <ion-row>
     <ion-col class="col-12">
+      <app-editor-entity #editorEntity [MostrarIconAdd]="false" [entityName]="entityName" (saveEvent)="getEventos()"
+  (deleteEvent)="getEventos()"></app-editor-entity>
           <my-calendar [disabled]="isLoading" [lan]="'ES'" [eventSource]="lstEventos"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
     </ion-col>
   </ion-row>
