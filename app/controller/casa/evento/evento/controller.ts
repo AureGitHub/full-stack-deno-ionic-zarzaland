@@ -11,7 +11,8 @@ const genericDB = new GenericDB(entity);
 const get = async (ctx: any) => {
 
   const sqlSelect = ` select e.id,TO_CHAR(e.fecha, 'yyyy-mm-dd') fecha ,e.observaciones, te.descripcion , te.color, te.bkcolor,
-  (case when e.eventotipoid = 2 or e.eventotipoid = 3 then true else false end) esturno
+  (case when e.eventotipoid = 2 or e.eventotipoid = 3 then true else false end) esturno,
+  e.eventotipoid
   `;
   let sqlFrom = ` from  casa.evento e
                   inner join casa.evento_tipo te on te.id=e.eventotipoid
@@ -111,6 +112,12 @@ const add = async (ctx: any) => {
 };
 
 
+const update = async (ctx: any) => {
+  
+  await genericDB.update(ctx);
+};
+
+
 const del = async (ctx: any) => {
   await genericDB.del(ctx);
 };
@@ -121,4 +128,5 @@ export default {
   getById,
   add,
   del,
+  update
 };

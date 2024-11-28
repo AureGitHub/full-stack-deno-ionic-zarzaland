@@ -66,8 +66,29 @@
       <app-editor-entity #editorEntity [MostrarIconAdd]="false" [entityName]="entityName" (saveEvent)="getEventos()"
   (deleteEvent)="getEventos()"></app-editor-entity>
           <my-calendar [disabled]="isLoading" [lan]="'ES'" [eventSource]="lstEventos"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
+
+         
+          
+
     </ion-col>
   </ion-row>
+
+  <ion-row>
+    <ion-col class="col-12">
+      <div class="flex_row contendor-eventos-dia">
+        <ion-button [color]="'success' "     shape="round" size="small" (click)="addEvento()" >
+          <ion-icon  slot="start" name="add-outline" ></ion-icon>  
+          {{fechaselected | date: 'dd/MM/yy'}}
+        </ion-button>
+        <div *ngFor="let ev of lstEventosDia" class="evento-detalle hand flex_column" (click)="updateEvento(ev.id)"  [style.background-color]="ev?.color">
+          <span>{{ev.descripcion}}</span>
+          <span>{{ev.observaciones}}</span>          
+        </div>
+      </div>
+    
+    </ion-col>
+  </ion-row>
+
 </ion-grid>
 
 

@@ -16,6 +16,7 @@ import {
 export class AgendaPage extends BasePage implements OnInit {
 
 
+
   buttonsTab = {};
   turnos = {};
   tipoturno: any;
@@ -29,6 +30,8 @@ export class AgendaPage extends BasePage implements OnInit {
   lstEventos: any;
 
   @ViewChild('editorEntity') editorEntityComponent: EditorEntityComponent;
+  lstEventosDia: any;
+  fechaselected: any;
 
   constructor(
     public override basePageService: BasePageService
@@ -42,7 +45,7 @@ export class AgendaPage extends BasePage implements OnInit {
   async ngOnInit() {
     this.Init();
     this.getEventos();
-    this.buttonTab('turnos');
+    // this.buttonTab('turnos');
 
   }
 
@@ -59,6 +62,7 @@ export class AgendaPage extends BasePage implements OnInit {
     try {
       let resp = await this.myHttpService.ejecuteURL(objHttp);
       this.lstEventos = resp?.data;
+      this.lstEventosDia =[];
     }
     catch (ex) {
       this.utilService.message(typeMessage.danger, ex.message);
@@ -91,12 +95,24 @@ export class AgendaPage extends BasePage implements OnInit {
     }
   }
   async refreshSelectedDate(fecha: any) {
+
+    this.fechaselected = fecha;
+
     if (this.buttonsTab['turnos']) {
       await this.gestionTurnos(fecha);
     }
-    else{
+    else {
       //añado evento normal
-      this.editorEntityComponent.management(0,null);
+      //this.editorEntityComponent.management(0,null);
+
+      //muestro los eventos de ese día
+
+      const anno = fecha.getUTCFullYear();
+      const month = fecha.getMonth() + 1 < 10 ? `0${fecha.getMonth() + 1}` : fecha.getMonth() + 1;
+      const day = fecha.getDate() < 10 ? `0${fecha.getDate()}` : fecha.getDate();
+      const fecha_Str = `${anno}-${month}-${day}`;
+      this.lstEventosDia = this.lstEventos.filter(a => a.fecha == fecha_Str && ![2, 3].some(b => b == a.eventotipoid));
+
     }
 
 
@@ -135,6 +151,20 @@ export class AgendaPage extends BasePage implements OnInit {
         break;
     }
 
+  }
+
+
+  addEvento() {
+
+    
+    const entityInitialValues = {fecha : this.utilService.toISOString(this.fechaselected)};
+    this.editorEntityComponent.management(0, { entityInitialValues });
+
+
+  }
+
+  updateEvento(enventoid){
+    this.editorEntityComponent.management(enventoid, null);
   }
 
 
