@@ -7,7 +7,6 @@ export const  menuItems =   [
     icon: 'storefront-outline',
     path: '/casa/',
     key: 'casa',  // para encontar la ruta en los guard
-    roles: [Role.god, Role.admin],
     // hide : true
   },
    {

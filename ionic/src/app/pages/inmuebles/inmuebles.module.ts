@@ -16,6 +16,10 @@ const routes: Routes = [
   }
 ];
 
+// routes.forEach(route => {
+//   route.data = { menuItems } 
+// })
+
 @NgModule({
   imports: [
     CommonModule,

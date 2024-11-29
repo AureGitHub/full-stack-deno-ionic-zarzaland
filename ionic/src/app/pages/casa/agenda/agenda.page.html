@@ -8,7 +8,7 @@
     <icon-remixicon [class]="'ri-image-add-fill'" ></icon-remixicon>
    Tipo
   </ion-tab-button>
-  <ion-tab-button [selected]="buttonsTab['turnos']"    (click)="buttonTab('turnos')">
+  <ion-tab-button [selected]="buttonsTab['turnos']"    (click)="buttonTab('turnos')" *ngIf="user">
     <icon-remixicon [class]="'ri-user-shared-line'" ></icon-remixicon>
     Turnos
   </ion-tab-button>
@@ -63,7 +63,7 @@
 
   <ion-row>
     <ion-col class="col-12">
-      <app-editor-entity #editorEntity [MostrarIconAdd]="false" [entityName]="entityName" (saveEvent)="getEventos()"
+      <app-editor-entity [WhoHasPermision]="[]" #editorEntity [MostrarIconAdd]="false" [entityName]="entityName" (saveEvent)="getEventos()"
   (deleteEvent)="getEventos()"></app-editor-entity>
           <my-calendar [disabled]="isLoading" [lan]="'ES'" [eventSource]="lstEventos"  (refreshEnvents)="refreshEnvents($event)" (refreshSelectedDate)="refreshSelectedDate($event)"></my-calendar>
 

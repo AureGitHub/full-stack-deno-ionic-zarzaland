@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MenuButtonsModule } from 'app-base-lib';
 import { FinanzasPage } from './finanzas.page';
 import { EmpresasComponentModule } from './components/empresas/empresas.component.module';
+import { menuItems } from './menu';
 
 
 const routes: Routes = [
@@ -32,6 +33,9 @@ const routes: Routes = [
     canActivate: [RolGuard]
   },
 ];
+routes.forEach(route => {
+  route.data = { menuItems } 
+})
 
 @NgModule({
   imports: [

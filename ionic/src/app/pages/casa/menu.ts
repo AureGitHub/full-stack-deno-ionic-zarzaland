@@ -7,7 +7,6 @@ export const  menuItems =   [
     icon: 'cart-outline',
     path: '/casa/compras/',
     key: 'compras',  // para encontar la ruta en los guard
-    roles: [Role.admin]
   } ,
 
   {
@@ -23,7 +22,6 @@ export const  menuItems =   [
     remixicon: 'ri-calendar-schedule-line',
     path: '/casa/agenda/',
     key: 'agenda',  // para encontar la ruta en los guard
-    roles: [Role.admin]
   } ,
 
  ]

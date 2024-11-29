@@ -7,9 +7,9 @@ const router = new Router({
 
 router
 .get("/",  controller.get)
-.get("/:id",requireAdmin,  controller.getById)
-.post("/", requireAdmin,getData, controller.add)
-.put("/:id", requireAdmin,getData,  controller.update)
-.delete("/:id",  requireAdmin,  controller.del)
+.get("/:id",  controller.getById)
+.post("/", getData, controller.add)
+.put("/:id", getData,  controller.update)
+.delete("/:id", controller.del)
 
 export default router;

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {RolGuard } from 'app-base-lib';
+import { menuItems } from './settings/menu';
 
 const routes: Routes = [
     {
@@ -48,6 +49,10 @@ const routes: Routes = [
 
 
 ];
+
+routes.forEach(route => {
+  route.data = { menuItems } 
+})
 
 @NgModule({
   imports: [

@@ -8,6 +8,7 @@ import { RolGuard, SharedComponentsModule, TreeModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuButtonsModule } from 'app-base-lib';
 import { CasaPage } from './casa.page';
+import  {menuItems} from './menu'
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
     canActivate: [RolGuard]
   },
 ];
+
+routes.forEach(route => {
+  route.data = { menuItems } 
+})
  
 @NgModule({
   imports: [
