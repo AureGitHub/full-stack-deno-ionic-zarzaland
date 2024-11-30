@@ -2,6 +2,8 @@ import { gnericRouter, Router } from "../dep/deps.ts";
 
 import finanzasRouter from "./controller/finanazas/routerFinanzas.ts"
 import casaRouter from "./controller/casa/routerCasa.ts"
+import inmuebleRouter from "./controller/inmueble/routerInmuebles.ts"
+
 
 
 
@@ -21,6 +23,8 @@ gnericRouter.init(client,clientNoTransaction,entities);
 router.use(gnericRouter.router.routes());  
 router.use(finanzasRouter.routes());  
 router.use(casaRouter.routes());  
+router.use(inmuebleRouter.routes());  
+
 
 
 

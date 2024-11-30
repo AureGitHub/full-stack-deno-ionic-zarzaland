@@ -4,21 +4,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SharedComponentsModule } from 'app-base-lib';
+import { MenuButtonsModule, RolGuard, SharedComponentsModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { InmueblesPage } from './inmuebles.page';
+import { menuItems } from './menu';
 
 
 const routes: Routes = [
   {
     path: '',
     component: InmueblesPage
-  }
+  },
+  {
+    path: 'catastro',
+    loadChildren: () => import('./catastro/catastro.module').then(m => m.CatastroPageModule), 
+    canActivate: [RolGuard]
+  },
 ];
 
-// routes.forEach(route => {
-//   route.data = { menuItems } 
-// })
+routes.forEach(route => {
+  route.data = { menuItems } 
+})
 
 @NgModule({
   imports: [
@@ -28,6 +34,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedComponentsModule,
+    MenuButtonsModule,
+
   ],
   declarations: [InmueblesPage]
 })

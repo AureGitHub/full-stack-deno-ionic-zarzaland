@@ -131,6 +131,28 @@ const entities = {
          { name: 'observaciones', type: 'text', title: 'Observaciones' },
       ],
 
+      'inmueble.catastro_tipo':
+      [
+         { name: 'descripcion', type: 'text', title: 'Descripción', validators: [Validators.required] },
+      ],
+
+
+      'inmueble.catastro':
+      [         
+         { name: 'catastrotipoid', type: 'select', title: 'Tipo', validators: [Validators.required], noTC: true, multiple: false, coleccion: 'inmueble/catastro_tipo', id: 'id', desc: 'descripcion', default: 2 },
+         { name: 'felipe', type: 'checkbox', title: 'Felipe', default: true, validators: [Validators.required] },
+         { name: 'referenciacatastral', type: 'text', title: 'R. Catastral', validators: [Validators.required] },
+         { name: 'direccion', type: 'text', title: 'Dirección', validators: [Validators.required]},
+         { name: 'poligono', type: 'text', title: 'Polígono'},
+         { name: 'parcela', type: 'text', title: 'Parcela'},
+         { name: 'superficieconstruida', type: 'number', title: 'Sup. Contruida (m2)', validators: [Validators.required], default: 0 },         
+         { name: 'superficieparcela', type: 'number', title: 'Sup. Parcela (m2)', validators: [Validators.required], default: 0 },         
+         { name: 'uso', type: 'text', title: 'Uso', validators: [Validators.required]},
+         { name: 'valorsuelo', type: 'number', title: 'Valor suelo', validators: [Validators.required], default: 0 },         
+         { name: 'valorconstruccion', type: 'number', title: 'Valor Construcción', validators: [Validators.required], default: 0 },         
+         { name: 'valorcatastral', type: 'number', title: 'Valor Catastral', validators: [Validators.required], default: 0 },         
+      ],
+
 };
 
 export default entities;

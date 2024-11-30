@@ -200,4 +200,30 @@ CREATE TABLE casa.evento (
 );
 
 
+CREATE TABLE inmueble.catastro_tipo(	
+	id serial4 NOT NULL,
+	descripcion text NOT NULL,		
+	CONSTRAINT catastro_tipo_pkey PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX catastro_tipo_descripcion_key ON inmueble.catastro_tipo USING btree (descripcion);
+
+CREATE TABLE inmueble.catastro (
+	id serial4 NOT NULL,
+	catastrotipoid int4 DEFAULT 2 NOT NULL,
+	CONSTRAINT "catastro_catastro_tipo_fkey" FOREIGN KEY (catastrotipoid) REFERENCES inmueble.catastro_tipo(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	felipe boolean  DEFAULT true  not null,
+	referenciacatastral text not null,
+	direccion text not null,	
+	poligono text null,	
+	parcela text null,	
+	superficieconstruida numeric (9, 2)  DEFAULT 0  not null,
+	superficieparcela numeric (9, 2) DEFAULT 0 not null,
+	uso text not null,
+	valorsuelo numeric (9, 2) not null,
+	valorconstruccion numeric (9, 2) not null,
+	valorcatastral numeric (9, 2) not null,
+	CONSTRAINT catastro_pkey PRIMARY KEY (id)
+);
+
+
 
