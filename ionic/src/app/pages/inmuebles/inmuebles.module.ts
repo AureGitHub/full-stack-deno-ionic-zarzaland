@@ -27,6 +27,7 @@ routes.forEach(route => {
 })
 
 @NgModule({
+  declarations: [InmueblesPage],
   imports: [
     CommonModule,
     FormsModule,
@@ -37,6 +38,6 @@ routes.forEach(route => {
     MenuButtonsModule,
 
   ],
-  declarations: [InmueblesPage]
+ 
 })
 export class InmueblesPageModule { }

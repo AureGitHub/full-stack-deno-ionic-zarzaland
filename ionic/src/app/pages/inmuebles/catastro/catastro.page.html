@@ -3,19 +3,9 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<ion-grid class="router-outlet">
-
-  <ion-row>
-    <my-table
-    [loadOnInit]="true"
-      [canAddEntity] ="user.isAdmin"
-      [canUpdateEntity] ="user.isAdmin"
-      [title]="'Catastro'"
-      [entityName]="entityName"
-      [columns]="columns"
-      [refresh]="tableRefresh"
-      [withCache]="true"
-    ></my-table>
-
-  </ion-row>
-</ion-grid>
+<div *ngIf="isLoading">
+  <app-base-cargando [message]="'Cargando inmuebles...'"></app-base-cargando>
+</div>
+<div class="contenedor" *ngIf="!isLoading">
+    <item-catastro *ngFor="let catastro of lstCatastro" [catastro]="catastro"></item-catastro>
+</div>
