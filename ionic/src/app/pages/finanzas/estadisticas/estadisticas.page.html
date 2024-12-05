@@ -36,17 +36,17 @@
   </ion-select>
 
 <div class="grid itemCompraVenta" *ngFor="let item of resultComprasVentas">
-  <div class="col-2">
+  <div class="col-4">
     {{item.abreviatura}}
 
   </div>
-  <div class="col-5">
+  <div class="col-4">
     <div class="flex_col center">
       <div>{{item.fechacompra | date: 'dd/MM/yy'}}</div>
       <span class="preciocompra">{{item.preciocompra | number : '1.2-2'}}</span>
     </div>
   </div>
-  <div class="col-5">
+  <div class="col-4">
     <div>{{item.fechaventa | date: 'dd/MM/yy'}}</div>
       <span class="precioventa">{{item.precioventa | number : '1.2-2'}}</span>
   </div>
