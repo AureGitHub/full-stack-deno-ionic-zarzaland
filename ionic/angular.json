@@ -116,8 +116,10 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss",
-             "src/global.scss"
+            "styles": [             
+              "src/theme/variables.scss",
+             "src/global.scss"   
+           
             ],
             "scripts": []
           },

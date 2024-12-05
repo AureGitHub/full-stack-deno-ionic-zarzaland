@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuButtonsModule, RolGuard, SharedComponentsModule } from 'app-base-lib';
+import { MenuButtonsModule, PruebaPrimengComponentModule, RolGuard, SharedComponentsModule,  } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { InmueblesPage } from './inmuebles.page';
 import { menuItems } from './menu';
@@ -36,7 +36,7 @@ routes.forEach(route => {
     RouterModule.forChild(routes),
     SharedComponentsModule,
     MenuButtonsModule,
-
+    PruebaPrimengComponentModule
   ],
  
 })

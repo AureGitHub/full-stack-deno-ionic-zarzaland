@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RolGuard, SharedComponentsModule, TreeModule } from 'app-base-lib';
+import { RolGuard, SharedComponentsModule } from 'app-base-lib';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuButtonsModule } from 'app-base-lib';
 import { CasaPage } from './casa.page';
@@ -46,7 +46,6 @@ routes.forEach(route => {
     RouterModule.forChild(routes),
     SharedComponentsModule, 
     MenuButtonsModule,
-    TreeModule
 
   ],
   declarations: [CasaPage]

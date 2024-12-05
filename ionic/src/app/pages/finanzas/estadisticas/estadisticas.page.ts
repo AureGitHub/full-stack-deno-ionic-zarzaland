@@ -17,6 +17,10 @@ export class EstadisticasPage extends BasePage implements OnInit {
 
   addEmpresa = false;
 
+  lstItemEmpresas = [];
+
+  Empresaselected : any;
+
 
   columnsFondosActivos = [
 
@@ -50,6 +54,9 @@ export class EstadisticasPage extends BasePage implements OnInit {
   resultFondosActivos: any[] = [];
 
   buttonsTab = {};
+  resultComprasVentas: any;
+  lstItemEmpresasTMP: any;
+  resultComprasVentasTMP: any;
 
 
   constructor(
@@ -78,6 +85,8 @@ export class EstadisticasPage extends BasePage implements OnInit {
       if (result) {
         this.resultWithoutEmpresa = result?.resultWithoutEmpresa;
         this.resultFondosActivos = result?.resultFondosActivos;
+        this.resultComprasVentasTMP = result?.resultComprasVentas;
+        this.resultComprasVentas = result?.resultComprasVentas;
       }
 
     } catch (error) {
@@ -96,7 +105,7 @@ export class EstadisticasPage extends BasePage implements OnInit {
   }
 
 
-  buttonTab(cual) {
+  async buttonTab(cual) {
 
     for(const pp in this.buttonsTab){
       this.buttonsTab[pp] =false;
@@ -110,12 +119,31 @@ export class EstadisticasPage extends BasePage implements OnInit {
     //mejorarlo... si no he accedido al servidor, acceder
     // solo hay que traerse los datos del tab activo
     switch(cual){
-      case '':
+      case 'compravsventas':
+        await this.getlstItemEmpresas();
+        
+        break;
         default:    
         this.getEstadisticas();
         break;
     }
 
   }
+  async getlstItemEmpresas() {
+    this.lstItemEmpresas = [];
+
+    const objHttp: classHttp = new classHttp('get', 'finanzas/empresa', null);
+    const result = await this.myHttpService.ejecuteURL(objHttp);
+    this.lstItemEmpresas = result?.data;
+
+
+
+  }
+
+
+  selectedEmpresa(){
+    this.resultComprasVentas =  this.resultComprasVentasTMP.filter(a=> a.empresaid==this.Empresaselected);
+  }
+
 
 }

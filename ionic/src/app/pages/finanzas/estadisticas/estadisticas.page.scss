@@ -6,3 +6,33 @@
     height: 100%;
     width:100%;
   }
+
+  .compravsventas{
+    font-size: 12px;
+    padding: 30px;
+    border: solid 1px;
+    background-color: black;
+    color: white;
+  }
+
+  .itemCompraVenta{
+    border: solid 1px white;
+  }
+
+  .preciocompra{
+    font-weight: bold;
+    color: blue;
+    font-size: 14px;
+    background-color: white;
+    padding: 1px;
+  }
+
+  .precioventa{
+    font-weight: bold;
+    color: orange;
+    font-size: 14px;
+    background-color: white;
+    align-items: center;
+    align-content: center;
+    padding: 1px;
+  }

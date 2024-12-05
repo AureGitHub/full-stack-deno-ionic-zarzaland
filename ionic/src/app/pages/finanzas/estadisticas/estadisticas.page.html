@@ -1,67 +1,61 @@
-
 <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
 <ion-tab-bar slot="bottom">
-  <ion-tab-button [selected]="buttonsTab['resumenxmes']"   (click)="buttonTab('resumenxmes')">
-    <icon-remixicon [class]="'ri-line-chart-line'" ></icon-remixicon>
+  <ion-tab-button [selected]="buttonsTab['resumenxmes']" (click)="buttonTab('resumenxmes')">
+    <icon-remixicon [class]="'ri-line-chart-line'"></icon-remixicon>
     Resumen X mes
   </ion-tab-button>
-  <ion-tab-button [selected]="buttonsTab['fondosactivos']"    (click)="buttonTab('fondosactivos')">
-    <icon-remixicon [class]="'ri-bar-chart-box-ai-fill'" ></icon-remixicon>
+
+  <ion-tab-button [selected]="buttonsTab['compravsventas']" (click)="buttonTab('compravsventas')">
+    <icon-remixicon [class]="'ri-shopping-bag-line'"></icon-remixicon>
+    Compras vs Ventas
+  </ion-tab-button>
+  <ion-tab-button [selected]="buttonsTab['fondosactivos']" (click)="buttonTab('fondosactivos')">
+    <icon-remixicon [class]="'ri-bar-chart-box-ai-fill'"></icon-remixicon>
     Fondos Activos
   </ion-tab-button>
 </ion-tab-bar>
 
 <div *ngIf="buttonsTab['resumenxmes']">
-<my-table
-[loadOnInit]="true"
-  [canAddEntity] ="user.isAdmin"
-  [canUpdateEntity] ="user.isAdmin"
-  [tableResult]="'resultWithoutEmpresa'"
-  [tableResultCount]="'resultWithoutEmpresacount'"
-  [dataFromOut]="resultWithoutEmpresa"
-  [title]="'Resumen X mes'"
-  [entityName]="entityName"
-  [columns]="columnsWithout"
-  [refresh]="tableRefresh"
-  [withCache]="true" 
-  (selecting)="selectingWithoutEmpresa($event)"
-></my-table>
-<my-table
-[loadOnInit]="true"
-  [canAddEntity] ="user.isAdmin"
-  [canUpdateEntity] ="user.isAdmin"
-  [tableResult]="'resultWithEmpresa'"
-  [tableResultCount]="'resultWithEmpresacount'"
-  [title]="'Resumen X Empresas'"
-  [entityName]="entityName"
-  [columns]="columns"
-  [refresh]="tableRefresh"
-  [dataFromOut]="resultWithEmpresa"
-  [withCache]="true"
-></my-table>
+  <my-table [loadOnInit]="true" [canAddEntity]="user.isAdmin" [canUpdateEntity]="user.isAdmin"
+    [tableResult]="'resultWithoutEmpresa'" [tableResultCount]="'resultWithoutEmpresacount'"
+    [dataFromOut]="resultWithoutEmpresa" [title]="'Resumen X mes'" [entityName]="entityName" [columns]="columnsWithout"
+    [refresh]="tableRefresh" [withCache]="true" (selecting)="selectingWithoutEmpresa($event)"></my-table>
+  <my-table [loadOnInit]="true" [canAddEntity]="user.isAdmin" [canUpdateEntity]="user.isAdmin"
+    [tableResult]="'resultWithEmpresa'" [tableResultCount]="'resultWithEmpresacount'" [title]="'Resumen X Empresas'"
+    [entityName]="entityName" [columns]="columns" [refresh]="tableRefresh" [dataFromOut]="resultWithEmpresa"
+    [withCache]="true"></my-table>
+</div>
+
+<div class="compravsventas" *ngIf="buttonsTab['compravsventas']">
+
+  <ion-select label="Empresa " placeholder="selecciona"  [(ngModel)]="Empresaselected" (ionChange)="selectedEmpresa()">
+    <ion-select-option *ngFor="let item of lstItemEmpresas"  [value]="item.id">{{item.descripcion}}</ion-select-option>    
+  </ion-select>
+
+<div class="grid itemCompraVenta" *ngFor="let item of resultComprasVentas">
+  <div class="col-2">
+    {{item.abreviatura}}
+
+  </div>
+  <div class="col-5">
+    <div class="flex_col center">
+      <div>{{item.fechacompra | date: 'dd/MM/yy'}}</div>
+      <span class="preciocompra">{{item.preciocompra | number : '1.2-2'}}</span>
+    </div>
+  </div>
+  <div class="col-5">
+    <div>{{item.fechaventa | date: 'dd/MM/yy'}}</div>
+      <span class="precioventa">{{item.precioventa | number : '1.2-2'}}</span>
+  </div>
+</div>
 </div>
 
 <div *ngIf="buttonsTab['fondosactivos']">
-  <my-table
-[loadOnInit]="true"
-  [canAddEntity] ="user.isAdmin"
-  [canUpdateEntity] ="user.isAdmin"
-  [tableResult]="'resultFondosActivos'"
-  [tableResultCount]="'resultFondosActivoscount'"
-  [dataFromOut]="resultFondosActivos"
-  [title]="'Activos'"
-  [entityName]="entityName"
-  [columns]="columnsFondosActivos"
-  [refresh]="tableRefresh"
-  [withCache]="true" 
-></my-table>
-  </div>
-
-
-
-
-
-
+  <my-table [loadOnInit]="true" [canAddEntity]="user.isAdmin" [canUpdateEntity]="user.isAdmin"
+    [tableResult]="'resultFondosActivos'" [tableResultCount]="'resultFondosActivoscount'"
+    [dataFromOut]="resultFondosActivos" [title]="'Activos'" [entityName]="entityName" [columns]="columnsFondosActivos"
+    [refresh]="tableRefresh" [withCache]="true"></my-table>
+</div>

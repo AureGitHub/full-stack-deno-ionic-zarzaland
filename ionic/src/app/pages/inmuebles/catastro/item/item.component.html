@@ -32,7 +32,10 @@
 <!--RUSTICO-->
 <div class="contenedor rustico" *ngIf="catastro?.catastrotipoid==2">
   <div class="grid">
-    <div class="col-2"><icon-remixicon [style]="'font-size: 30px'" [class]="'ri-plant-fill'" ></icon-remixicon></div>
+    <div class="col-2">
+      <!-- <icon-remixicon [style]="'font-size: 30px'" [class]="'ri-plant-fill'" ></icon-remixicon> -->
+       <img height="30px" width="30px" src="assets/olivo.png" alt="">
+    </div>
     <div class="col-10">
       <div class="grid">
         <div class="col">{{catastro?.direccion}}</div>        

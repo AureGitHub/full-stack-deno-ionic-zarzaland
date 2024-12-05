@@ -151,15 +151,37 @@ where f.fechainicio  <= now() and f.fechafin >= now()
   
 }
 
+const getresultComprasVentas = async () => {
+  let sqlSelect = `
+select
+e.id empresaid,
+e.abreviatura ,
+co.fecha fechacompra, co.precio preciocompra, 
+ve.fecha fechaventa, ve.precio precioventa
+from finanzas.cartera c
+inner join finanzas.empresa e on e.id = c.empresaid
+inner join finanzas.compra co on co.carteraid = c.id
+left join finanzas.venta ve on ve.carteraid = c.id 
+order by co.fecha  desc,  ve.fecha  desc,  e.abreviatura
+    `;
+  const resultComprasVentas = await GenericDB.queryObject(client, sqlSelect);
+  return resultComprasVentas?.rows;
+  
+}
+
 
 const get = async (ctx: any) => {
 
   const lstFondosActivos = await getFondoLetrasActivos();
   const resultWithoutEmpresa = await getResumenByMoth();
+  const resultComprasVentas = await getresultComprasVentas();
+  
   ctx.response.status = 201;
   ctx.response.body = {
     status: StatusCodes.OK,
     data: {
+      resultComprasVentas,
+      resultComprasVentascount: resultComprasVentas.length,
       resultWithoutEmpresa,
       resultWithoutEmpresacount: resultWithoutEmpresa.length,
       resultFondosActivos: lstFondosActivos,

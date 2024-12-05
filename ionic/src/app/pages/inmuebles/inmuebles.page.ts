@@ -19,6 +19,9 @@ export class InmueblesPage extends BasePage implements OnInit {
     this.entityName = 'UserXMovimiento';
   }
 
+
+
+
   async ngOnInit() {
 
   }
