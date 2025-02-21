@@ -21,6 +21,13 @@ const routes: Routes = [
     loadChildren: () => import('app-base-lib').then(m => m.ForgotPasswordModule)
   },
 
+
+  {
+    path: 'orc',
+    loadChildren: () => import('./components/orc/orc.module').then(m => m.OrcPageModule), 
+    canActivate: [RolGuard]
+  },
+
   {
     path: 'inmuebles',
     loadChildren: () => import('./pages/inmuebles/inmuebles.module').then(m => m.InmueblesPageModule), 

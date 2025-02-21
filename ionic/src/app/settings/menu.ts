@@ -1,6 +1,16 @@
 import { Role } from 'app-base-lib';
 
 export const  menuItems =   [
+
+  {
+    ppal : true,
+    title: 'ORC',
+    icon: 'storefront-outline',
+    path: '/orc/',
+    key: 'orc',  // para encontar la ruta en los guard
+    // hide : true
+  },
+
   {
     ppal : true,
     title: 'Casa',
