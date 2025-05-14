@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
    //server: 'https://zarzaland.deno.dev/',
-  // server: ' https://localhost:3000/',
-    server: ' https://192.168.1.131:3000/', 
+  server: ' https://localhost:3000/',
+ //    server: ' https://192.168.1.130:3000/', 
   key_user: 'e12b1871-c221-448b-9089-71751478793d',
   localStorageSave_secret: '971f8ad8-00c9-4e8a-9f8a-36dcd42cd8bf',   
 };

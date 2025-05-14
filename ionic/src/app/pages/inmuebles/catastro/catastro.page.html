@@ -6,6 +6,22 @@
 <div *ngIf="isLoading">
   <app-base-cargando [message]="'Cargando inmuebles...'"></app-base-cargando>
 </div>
+
+<ion-list>
+  <ion-item>
+    <ion-checkbox justify="start" [(ngModel)]="urbano" (ionChange)="handleChange()">Urbano</ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox justify="start"  [(ngModel)]="rustico" (ionChange)="handleChange()">Rústico</ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox justify="start"  [(ngModel)]="felipe" (ionChange)="handleChange()">Sólo Felipe</ion-checkbox>
+  </ion-item>
+
+</ion-list>
+
 <div class="contenedor" *ngIf="!isLoading">
-    <item-catastro *ngFor="let catastro of lstCatastro" [catastro]="catastro"></item-catastro>
+    <item-catastro *ngFor="let catastro of lstCatastroVer" [catastro]="catastro" [user]="user"></item-catastro>
 </div>

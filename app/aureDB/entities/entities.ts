@@ -153,6 +153,18 @@ const entities = {
          { name: 'valorcatastral', type: 'number', title: 'Valor Catastral', validators: [Validators.required], default: 0 },         
       ],
 
+      'inmueble.arriendo':
+      [  
+         { name: 'catastroid', type: 'number',  validators: [Validators.required] },         
+         { name: 'fechapago', type: 'date', title: 'Fecha pago', validators: [Validators.required] }, 
+         { name: 'fechainicio', type: 'date', title: 'Fecha inicio', validators: [Validators.required] },       
+         { name: 'fechafin', type: 'date', title: 'Fecha fin', validators: [Validators.required] },       
+         { name: 'importe', type: 'number', title: 'Importe', disabled: true, validators: [Validators.required] },
+         { name: 'quien', type: 'text', title: 'Arrendado a', validators: [Validators.required] },
+         { name: 'observaciones', type: 'text', title: 'Observaciones' },
+      ],
+
+
 };
 
 export default entities;

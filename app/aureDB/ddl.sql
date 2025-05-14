@@ -227,3 +227,19 @@ CREATE TABLE inmueble.catastro (
 
 
 
+CREATE TABLE inmueble.arriendo (
+	id serial4 NOT NULL,
+	catastroid int4 DEFAULT 2 NOT NULL,
+	CONSTRAINT "arriendo_catastro_fkey" FOREIGN KEY (catastroid) REFERENCES inmueble.catastro(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	fechapago timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	fechainicio timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	fechafin timestamp(3) DEFAULT CURRENT_TIMESTAMP NOT NULL,	
+	importe numeric(9, 2) DEFAULT 0 NOT NULL,
+	quien text not null,
+	observaciones text  null,	
+	CONSTRAINT arriendo_pkey PRIMARY KEY (id)
+);
+
+
+
+

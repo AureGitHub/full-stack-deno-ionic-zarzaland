@@ -13,6 +13,7 @@ import {
 })
 export class CatastroPage extends BasePage implements OnInit {
 
+
   columns = [ 
     { name: 'Descripción', prop: 'descripcion', type: 'text'}, 
     { name: 'Dirección', prop: 'direccion', type: 'text'},    
@@ -20,6 +21,10 @@ export class CatastroPage extends BasePage implements OnInit {
      { name: 'v. catastral', prop: 'valorcatastral', type: 'number'},    
   ];
   lstCatastro: any[];
+  lstCatastroVer: any[];
+urbano=false;
+rustico=true;
+felipe: any;
   
   constructor(
     public override basePageService: BasePageService
@@ -47,6 +52,9 @@ export class CatastroPage extends BasePage implements OnInit {
       const result = await this.myHttpService.ejecuteURL(objHttp);
       if (result?.data) {
         this.lstCatastro =  result?.data;
+
+        this.handleChange();
+
       }
 
     } catch (error) {
@@ -57,5 +65,24 @@ export class CatastroPage extends BasePage implements OnInit {
 
   }
 
+
+  handleChange() {
+    this.lstCatastroVer = [];
+
+    this.lstCatastro.forEach(item => {
+      if(this.urbano && item.catastrotipoid==1){
+        this.lstCatastroVer.push(item);
+      }
+      if(this.rustico && item.catastrotipoid==2){
+        this.lstCatastroVer.push(item);
+      }
+    })
+
+    if(this.felipe){
+      this.lstCatastroVer = this.lstCatastroVer.filter(a=> a.felipe);
+    }
+
+    this.lstCatastroVer =  this.lstCatastroVer.sort((a,b)=>a.catastrotipoid - b.catastrotipoid)
+  }
 
 }

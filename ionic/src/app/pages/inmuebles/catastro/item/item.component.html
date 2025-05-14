@@ -1,9 +1,11 @@
 <!--URBANO-->
 <div class="contenedor urbano" *ngIf="catastro?.catastrotipoid==1">
 
-  <div class="grid">
-    <div class="col-2"><icon-remixicon [style]="'font-size: 30px'" [class]="'ri-community-line'" ></icon-remixicon></div>
-    <div class="col-10">
+  <div class="grid hand" (click)="catastro.verDetalle = !catastro.verDetalle">
+    <div class="col-2">
+      <icon-remixicon [style]="'font-size: 30px'" [class]="'ri-community-line'" ></icon-remixicon>      
+    </div>
+    <div class="col-9">
       <div class="grid">
         <div class="col">{{catastro?.direccion}}</div>        
       </div>
@@ -11,19 +13,22 @@
         <div class="col">{{catastro?.uso}}</div>
       </div>
     </div>
+    <div class="col-1">
+      <arriendo [catastro]="catastro"></arriendo>
+    </div>
   </div>
+  <div *ngIf="catastro?.verDetalle">  
   <div class="grid">
     <div class="col"><label-value [label]="'V. Catastral'" [value]="catastro?.referenciacatastral"></label-value></div>
     <div class="col"><label-value [label]="'S.CONST'" [value]="catastro?.superficieconstruida"></label-value></div>
     <div class="col"><label-value [label]="'S.PARC'" [value]="catastro?.superficieparcela"></label-value></div>
   </div>
-
-
   <div class="grid">
     <div class="col"><label-value [label]="'V.SUELO (€)'" [value]="catastro?.valorsuelo"></label-value></div>
     <div class="col"><label-value [label]="'V.CONSTR.(€)'" [value]="catastro?.valorconstruccion"></label-value></div>
     <div class="col"><label-value [label]="'V.CATASTRAL(€)'" [value]="catastro?.valorcatastral"></label-value></div>
   </div>
+</div>
 
 
   
@@ -31,24 +36,32 @@
 
 <!--RUSTICO-->
 <div class="contenedor rustico" *ngIf="catastro?.catastrotipoid==2">
-  <div class="grid">
+  <div class="grid hand"  (click)="catastro.verDetalle = !catastro.verDetalle">
     <div class="col-2">
       <!-- <icon-remixicon [style]="'font-size: 30px'" [class]="'ri-plant-fill'" ></icon-remixicon> -->
        <img height="30px" width="30px" src="assets/olivo.png" alt="">
+      
+       
     </div>
-    <div class="col-10">
+    <div class="col-9">
       <div class="grid">
         <div class="col">{{catastro?.direccion}}</div>        
       </div>
-      <div class="grid">        
-        <div class="col">{{catastro?.uso}}</div>
-        <div class="col">Polígono {{catastro?.poligono}}</div>
-        <div class="col">Parcela {{catastro?.parcela}}</div>
-      </div>
+     
+    </div>
+    <div class="col-1">
+      <arriendo [catastro]="catastro"></arriendo>
     </div>
   </div>
 
+  <div *ngIf="catastro?.verDetalle">
 
+    <div class="grid">        
+      <div class="col">{{catastro?.uso}}</div>
+      <div class="col">Polígono {{catastro?.poligono}}</div>
+      <div class="col">Parcela {{catastro?.parcela}}</div>
+    </div>
+  
   <div class="grid">
     <div class="col"><label-value [label]="'V. Catastral'" [value]="catastro?.referenciacatastral"></label-value></div>
     <div class="col"><label-value [label]="'S.CONST'" [value]="catastro?.superficieconstruida"></label-value></div>
@@ -61,6 +74,24 @@
     <div class="col"><label-value [label]="'V.CONSTR.(€)'" [value]="catastro?.valorconstruccion"></label-value></div>
     <div class="col"><label-value [label]="'V.CATASTRAL(€)'" [value]="catastro?.valorcatastral"></label-value></div>
   </div>
+
+</div>
+
   
   
+</div>
+
+<!--ARRIENDOS-->
+<div  *ngIf="catastro?.verDetalle">
+  <my-table
+  [canAddEntity] ="user.isAdmin"
+  [canUpdateEntity] ="user.isAdmin"
+    [title]="'Arriendos'"
+    [entityInitialValues]="{catastroid : catastro.id}"
+    [pageSize]="7" 
+    [entityName]="'inmueble/arriendo'"
+    [columns]="columns"
+    [withCache]="true"
+    [refresh]="tableRefresh"
+  ></my-table>
 </div>
