@@ -21,7 +21,9 @@ select c.id,c.fecha,c.acciones, beneficios, e.descripcion,e.abreviatura,
 (select cast(count(*) as integer) from finanzas.dividendo d  where d.carteraid= c.id) AS dividendos,
 (select  max(fecha) from finanzas.venta v  where v.carteraid= c.id) maxventa,
 (select cast(sum(c2.precio)/count(*) as float) from finanzas.compra c2 where c2.carteraid= c.id) AS preciocompras,
-(select cast(sum(v.precio)/count(*) as float) from finanzas.venta v where v.carteraid= c.id) AS precionventas
+(select cast(sum(v.precio)/count(*) as float) from finanzas.venta v where v.carteraid= c.id) AS precionventas,
+(select sum(c2.total) from finanzas.compra c2 where c2.carteraid= c.id) AS totalcompras,
+(select sum(v.total) from finanzas.venta v where v.carteraid= c.id) AS totalventas
 from  finanzas.cartera c 
 inner join  finanzas.empresa e on e.id = c.empresaid 
 order by ventas asc,c.fecha  desc

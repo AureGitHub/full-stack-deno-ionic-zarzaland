@@ -68,29 +68,52 @@
                   '1.2-2' }}%</span>
 
               </div>
+
             </div>
 
 
-            <div class="col-3 flex_row">
-              <div class="flex_column flex-center-align-items">
-                <span>{{cartera.compras}}</span>
-                <ion-icon (click)="management(cartera,'finanzas/compra',0)" class="hand"
-                  style="font-size: 24px;color: blue;" name="add-circle"></ion-icon>
+            <div class="col-3">
+
+              <div class="flex_column">
+
+                <div class="flex_row">
+                  <div class="flex_column flex-center-align-items">
+                    <span>{{cartera.compras}}</span>
+                    <ion-icon (click)="management(cartera,'finanzas/compra',0)" class="hand"
+                      style="font-size: 24px;color: blue;" name="add-circle"></ion-icon>
+                  </div>
+
+                  <div class="flex_column  flex-center-align-items">
+                    <span>{{cartera.ventas}}</span>
+                    <ion-icon (click)="management(cartera,'finanzas/venta',0)" class="hand"
+                      style="font-size: 24px;color: orange;" name="add-circle"></ion-icon>
+                  </div>
+
+                  <div class="flex_column  flex-center-align-items">
+                    <span>{{cartera.dividendos}}</span>
+                    <ion-icon (click)="management(cartera,'finanzas/dividendo',0)" class="hand"
+                      style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <spa class="preciocompras">Compra : {{cartera.totalcompras | number :'1.2-2'}} €</spa>
+                  </div>
+                  <div>
+                    <spa class="precioventas">Venta    : {{cartera.totalventas | number :'1.2-2'}} €</spa>
+                  </div>
+                </div>
+
               </div>
 
-              <div class="flex_column  flex-center-align-items">
-                <span>{{cartera.ventas}}</span>
-                <ion-icon (click)="management(cartera,'finanzas/venta',0)" class="hand"
-                  style="font-size: 24px;color: orange;" name="add-circle"></ion-icon>
-              </div>
 
-              <div class="flex_column  flex-center-align-items">
-                <span>{{cartera.dividendos}}</span>
-                <ion-icon (click)="management(cartera,'finanzas/dividendo',0)" class="hand"
-                  style="font-size: 24px;color: green;" name="add-circle"></ion-icon>
-              </div>
             </div>
+
+
           </div>
+
+
 
           <div class="operaciones" *ngIf="cartera['expanded']">
 
