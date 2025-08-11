@@ -34,6 +34,7 @@ export class BolsaPage extends BasePage implements OnInit {
 
   Empresaselected: any;
   lstItemEmpresas: any[];
+cartera_Abierta=true;
 
 
   constructor(
@@ -78,6 +79,12 @@ export class BolsaPage extends BasePage implements OnInit {
         else{
           this.lstCartera =  result?.data.filter(a=> a.empresaid == this.Empresaselected);
         }
+
+        if(this.cartera_Abierta)
+        {
+           this.lstCartera =  this.lstCartera.filter(a=> a.acciones >0);
+        }
+
         
         this.lstCartera.forEach(cartera => {
           cartera['expanded']=false;

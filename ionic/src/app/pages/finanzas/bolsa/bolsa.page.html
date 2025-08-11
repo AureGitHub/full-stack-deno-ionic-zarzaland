@@ -15,17 +15,24 @@
       </ion-button>
     </ion-col>
     <ion-col class="col-4">
-        <ion-select label="Empresa " placeholder="selecciona"  [(ngModel)]="Empresaselected" (ionChange)="selectedEmpresa()">
-    <ion-select-option *ngFor="let item of lstItemEmpresas"  [value]="item.id">{{item.descripcion}}</ion-select-option>    
-  </ion-select>
+      <div  class="flex_column" >
+         <ion-checkbox justify="start" [(ngModel)]="cartera_Abierta" (ionChange)="getCartera()">Abierta</ion-checkbox>
+
+         <ion-select label="Empresa " placeholder="selecciona"  [(ngModel)]="Empresaselected" (ionChange)="getCartera()">
+            <ion-select-option *ngFor="let item of lstItemEmpresas"  [value]="item.id">{{item.descripcion}}</ion-select-option>    
+          </ion-select>
+
+
+      </div>
+        
     </ion-col>
     <ion-col class="col-1">
 
     </ion-col>
     <ion-col class="col-4">
       <div class="flex_column infoBeneInver">
-        <span>beneficios : {{beneficios | number : '1.2-2' }}€</span>
-        <span>Inversión : {{inversionActual | number : '1.2-2' }}€</span>
+        <span>benef. : {{beneficios | number : '1.2-2' }}€</span>
+        <span>Inver. : {{inversionActual | number : '1.2-2' }}€</span>
       </div>
 
     </ion-col>
