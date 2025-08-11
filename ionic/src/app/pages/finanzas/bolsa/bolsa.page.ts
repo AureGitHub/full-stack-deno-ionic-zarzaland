@@ -32,6 +32,9 @@ export class BolsaPage extends BasePage implements OnInit {
   addEmpresa=false;
 
 
+  Empresaselected: any;
+  lstItemEmpresas: any[];
+
 
   constructor(
     public override basePageService: BasePageService
@@ -45,21 +48,22 @@ export class BolsaPage extends BasePage implements OnInit {
     this.Init();
 
     await this.getCartera();
+    await this.getlstItemEmpresas();
   }
 
 
-  async handleRefresh(event) {
-    await this.getCartera();
-    event.target.complete();
+    async getlstItemEmpresas() {
+    this.lstItemEmpresas = [];
+
+    const objHttp: classHttp = new classHttp('get', 'finanzas/empresa', null);
+    const result = await this.myHttpService.ejecuteURL(objHttp);
+    this.lstItemEmpresas = result?.data;
+
+
+
   }
 
-
-  formatFecha(fecha) {
-    const value = new Date(fecha);
-    return `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`;
-  }
-
-  async getCartera() {
+    async getCartera() {
     try {
       this.beneficios=0;
       this.inversionActual=0;
@@ -68,7 +72,13 @@ export class BolsaPage extends BasePage implements OnInit {
       const objHttp: classHttp = new classHttp('get', this.entityName, null);
       const result = await this.myHttpService.ejecuteURL(objHttp);
       if (result?.data) {
-        this.lstCartera =  result?.data;
+        if(!this.Empresaselected){
+            this.lstCartera =  result?.data;
+        }
+        else{
+          this.lstCartera =  result?.data.filter(a=> a.empresaid == this.Empresaselected);
+        }
+        
         this.lstCartera.forEach(cartera => {
           cartera['expanded']=false;
           if (parseInt(cartera.acciones) == 0) {
@@ -88,6 +98,26 @@ export class BolsaPage extends BasePage implements OnInit {
 
 
   }
+
+
+    selectedEmpresa(){
+    this.getCartera();
+  }
+
+
+
+  async handleRefresh(event) {
+    await this.getCartera();
+    event.target.complete();
+  }
+
+
+  formatFecha(fecha) {
+    const value = new Date(fecha);
+    return `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`;
+  }
+
+
 
 
   management(cartera: any, entityName_: string, entityid) {
