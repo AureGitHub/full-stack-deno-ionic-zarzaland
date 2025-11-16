@@ -81,7 +81,7 @@ ctx.response.status = 201;
 
 
 const getById= async (ctx: any) => {
-  await genericDB.getById(ctx);
+  await genericDB.getById(ctx);  
 };
 
 

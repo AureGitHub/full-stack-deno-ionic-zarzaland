@@ -25,6 +25,8 @@ export class CatastroPage extends BasePage implements OnInit {
 urbano=false;
 rustico=true;
 felipe: any;
+
+aure: any
   
   constructor(
     public override basePageService: BasePageService
