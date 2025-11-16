@@ -1,0 +1,1 @@
+import{a as i,f as r}from"./chunk-EENDQBIP.js";var c=class t{titleSubject=new i("");title$=this.titleSubject.asObservable();setTitle(e){this.titleSubject.next(e)}clearTitle(){this.titleSubject.next("")}getTitle(){return this.titleSubject.value}static \u0275fac=function(a){return new(a||t)};static \u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})};export{c as a};
