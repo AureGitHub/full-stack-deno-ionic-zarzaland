@@ -1,1 +1,0 @@
-import{f as i,h as o,ya as p}from"./chunk-EENDQBIP.js";var e=class t{constructor(r){this.http=r}get(r){return this.http.get(r)}static \u0275fac=function(n){return new(n||t)(o(p))};static \u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"})};
